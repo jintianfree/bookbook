@@ -6,13 +6,21 @@
 
 <body>
 
-<form action="" method="post">
+<form action="bookbarend" method="get">
 
 
 书名<input type="text" name="title">
 出版社<input type="text" name="publisher">
 出版时间<input type="text" name="publisher_time">
-类别<input type="text" name="category">
+类别
+<select name="category" >
+<option>--</option>
+<option>计算机</option>
+<option>英语</option>
+<option>哲学</option>
+</select>
+
+
 标签<input type="text" name="tag">
 作者<input type="text" name="author_name">
 译者<input type="text" name="translator_name">
