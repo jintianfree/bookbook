@@ -10,6 +10,9 @@ class User(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=64)
 
+    def __unicode__(self):
+        return self.name
+
 class Comment(models.Model):
     content     = models.CharField(max_length=4096)
     create_time = models.DateField(auto_now_add=True)
@@ -24,12 +27,12 @@ class Book(models.Model):
     tag             = models.CharField(max_length=1024)
     author_name     = models.CharField(max_length=64)
     translator_name = models.CharField(max_length=64)
-    pic_url         = models.CharField(max_length=1024)
+    pic_url         = models.URLField()
     isbn            = models.CharField(max_length=64)
 
 class BookDownloadUrl(models.Model):
     book         = models.ForeignKey('Book')
-    url          = models.CharField(max_length=1024)
+    url          = models.URLField()
     create_time  = models.DateField(auto_now_add=True)
     download_num = models.IntegerField()
     user_name    = models.CharField(max_length=64)  # same to comment.user_name

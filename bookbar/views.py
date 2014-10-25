@@ -10,11 +10,11 @@ def addbook(request):
         bookform = BookForm(request.POST)
         if(bookform.is_valid()):
             bookform.save()
-            return render_to_response('addbook.html',
-                                       {'a':"abc"}, 
+            return render_to_response('addbookend.html',
+                                       {}, 
                                        context_instance=RequestContext(request))
             #return HttpResponse("thank") 
     else:
         bookform = BookForm()
 
-    return render_to_response('addbook2.html', {'bookform':bookform}, context_instance=RequestContext(request))
+    return render_to_response('addbook.html', {'bookform':bookform}, context_instance=RequestContext(request))

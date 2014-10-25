@@ -4,9 +4,10 @@ from django.conf.urls import patterns, include, url
 # from django.contrib import admin
 # admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns('bookbar',
     # Examples:
-    url(r'^bookbar/', include('bookbar.urls')),
+    url(r'^addbook$', 'views.addbook', name='addbook'),
+    url(r'^addbookend$', 'views.addbookend', name='addbookend'),
     # url(r'^$', 'bookbook.views.home', name='home'),
     # url(r'^bookbook/', include('bookbook.foo.urls')),
 
