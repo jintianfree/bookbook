@@ -7,8 +7,8 @@ from django.conf.urls import patterns, include, url
 urlpatterns = patterns('bookbar',
     # Examples:
     url(r'^addbook$', 'views.addbook', name='addbook'),
-    url(r'^addbookend$', 'views.addbookend', name='addbookend'),
-    url(r'^booklist$', 'views.booklist', name='booklist'),
+    url(r'^adddownloadurl/(\d+)/$', 'views.adddownloadurl', name='adddownloadurl'),
+    url(r'^booklist/(\d+)/(\d+)/$', 'views.booklist', name='booklist'),
     # url(r'^$', 'bookbook.views.home', name='home'),
     # url(r'^bookbook/', include('bookbook.foo.urls')),
 

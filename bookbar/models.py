@@ -31,7 +31,25 @@ class Book(models.Model):
     pic_url         = models.URLField(blank=True)
     isbn            = models.CharField(max_length=64, blank=True)
 
+class ExtensionName(models.Model):
+    name = models.CharField(max_length=16)
+
+    def __unicode__(self):
+        return self.name
+
+# word
+# high picture
+# middle
+# low
+class ClearType(models.Model):
+    type = models.CharField(max_length=16)
+
+    def __unicode__(self):
+        return self.type
+
 class BookDownloadURL(models.Model):
+    filename     = models.CharField(max_length=1024)
+    extension_name = models.ForeignKey('ExtensionName')
     book         = models.ForeignKey('Book')
     url          = models.URLField()
     create_time  = models.DateTimeField(auto_now_add=True)
@@ -39,8 +57,12 @@ class BookDownloadURL(models.Model):
     user_name    = models.CharField(max_length=64)  # same to comment.user_name
     user         = models.ForeignKey('User')
     comment      = models.ManyToManyField('Comment')
+    up_num       = models.IntegerField()
+    down_num     = models.IntegerField()
+    cleartype    = models.ForeignKey('ClearType')
 
 class Article(models.Model):
+    title       = models.CharField(max_length=128)
     content     = models.TextField()
     user_name   = models.CharField(max_length=64)  # same to comment.user_name
     user        = models.ForeignKey('User')
@@ -49,4 +71,5 @@ class Article(models.Model):
     up_num      = models.IntegerField()
     down_num    = models.IntegerField()
     comment     = models.ManyToManyField('Comment')
+    show_num    = models.IntegerField()
 

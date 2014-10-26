@@ -14,4 +14,5 @@ class BookForm(forms.ModelForm):
 class BookDownloadURLForm(forms.ModelForm):
     class Meta:
         model = BookDownloadURL
-        exclude = ('book', 'user', 'comment')
+        fields = ('filename', 'extension_name',
+        'url', 'cleartype')
