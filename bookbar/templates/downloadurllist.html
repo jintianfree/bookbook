@@ -1,0 +1,18 @@
+
+{% include 'bookdetail.html' %}
+
+<table>
+{% for url in urls %}
+        <tr>
+            <td>{{url.filename}}</td>
+            <td>{{url.extension_name}}</td>
+            <td>{{url.download_num}}</td>
+            <td>{{url.up_num}}</td>
+            <td>{{url.down_num}}</td>
+            <td>{{url.cleartype}}</td>
+            <td>{{url.user_name}}</td>
+            <td>{{url.create_time}}</td>
+            <td><a href="/bookbar/downloadbook/{{url.id}}/">download</a></td>
+        </tr>
+{% endfor %}
+</table>

@@ -136,6 +136,7 @@ def adddownloadurl(request, bookid):
     url.filename = downloadurlform.cleaned_data['filename']
     url.extension_name = extension_name[0]
     url.book = books[0]
+    url.url  = downloadurlform.cleaned_data['url']
     url.download_num = 0
     url.user_name = user.name
     url.user = user
@@ -148,3 +149,41 @@ def adddownloadurl(request, bookid):
     return render_to_response('adddownloadurlend.html',
             context,
             context_instance = RequestContext(request))
+
+
+def downloadurllist(request, bookid, pageindex):
+    books = Book.objects.filter(id=bookid)
+    if books.count() == 0:
+        return HttpResponse("error")
+
+
+    urls = books[0].bookdownloadurl_set.all()
+
+    context = { 'book':books[0], 'urls': urls }
+
+    return render_to_response('downloadurllist.html',
+        context,
+        context_instance = RequestContext(request))
+
+def booksmalllist(request, pageindex):
+    books   = Book.objects.all()
+    context = { 'books':books }
+
+    return render_to_response('booksmalllist.html',
+        context,
+        context_instance = RequestContext(request))
+
+def downloadbook(request, url_id):
+    urls = BookDownloadURL.objects.filter(id=url_id)
+
+    if urls.count() > 0:
+        url = urls[0]
+        url.download_num += 1
+        url.save()
+
+        return render_to_response('ad.html',
+            {'url':url},
+            context_instance = RequestContext(request))
+    else:
+        return HttpResponse("error")
+

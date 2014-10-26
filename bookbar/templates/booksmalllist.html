@@ -1,0 +1,40 @@
+<style type="text/css">
+td {
+    vertical-align: text-top;
+    padding: 6px 15px 6px 6px;
+    background-color: #EFEFEF;
+    border: 1px solid #AAA;
+}
+
+th {
+    vertical-align: baseline;
+    padding: 5px 15px 5px 6px;
+    background-color: #D5D5D5;
+    border: 1px solid #AAA;
+    text-align: left;
+}
+
+
+
+</style>
+
+<table border="1">
+    <tr>
+        <th>category</th>
+        <th>name</th>
+        <th>tag</th>
+    <tr>
+    {% for book in books%}
+    <tr>
+        <td>[{{book.category}}] </td>
+        <td><a href="/bookbar/booklist/{{book.id}}/0">{{book.title}}</a></td>
+        <td>{{book.tag}}</td>
+    <tr>
+    {% endfor %}
+    <tr>
+        <td></td>
+        <td> <a href="">Prev Page</a></td>
+        <td> <a href="">Next Page</a></td>
+    <tr>
+</table>
+</div>

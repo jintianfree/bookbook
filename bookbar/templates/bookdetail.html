@@ -1,0 +1,102 @@
+<style type="text/css">
+
+#title {
+    height:25px;
+    max-height:25px;
+    min-height:25px;
+
+    width:150px;
+    max-width:150px;
+    min-width:150px;
+}
+
+#value {
+    height:25px;
+    max-height:25px;
+    min-height:25px;
+
+    width:250px;
+    max-width:250px;
+    min-width:250px;
+}
+
+#book_pic_img {
+    height:100px;
+    max-height:100px;
+    min-height:100px;
+
+    width:100px;
+    max-width:100px;
+    min-width:100px;
+}
+
+#ad {
+    height:100px;
+    max-height:100px;
+    min-height:100px;
+
+    width:100px;
+    max-width:100px;
+    min-width:100px;
+}
+
+</style>
+
+<table border="1" id="book_detail">
+    <tr>
+        <th colspan="4"> book detail </th>
+    </tr>
+
+    <tr>
+        <th id="title">title:</th>
+        <td id="value">{{book.title}}</td>
+
+        <td rowspan="4">
+            <img id="book_pic_img" src="{{book.pic_url}}"/>
+        </td>
+
+        <td rowspan="4" id="ad">taobao</td>
+    </tr>
+
+    <tr>
+        <th>category:</th>
+        <td>{{book.category}}</td>
+    </tr>
+    
+    <tr>
+        <th>tag:</th>
+        <td>{{book.tag}}</td>
+    </tr>
+
+    <tr>
+        <th>author name:</th>
+        <td>{{book.author_name}}</td>
+
+    </tr>
+
+    <tr>
+        <th>translator name:</th>
+        <td>{{book.translator_name}}</td>
+
+        <td rowspan="4" id="book_ad_td">jd</td>
+        <td rowspan="4" id="book_ad_td">amazon</td>
+    </tr>
+    
+    <tr>
+        <th>publisher:</th>
+        <td>{{book.publisher}}</td>
+    </tr>
+    
+    <tr>
+        <th>publisher date:</th>
+        <td>{{book.publisher_time}}</td>
+    </tr>
+
+    <tr>
+        <th id="book_ISBN_td">ISBN:</th>
+        <td>{{book.isbn}}</td>
+    </tr>
+
+
+</table>
+ 

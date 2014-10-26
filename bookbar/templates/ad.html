@@ -1,0 +1,30 @@
+
+<html> 
+
+<head> 
+    <script> 
+    var i = 5;
+ 
+    function sett() 
+    { 
+        document.getElementById("theDiv").innerHTML=i; 
+        i--;
+        if(i >= 0) {
+            setTimeout("sett()",1000); 
+        } else {
+            document.getElementById("showDiv").style.display = "block";
+            i = 0;
+        }
+    } 
+    </script> 
+</head> 
+
+<body onload="sett()"> 
+    Download will start after <span id="theDiv"></span> second ...<br/>
+    <div  id="showDiv" style="display:none">
+    if it doesn't download automatic, chick the download button manual<br/>
+    <a href="{{url.url}}"> download </a>
+    </div>
+</body> 
+
+</html>

@@ -1,46 +1,5 @@
-<table>
-
-        <tr>
-            <td rowspan="2">
-            <img src="{{book.pic_url}}"/></td>
-
-            <td>title:</td>
-            <td>{{book.title}}</td>
-
-            <td>category:</td>
-            <td>{{book.category}}</td>
-        
-            <td>tag:</td>
-            <td>{{book.tag}}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td rowspan="2">taobao</td>
-            <td rowspan="2">jd</td>
-            <td rowspan="2">amazon</td>
-        </tr>
-        
-        <tr>
-            <td>author name:</td>
-            <td>{{book.author_name}}</td>
-        
-            <td>translator name:</td>
-            <td>{{book.translator_name}}</td>
-        
-            <td>publisher:</td>
-            <td>{{book.publisher}}</td>
-        
-            <td>publisher date:</td>
-            <td>{{book.publisher_time}}</td>
-       
-        
-            <td>ISBN:</td>
-            <td>{{book.isbn}}</td>
-        </tr>
-        
-    </table>
  
+{% include 'bookdetail.html' %}
 
 <form action="" method="post">
 {% csrf_token %}

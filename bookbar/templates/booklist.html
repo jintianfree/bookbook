@@ -1,79 +1,85 @@
-
 <html>
+
 <head>
+<style type="text/css">
+td {
+    background-color: #EFEFEF;
+    border: 1px solid #AAA;
+}
+
+th {
+    background-color: #D5D5D5;
+    border: 1px solid #AAA;
+    text-align: left;
+}
+
+
+</style>
+
+
 </head>
+
 <body>
 
+    {% for book in books %}
 
-{% for book in books %}
-<table>
+    {% include 'bookdetail.html' %}
+
+    <table>
+        <tr>
+            <th> filename </th>
+            <th> type </th>
+            <th> download </th>
+            <th> up </th>
+            <th> down </th>
+            <th> clear type </th>
+            <th> user </th>
+            <th> time </th>
+        <tr>
+        {% for urls in url_sets %}
+            {% ifequal forloop.counter0 forloop.parentloop.counter0 %}
+                {% for url in urls %}
+        <tr>
+            <td>{{url.filename}}</td>
+            <td>{{url.extension_name}}</td>
+            <td>{{url.download_num}}</td>
+            <td>{{url.up_num}}</td>
+            <td>{{url.down_num}}</td>
+            <td>{{url.cleartype}}</td>
+            <td>{{url.user_name}}</td>
+            <td>{{url.create_time}}</td>
+            <td><a href="/bookbar/downloadbook/{{url.id}}/">download</a></td>
+            <td><a href="">remark</a></td>
+        </tr>
+                {% endfor %}
+            {% endifequal %}
+        {% endfor%}
 
         <tr>
-            <td rowspan="2">
-            <img src="{{book.pic_url}}"/></td>
+            <td colspan="4" style="padding:0"> 
+                <a href="/bookbar/adddownloadurl/{{book.id}}/">add a new downloadurl </a>
+            </td>
 
-            <td>title:</td>
-            <td>{{book.title}}</td>
-
-            <td>category:</td>
-            <td>{{book.category}}</td>
-        
-            <td>tag:</td>
-            <td>{{book.tag}}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td rowspan="2">taobao</td>
-            <td rowspan="2">jd</td>
-            <td rowspan="2">amazon</td>
+            <td colspan="4" style="padding:0"> 
+                <a href="/bookbar/downloadurllist/{{book.id}}/0/">view more</a>
+            </td>
         </tr>
-        
-        <tr>
-            <td>author name:</td>
-            <td>{{book.author_name}}</td>
-        
-            <td>translator name:</td>
-            <td>{{book.translator_name}}</td>
-        
-            <td>publisher:</td>
-            <td>{{book.publisher}}</td>
-        
-            <td>publisher date:</td>
-            <td>{{book.publisher_time}}</td>
-       
-        
-            <td>ISBN:</td>
-            <td>{{book.isbn}}</td>
-        </tr>
-        
     </table>
     
     <table>
-    {% for url in url_sets %}
+    {% for articles in article_sets %}
         {% ifequal forloop.counter0 forloop.parentloop.counter0 %}
-        <tr>
-        <td>{{url.url}}</td>
-        <td>{{url.create_time}}</td>
-        <td>{{url.download_num}}</td>
-        <td>{{url.user_name}}</td>
-        </tr>
-        {% endifequal %}
-    {% endfor%}
-    </table>
-    
-    <table>
-    {% for article in article_sets %}
-        {% ifequal forloop.counter0 forloop.parentloop.counter0 %}
+            {% for article in articles %}
         <tr>
         <td>{{article.user_name}}</td>
         <td>{{article.create_time}}</td>
         </tr>
+            {% endfor %}
         {% endifequal %}
     {% endfor%}
     </table>
     
-{% endfor %}
+    {% endfor %}
 
 </body>
 </html>
