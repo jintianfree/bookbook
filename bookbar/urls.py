@@ -8,6 +8,7 @@ urlpatterns = patterns('bookbar',
     # Examples:
     url(r'^addbook$', 'views.addbook', name='addbook'),
     url(r'^addbookend$', 'views.addbookend', name='addbookend'),
+    url(r'^booklist$', 'views.booklist', name='booklist'),
     # url(r'^$', 'bookbook.views.home', name='home'),
     # url(r'^bookbook/', include('bookbook.foo.urls')),
 
