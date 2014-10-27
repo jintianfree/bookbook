@@ -1,0 +1,46 @@
+
+<h4> max download url </h4>
+<ul>
+    {% for url in max_download_urls %}
+    <li> 
+         <a href="/bookbar/downloadurldetail/{{url.id}}/0">{{url.filename}} {{url.extension_name}} {{url.clear_type}} {{url.download_num}} </a>
+    </li>
+    {% endfor %}
+</ul>
+
+<h4> max show article </h4>
+<ul>
+    {% for article in max_show_articles %}
+    <li> 
+    {{article.title}} {{article.show_num}} {{article.create_time}}
+    </li>
+    {% endfor %}
+</ul>
+
+<h4> latest download url </h4>
+<ul>
+    {% for url in latest_download_urls %}
+    <li> 
+        <a href="/bookbar/downloadurldetail/{{url.id}}/0">{{url.filename}} {{url.extension_name}} {{url.clear_type}} {{url.create_time}} </a>
+    </li>
+    {% endfor %}
+</ul>
+
+<h4> latest show article </h4>
+<ul>
+    {% for article in latest_show_articles %}
+    <li> 
+        {{article.title}} {{article.show_num}} {{article.create_time}}
+    </li>
+    {% endfor %}
+</ul>
+
+<h4> good read method</h4>
+<ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+</ul>
+
+

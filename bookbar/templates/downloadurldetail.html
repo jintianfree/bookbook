@@ -1,0 +1,54 @@
+
+<style type="text/css">
+#id_content {
+width:500px;
+height:100px;
+}
+</style>
+
+{% include 'header.html' %}
+{% include 'bookdetail.html' %}
+
+{% for url in urls %}
+{% endfor %}
+
+<h3> downurl detail </h3>
+<table border="1">
+    <tr>
+        <td>{{url.filename}}</td>
+        <td>{{url.extension_name}}</td>
+        <td>{{url.download_num}}</td>
+        <td>{{url.up_num}}</td>
+        <td>{{url.down_num}}</td>
+        <td>{{url.cleartype}}</td>
+        <td>{{url.user_name}}</td>
+        <td>{{url.create_time}}</td>
+        <td><a href="/bookbar/downloadbook/{{url.id}}/">download</a></td>
+        <td><a href="/bookbar/downloadurllist/{{book.id}}/0/">other download</a></td>
+    </tr>
+</table>
+
+<h3> Comments </h3>
+<table border="1">
+{% for comment in comments %}
+    <tr>
+    <td> {{comment.content}}</td>    
+    </tr>
+    <tr>
+    <td> {{comment.create_time}}</td>
+    <td> {{comment.user_name}}</td>
+    </tr>
+{% endfor %}
+</table>
+
+<form action="" method="post">
+{% csrf_token %}
+    <table border="1">
+        <tr>
+            {{commentform.content}}
+        <tr>
+            <td><input type="submit" value="add comment"></td>
+        </tr>
+    </table>
+</form>
+

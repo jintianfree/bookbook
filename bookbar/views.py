@@ -6,12 +6,31 @@ from django.template import RequestContext
 
 from bookbar.forms import BookForm
 from bookbar.forms import BookDownloadURLForm
+from bookbar.forms import CommentForm
 
 from bookbar.models import User
 from bookbar.models import Book
 from bookbar.models import BookDownloadURL
 from bookbar.models import ExtensionName
 from bookbar.models import ClearType
+from bookbar.models import Comment
+from bookbar.models import Article
+
+def bookbar(request, category, pageindex):
+    max_download_urls = BookDownloadURL.objects.order_by('-download_num')[0:10]
+    max_show_articles = Article.objects.order_by('-show_num')[0:10]
+    latest_download_urls = BookDownloadURL.objects.order_by('-create_time')[0:10]
+    latest_show_articles = Article.objects.order_by('-create_time')[0:10]
+
+    context = {
+        'max_download_urls': max_download_urls,
+        'max_show_articles': max_show_articles,
+        'latest_download_urls': latest_download_urls,
+        'latest_show_articles': latest_show_articles,
+    }
+ 
+    return render_to_response('bookbar_home.html', context, 
+            context_instance = RequestContext(request))
 
 def addbook(request):
     # GET
@@ -187,3 +206,78 @@ def downloadbook(request, url_id):
     else:
         return HttpResponse("error")
 
+def downloadurldetail(request, url_id, page_index):
+    # GET
+    if request.method == 'GET':
+        urls = BookDownloadURL.objects.filter(id=url_id)
+
+        if urls.count() > 0:
+            url = urls[0]
+    
+            commentform = CommentForm()
+            book = url.book
+            comments = url.comment.all()
+    
+            context = {'book':book, 'url':url, 
+                'comments':comments, 'commentform':commentform}
+    
+            return render_to_response('downloadurldetail.html',
+                context,
+                context_instance = RequestContext(request))
+        else:
+            return HttpResponse("error")
+
+    # POST
+
+    commentform = CommentForm(request.POST)
+
+    if not commentform.is_valid():
+        urls = BookDownloadURL.objects.filter(id=url_id)
+        if urls.count() > 0:
+            url = urls[0]
+    
+            commentform = CommentForm()
+            book = url.book
+            comments = url.comment.all()
+    
+            context = {'book':book, 'url':url, 
+                'comments':comments, 'commentform':commentform}
+    
+            return render_to_response('downloadurldetail.html',
+                context,
+                context_instance = RequestContext(request))
+   
+    # TODO: only support anonymous now
+    anonymous = User.objects.filter(name = "anonymous")
+    if anonymous.count() == 0:
+        user = User(name="anonymous", password="password")
+        user.save()
+    else:
+        user = anonymous[0]
+
+
+    urls = BookDownloadURL.objects.filter(id=url_id)
+    if urls.count() > 0:
+        url = urls[0]
+
+ 
+        comment=Comment()
+        comment.content = commentform.cleaned_data['content']
+        comment.user_name = user.name
+        comment.user = user
+        comment.save()
+    
+        url.comment.add(comment)
+        url.save()
+
+        commentform = CommentForm()
+        book = url.book
+        comments = url.comment.all()
+
+        context = {'book':book, 'url':url, 
+            'comments':comments, 'commentform':commentform}
+
+        return render_to_response('downloadurldetail.html',
+            context,
+            context_instance = RequestContext(request))
+ 

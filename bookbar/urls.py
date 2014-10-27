@@ -5,13 +5,16 @@ from django.conf.urls import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('bookbar',
-    # Examples:
+    url(r'^(\d+)/(\d+)/$', 'views.bookbar', name='bookbar'),
     url(r'^addbook$', 'views.addbook', name='addbook'),
     url(r'^adddownloadurl/(\d+)/$', 'views.adddownloadurl', name='adddownloadurl'),
     url(r'^booklist/(\d+)/(\d+)/$', 'views.booklist', name='booklist'),
     url(r'^downloadurllist/(\d+)/(\d+)/$', 'views.downloadurllist', name='downloadlist'),
     url(r'^booksmalllist/(\d+)/$', 'views.booksmalllist', name='booksmalllist'),
     url(r'^downloadbook/(\d+)/$', 'views.downloadbook', name='downloadbook'),
+    url(r'^downloadurldetail/(\d+)/(\d+)/$', 'views.downloadurldetail', name='downloadurldetail'),
+
+    # Examples:
     # url(r'^$', 'bookbook.views.home', name='home'),
     # url(r'^bookbook/', include('bookbook.foo.urls')),
 

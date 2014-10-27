@@ -1,6 +1,8 @@
 from django import forms
+
 from bookbar.models import Book
 from bookbar.models import BookDownloadURL
+from bookbar.models import Comment
 
 class BookForm(forms.ModelForm):
     class Meta:
@@ -16,3 +18,9 @@ class BookDownloadURLForm(forms.ModelForm):
         model = BookDownloadURL
         fields = ('filename', 'extension_name',
         'url', 'cleartype')
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('content',)
+
