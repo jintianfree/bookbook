@@ -3,18 +3,21 @@
 
 <head> 
     <script> 
-    var i = 5;
+    var i = 3;
  
     function sett() 
     { 
-        document.getElementById("theDiv").innerHTML=i; 
-        i--;
         if(i >= 0) {
+            document.getElementById("theDiv").innerHTML=i; 
+            setTimeout("sett()",1000); 
+        } else if(i > -2) {
             setTimeout("sett()",1000); 
         } else {
             document.getElementById("showDiv").style.display = "block";
             i = 0;
         }
+
+        i--;
     } 
     </script> 
 </head> 

@@ -93,7 +93,6 @@ def booklist(request, bookid, pageindex):
         articles = book.article_set.order_by('-up_num')[0:5]
         article_sets.append(articles)
         
-
     return render_to_response('booklist.html', 
         {'books':books, 
          'url_sets':url_sets, 
@@ -206,7 +205,102 @@ def downloadbook(request, url_id):
     else:
         return HttpResponse("error")
 
+
+def get_query_set_page_i(set, set_name, i, one_page_count):
+    total = set.count()
+ 
+    total_page = total / one_page_count
+
+    if total % one_page_count != 0:
+        total_page += 1
+
+    if total_page == 0:
+        return {
+            'current_page':0, 
+            'prev_page':0, 
+            'next_page':0, 
+            'total_page':0, 
+            set_name:set, 
+    } 
+
+    current_page = i
+    if current_page < 0:
+        current_page = 0
+    if current_page >= total_page:
+        current_page = total_page -1
+
+    prev_page = current_page - 1
+    if prev_page < 0:
+        prev_page = 0
+  
+    next_page = current_page + 1
+    if next_page >= total_page:
+        next_page = total_page - 1
+    
+    set1 = set[current_page * one_page_count:]
+
+
+    if(set1.count() > one_page_count):
+        set2 = set1[:one_page_count]
+    else:
+        set2 = set1
+
+    current_page_show = current_page + 1
+
+    return {
+        'current_page_show': current_page_show, 
+        'current_page': current_page, 
+        'prev_page': prev_page,
+        'next_page': next_page, 
+        'total_page':total_page, 
+        set_name:set2
+    }
+     
+
+def get_one_page_comment(comments, page_index):
+   return get_query_set_page_i(comments, "comments", int(page_index), 2)
+
+   comment_one_page = 3
+   total_page = comments.count() / comment_one_page
+
+   if comments.count() % comment_one_page != 0 :
+       total_page += 1
+
+   if total_page == 0:
+       return {'current_page': 0, 'prev_page': 0,
+            'next_page': 0, 'total_page':0, 'comments':comments}
+
+   current_page = int(page_index)
+   if current_page < 0:
+       current_page = 0
+   if current_page >= total_page:
+       current_page = total_page - 1
+
+   prev_page    = current_page - 1
+   if prev_page < 0:
+       prev_page = 0
+ 
+   next_page    = current_page + 1
+   if next_page >= total_page:
+       next_page = total_page - 1
+   
+   c = comments[current_page * comment_one_page: ]
+
+   if(c.count() > comment_one_page):
+       d = c[:comment_one_page]
+   else:
+       d = c
+
+   current_page_show = current_page + 1
+
+   return {'current_page': current_page_show, 'prev_page': prev_page,
+            'next_page': next_page, 'total_page':total_page, 'comments':d}
+
+   
+
 def downloadurldetail(request, url_id, page_index):
+    urls = BookDownloadURL.objects.filter(id=url_id)
+
     # GET
     if request.method == 'GET':
         urls = BookDownloadURL.objects.filter(id=url_id)
@@ -218,8 +312,13 @@ def downloadurldetail(request, url_id, page_index):
             book = url.book
             comments = url.comment.all()
     
-            context = {'book':book, 'url':url, 
-                'comments':comments, 'commentform':commentform}
+            context = {
+                'book':book, 
+                'url':url, 
+                'commentform':commentform,
+            }
+
+            context.update(get_one_page_comment(comments, page_index))
     
             return render_to_response('downloadurldetail.html',
                 context,
@@ -228,7 +327,6 @@ def downloadurldetail(request, url_id, page_index):
             return HttpResponse("error")
 
     # POST
-
     commentform = CommentForm(request.POST)
 
     if not commentform.is_valid():
@@ -240,9 +338,14 @@ def downloadurldetail(request, url_id, page_index):
             book = url.book
             comments = url.comment.all()
     
-            context = {'book':book, 'url':url, 
-                'comments':comments, 'commentform':commentform}
+            context = {
+                'book':book, 
+                'url':url, 
+                'commentform':commentform
+            }
     
+            context.update(get_one_page_comment(comments, page_index))
+
             return render_to_response('downloadurldetail.html',
                 context,
                 context_instance = RequestContext(request))
@@ -255,11 +358,9 @@ def downloadurldetail(request, url_id, page_index):
     else:
         user = anonymous[0]
 
-
     urls = BookDownloadURL.objects.filter(id=url_id)
     if urls.count() > 0:
         url = urls[0]
-
  
         comment=Comment()
         comment.content = commentform.cleaned_data['content']
@@ -274,8 +375,13 @@ def downloadurldetail(request, url_id, page_index):
         book = url.book
         comments = url.comment.all()
 
-        context = {'book':book, 'url':url, 
-            'comments':comments, 'commentform':commentform}
+        context = {
+            'book':book, 
+            'url':url, 
+            'commentform':commentform
+        }
+
+        context.update(get_one_page_comment(comments, page_index))
 
         return render_to_response('downloadurldetail.html',
             context,

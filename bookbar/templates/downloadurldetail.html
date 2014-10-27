@@ -32,13 +32,22 @@ height:100px;
 <table border="1">
 {% for comment in comments %}
     <tr>
-    <td> {{comment.content}}</td>    
+        <td> {{comment.content}}</td>    
     </tr>
+
     <tr>
-    <td> {{comment.create_time}}</td>
-    <td> {{comment.user_name}}</td>
+        <td> {{comment.create_time}}</td>
+        <td> {{comment.user_name}}</td>
     </tr>
 {% endfor %}
+    <tr>
+        <td>
+            {{current_page}}/{{total_page}}
+        </td>
+        <td>
+            <a href="/bookbar/downloadurldetail/{{url.id}}/{{prev_page}}">Prev</a> <a href="/bookbar/downloadurldetail/{{url.id}}/{{next_page}}">Next</a>
+        </td>
+    </tr>
 </table>
 
 <form action="" method="post">
