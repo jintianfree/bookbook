@@ -1,7 +1,117 @@
+<script>
+
+function check(obj) {
+    document.getElementById("submit_type").value = obj.name
+    document.getElementById("submit_value").value = obj.id
+}
+
+</script>
+
 1. view this article</br>
 
 2. continue add article <br/>
 
 3. <a href="/">go home</a>
 
+<br/>
+4. system has find some book, click to add map
+<br/>
+
+<input type="text" id="submit_type"></input>
+<input type="text" id="submit_value"></input>
+
+<table border="1">
+    {% for book in books %}
+    <tr>
+        <td> {{book.title}} </td>
+        <td> {{book.category}} </td>
+        <td> {{book.author_name}} </td>
+        <td> <input type="submit" id="{{book.id}}_map" name="map" value="map" onClick="check(this)"></input> </td>
+    <tr>
+    {% endfor %}
+</table>
+
+<br/>
+5. find myself and add map
+<br/>
+
+<input type="text" value="book name"></input>
+<input type="submit" id="find" name="find" value="find" onClick="check(this)"></input>
+
+<table border="1">
+    <tr>
+        <td> book name </td>
+        <td> author name </td>
+        <td> publisher time </td>
+        <td> <input type="submit" id="{{book_id}}_find_and_map" name="map" value="add" onClick="check(this)"></input> </td>
+    <tr>
+</table>
+
+<br/>
+6. can not find add a new book
+
+    <form action="" method="post">
+    {% csrf_token %}
+    <table border="1">
+        <tr>
+            <td><span style="color:red">*</span>title:</td>   
+            <td>{{bookform.title}}</td>
+            <td>{{bookform.title.errors}}</td>
+        </tr>  
+        
+        <tr>
+            <td><span style="color:red">*</span>category:</td>
+            <td>{{bookform.category}}</td>
+            <td>{{bookform.category.errors}}</td>
+        </tr>       
+        
+        <tr>
+            <td>tag:</td>
+            <td>{{bookform.tag}}</td>
+            <td>{{bookform.tag.errors}}</td>
+        </tr>
+        
+        <tr>
+            <td><span style="color:red">*</span>author name:</td>
+            <td>{{bookform.author_name}}</td>
+            <td>{{bookform.author_name.errors}}</td>
+        </tr>
+        
+        <tr>
+            <td>translator name:</td>
+            <td>{{bookform.translator_name}}</td>
+            <td>{{bookform.translator_name.errors}}</td>
+        </tr>
+        
+        <tr>
+            <td>publisher:</td>
+            <td>{{bookform.publisher}}</td>
+            <td>{{bookform.publisher.errors}}</td>
+        </tr>
+        
+        <tr>
+            <td>publisher date:</td>
+            <td>{{bookform.publisher_time}}</td>
+            <td>{{bookform.publisher_time.errors}}</td>
+        </tr>
+        
+        <tr>
+            <td>picture URL:</td>
+            <td>{{bookform.pic_url}}</td>
+            <td>{{bookform.pic_url.errors}}</td>
+        </tr>
+        
+        <tr>
+            <td>ISBN:</td>
+            <td>{{bookform.isbn}}</td>
+            <td>{{bookform.isbn.erros}}</td>
+        </tr>
+        
+        <tr>
+            <td></td>
+            <td><input type="submit" id="add_new_and_map" name="add_new_and_map" value="submit"></td>
+            <td></td>
+        </tr>
+    </table>
+    </form>
 

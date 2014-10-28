@@ -64,9 +64,10 @@ class BookDownloadURL(models.Model):
 class Article(models.Model):
     title       = models.CharField(max_length=128)
     content     = models.TextField()
-    user_name   = models.CharField(max_length=64)  # same to comment.user_name
+    user_name   = models.CharField(max_length=64)   # same to comment.user_name
     user        = models.ForeignKey('User')
-    book        = models.ForeignKey('Book')
+    bookname    = models.CharField(max_length=1024, blank=True) # book name it related, split by ; or ,
+    book        = models.ManyToManyField('Book')
     create_time = models.DateTimeField(auto_now_add=True)
     up_num      = models.IntegerField()
     down_num    = models.IntegerField()

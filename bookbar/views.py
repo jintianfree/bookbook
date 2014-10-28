@@ -1,6 +1,8 @@
 # Create your views here.
 
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
+# from django.http import Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
@@ -65,16 +67,39 @@ def addarticle(request):
     article.content = articleform.cleaned_data['content']
     article.user_name = user.name
     article.user = user
-    article.book = Book.objects.all()[0]
     article.up_num = 0
     article.down_num = 0
     article.show_num = 0
+    article.bookname = articleform.cleaned_data['bookname']
 
     article.save()
 
+    url = '/bookbar/addarticleend/' + str(article.id)
+    return HttpResponseRedirect(url)
+    #return render_to_response('addarticleend.html',
+    #    {'article':article},
+    #    context_instance=RequestContext(request))
+
+def addarticleend(request, article_id):
+    if not Article.objects.all().count > 0:
+        return HttpResponse("error")
+
+    article = Article.objects.all()[0]
+
+    relative_books = []
+    booknames = article.bookname.split(';')
+
+    for bookname in booknames:
+       books = Book.objects.filter(title__icontains=bookname)
+       if(len(books) > 5):
+           books = books[:5]
+       if (len(relative_books) < 50):
+           relative_books.extend(books)
+
     return render_to_response('addarticleend.html',
-        {'article':article},
+        {'books':relative_books},
         context_instance=RequestContext(request))
+
 
 def addbook(request):
     # GET

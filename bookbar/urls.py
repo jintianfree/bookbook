@@ -14,6 +14,7 @@ urlpatterns = patterns('bookbar',
     url(r'^downloadbook/(\d+)/$', 'views.downloadbook', name='downloadbook'),
     url(r'^downloadurldetail/(\d+)/(\d+)/$', 'views.downloadurldetail', name='downloadurldetail'),
     url(r'^addarticle$', 'views.addarticle', name='addarticle'),
+    url(r'^addarticleend/(\d+)/$', 'views.addarticleend', name='addarticleend'),
 
     # Examples:
     # url(r'^$', 'bookbook.views.home', name='home'),
