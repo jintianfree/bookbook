@@ -7,6 +7,7 @@ from django.template import RequestContext
 from bookbar.forms import BookForm
 from bookbar.forms import BookDownloadURLForm
 from bookbar.forms import CommentForm
+from bookbar.forms import ArticleForm
 
 from bookbar.models import User
 from bookbar.models import Book
@@ -31,6 +32,49 @@ def bookbar(request, category, pageindex):
  
     return render_to_response('bookbar_home.html', context, 
             context_instance = RequestContext(request))
+
+def addarticle(request):
+    # GET
+    if request.method == 'GET':
+        articleform = ArticleForm()
+        context = {'articleform':articleform}
+
+        return render_to_response('addarticle.html', context, 
+            context_instance = RequestContext(request))
+
+    # POST
+    # raise BaseException
+    articleform = ArticleForm(request.POST)
+    context     = {'articleform':articleform, }
+
+    if not articleform.is_valid():
+        return render_to_response('addarticle.html', 
+            context, 
+            context_instance = RequestContext(request))
+
+    # TODO: only support anonymous now
+    anonymous = User.objects.filter(name = "anonymous")
+    if anonymous.count() == 0:
+        user = User(name="anonymous", password="password")
+        user.save()
+    else:
+        user = anonymous[0]
+ 
+    article = Article()
+    article.title = articleform.cleaned_data['title']
+    article.content = articleform.cleaned_data['content']
+    article.user_name = user.name
+    article.user = user
+    article.book = Book.objects.all()[0]
+    article.up_num = 0
+    article.down_num = 0
+    article.show_num = 0
+
+    article.save()
+
+    return render_to_response('addarticleend.html',
+        {'article':article},
+        context_instance=RequestContext(request))
 
 def addbook(request):
     # GET
@@ -169,23 +213,25 @@ def adddownloadurl(request, bookid):
             context_instance = RequestContext(request))
 
 
-def downloadurllist(request, bookid, pageindex):
+def downloadurllist(request, bookid, page_index):
     books = Book.objects.filter(id=bookid)
     if books.count() == 0:
         return HttpResponse("error")
 
-
     urls = books[0].bookdownloadurl_set.all()
 
-    context = { 'book':books[0], 'urls': urls }
+    context = {'book':books[0],}
+ 
+    context.update(get_query_set_page_i(
+        urls, "urls", int(page_index), 2))
 
     return render_to_response('downloadurllist.html',
         context,
         context_instance = RequestContext(request))
 
-def booksmalllist(request, pageindex):
-    books   = Book.objects.all()
-    context = { 'books':books }
+def booksmalllist(request, page_index):
+    context = get_query_set_page_i(
+        Book.objects.all(), "books", int(page_index), 2)
 
     return render_to_response('booksmalllist.html',
         context,
@@ -216,6 +262,7 @@ def get_query_set_page_i(set, set_name, i, one_page_count):
 
     if total_page == 0:
         return {
+            'current_page_show':0,
             'current_page':0, 
             'prev_page':0, 
             'next_page':0, 

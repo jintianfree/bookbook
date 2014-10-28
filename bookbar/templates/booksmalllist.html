@@ -18,6 +18,8 @@ th {
 
 </style>
 
+{% include 'header.html' %}
+
 <table border="1">
     <tr>
         <th>category</th>
@@ -31,10 +33,10 @@ th {
         <td>{{book.tag}}</td>
     <tr>
     {% endfor %}
+
     <tr>
-        <td></td>
-        <td> <a href="">Prev Page</a></td>
-        <td> <a href="">Next Page</a></td>
+        <td>{{current_page_show}}/{{total_page}}</td>
+        <td> <a href="/bookbar/booksmalllist/{{prev_page}}">Prev Page</a> <a href="/bookbar/booksmalllist/{{next_page}}">Next Page</a></td>
     <tr>
 </table>
 </div>

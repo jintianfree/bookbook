@@ -13,6 +13,7 @@ urlpatterns = patterns('bookbar',
     url(r'^booksmalllist/(\d+)/$', 'views.booksmalllist', name='booksmalllist'),
     url(r'^downloadbook/(\d+)/$', 'views.downloadbook', name='downloadbook'),
     url(r'^downloadurldetail/(\d+)/(\d+)/$', 'views.downloadurldetail', name='downloadurldetail'),
+    url(r'^addarticle$', 'views.addarticle', name='addarticle'),
 
     # Examples:
     # url(r'^$', 'bookbook.views.home', name='home'),
