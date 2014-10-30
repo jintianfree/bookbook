@@ -228,9 +228,11 @@ def articledetail(request, article_id, page_index):
  
 
 def articlelist(request, category, pageindex):
+    article_num_one_page = 10
+
     articles = Article.objects.order_by('show_num')
 
-    context = get_query_set_page_i(articles, "articles", int(pageindex), 2)
+    context = get_query_set_page_i(articles, "articles", int(pageindex), article_num_one_page)
 
     context.update({'category':category})
 
@@ -446,9 +448,11 @@ def downloadurllist(request, bookid, page_index):
         context_instance = RequestContext(request))
 
 def downloadurlalllist(request, category, page_index):
+    url_num_one_page = 10
+
     urls = BookDownloadURL.objects.order_by('download_num')
 
-    context = get_query_set_page_i(urls, "urls", int(page_index), 2)
+    context = get_query_set_page_i(urls, "urls", int(page_index), url_num_one_page)
     context.update({'category':category})
 
     return render_to_response('downloadurlalllist.html',
@@ -456,8 +460,8 @@ def downloadurlalllist(request, category, page_index):
         context_instance = RequestContext(request))
 
 def booksmalllist(request, page_index):
-    context = get_query_set_page_i(
-        Book.objects.all(), "books", int(page_index), 2)
+    book_num_one_page = 10
+    context = get_query_set_page_i(Book.objects.all(), "books", int(page_index), book_num_one_page)
 
     return render_to_response('booksmalllist.html',
         context,

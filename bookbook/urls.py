@@ -7,8 +7,8 @@ from django.conf.urls import patterns, include, url
 urlpatterns = patterns('',
     # Examples:
     url(r'^bookbar/', include('bookbar.urls')),
-    # url(r'^$', 'bookbook.views.home', name='home'),
-    # url(r'^bookbook/', include('bookbook.foo.urls')),
+    url(r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', {'url':'/static/favicon.ico'}),
+    url(r'^$', 'django.views.generic.simple.redirect_to', {'url':'/bookbar/0/'}),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

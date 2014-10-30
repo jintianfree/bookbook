@@ -1,24 +1,6 @@
-<style type="text/css">
-td {
-    vertical-align: text-top;
-    padding: 6px 15px 6px 6px;
-    background-color: #EFEFEF;
-    border: 1px solid #AAA;
-}
+{% extends "base.html" %}
 
-th {
-    vertical-align: baseline;
-    padding: 5px 15px 5px 6px;
-    background-color: #D5D5D5;
-    border: 1px solid #AAA;
-    text-align: left;
-}
-
-
-
-</style>
-
-{% include 'header.html' %}
+{% block content %}
 
 <table border="1">
     <tr>
@@ -39,6 +21,8 @@ th {
         <td> <a href="/bookbar/booksmalllist/{{prev_page}}">Prev Page</a> <a href="/bookbar/booksmalllist/{{next_page}}">Next Page</a></td>
     <tr>
 </table>
-</div>
 
 <a href="/bookbar/addbook">add book</a>
+
+{% endblock %}
+

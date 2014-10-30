@@ -1,83 +1,70 @@
-<html>
-    <head>
-        <style type="text/css">
-        a, body {
-        font-family: "DINRoundOT-Light";
-        color: #666;
-        font-size: small;
-        }
 
-        form {
-        padding:50px
-        }
-        </style>
+{% extends "base.html" %}
+{% block content %}
 
 
-    </head>
-<body>
-
-    <form action="" method="post">
-    {% csrf_token %}
-    <table>
-        <tr>
-            <td><span style="color:red">*</span>title:</td>   
-            <td>{{bookform.title}}</td>
-            <td>{{bookform.title.errors}}</td>
-        </tr>  
-        
-        <tr>
-            <td><span style="color:red">*</span>category:</td>
-            <td>{{bookform.category}}</td>
-            <td>{{bookform.category.errors}}</td>
-        </tr>       
-        
-        <tr>
-            <td>tag:</td>
-            <td>{{bookform.tag}}</td>
-            <td>{{bookform.tag.errors}}</td>
-        </tr>
-        
-        <tr>
-            <td><span style="color:red">*</span>author name:</td>
-            <td>{{bookform.author_name}}</td>
-            <td>{{bookform.author_name.errors}}</td>
-        </tr>
-        
-        <tr>
-            <td>translator name:</td>
-            <td>{{bookform.translator_name}}</td>
-            <td>{{bookform.translator_name.errors}}</td>
-        </tr>
-        
-        <tr>
-            <td>publisher:</td>
-            <td>{{bookform.publisher}}</td>
-            <td>{{bookform.publisher.errors}}</td>
-        </tr>
-        
-        <tr>
-            <td>publisher date:</td>
-            <td>{{bookform.publisher_time}}</td>
-            <td>{{bookform.publisher_time.errors}}</td>
-        </tr>
-        
-        <tr>
-            <td>picture URL:</td>
-            <td>{{bookform.pic_url}}</td>
-            <td>{{bookform.pic_url.errors}}</td>
-        </tr>
-        
-        <tr>
-            <td>ISBN:</td>
-            <td>{{bookform.isbn}}</td>
-            <td>{{bookform.isbn.erros}}</td>
-        </tr>
-        
-        <tr>
-            <td></td>
-            <td><input type="submit" value="submit"></td>
-            <td></td>
-        </tr>
-    </table>
-    </form>
-</body>
+<form action="" method="post">
+{% csrf_token %}
+<table>
+    <tr>
+        <td><span style="color:red">*</span>title:</td>   
+        <td>{{bookform.title}}</td>
+        <td>{{bookform.title.errors}}</td>
+    </tr>  
+    
+    <tr>
+        <td><span style="color:red">*</span>category:</td>
+        <td>{{bookform.category}}</td>
+        <td>{{bookform.category.errors}}</td>
+    </tr>       
+    
+    <tr>
+        <td>tag:</td>
+        <td>{{bookform.tag}}</td>
+        <td>{{bookform.tag.errors}}</td>
+    </tr>
+    
+    <tr>
+        <td><span style="color:red">*</span>author name:</td>
+        <td>{{bookform.author_name}}</td>
+        <td>{{bookform.author_name.errors}}</td>
+    </tr>
+    
+    <tr>
+        <td>translator name:</td>
+        <td>{{bookform.translator_name}}</td>
+        <td>{{bookform.translator_name.errors}}</td>
+    </tr>
+    
+    <tr>
+        <td>publisher:</td>
+        <td>{{bookform.publisher}}</td>
+        <td>{{bookform.publisher.errors}}</td>
+    </tr>
+    
+    <tr>
+        <td>publisher date:</td>
+        <td>{{bookform.publisher_time}}</td>
+        <td>{{bookform.publisher_time.errors}}</td>
+    </tr>
+    
+    <tr>
+        <td>picture URL:</td>
+        <td>{{bookform.pic_url}}</td>
+        <td>{{bookform.pic_url.errors}}</td>
+    </tr>
+    
+    <tr>
+        <td>ISBN:</td>
+        <td>{{bookform.isbn}}</td>
+        <td>{{bookform.isbn.erros}}</td>
+    </tr>
+    
+    <tr>
+        <td></td>
+        <td><input type="submit" value="submit"></td>
+        <td></td>
+    </tr>
+</table>
+</form>
+{% endblock %}

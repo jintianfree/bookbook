@@ -1,5 +1,6 @@
+{% extends "base.html" %}
 
-{% include 'header.html' %}
+{% block content %}
 
 <table border="1">
     {% for article in articles %}
@@ -23,3 +24,5 @@
 </table>
 
 <a href="/bookbar/addarticle">add article</a>
+
+{% endblock %}

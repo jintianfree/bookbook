@@ -1,11 +1,17 @@
 
-{% include 'header.html' %}
+{% extends "base.html" %}
+{% block content %}
 
 
-{{article.title}}
+<h2> {{article.title}} </h2>
+
+<hr/>
+
 {% autoescape off %}
 {{article.content}}
 {% endautoescape %}
+
+<hr/>
 
 {% if comments %}
 <h3> Comments </h3>
@@ -33,6 +39,14 @@
 
 {% endif %}
 
+
+<style type="text/css">
+#id_content {
+width:90%;
+height:50px;
+}
+</style>
+
 <form action="" method="post">
 {% csrf_token %}
     <table border="1">
@@ -44,3 +58,4 @@
     </table>
 </form>
 
+{% endblock %}

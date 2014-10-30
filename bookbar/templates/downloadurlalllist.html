@@ -1,5 +1,6 @@
+{% extends "base.html" %}
 
-{% include 'header.html' %}
+{% block content %}
 
 <table border="1">
     {% for url in urls %}
@@ -22,7 +23,11 @@
         </td>
         <td>
             <a href="/bookbar/downloadurlalllist/{{category}}/{{prev_page}}">Prev</a> 
+        </td>
+        <td>
             <a href="/bookbar/downloadurlalllist/{{category}}/{{next_page}}">Next</a>
         </td>
     </tr>
 </table>
+
+{% endblock %}

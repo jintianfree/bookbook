@@ -1,15 +1,21 @@
 
-{% include 'header.html' %}
+{% extends "base.html" %}
+{% block content %}
 
 <div style="width:800px;margin:20px auto;">
 
 <h4> max download url </h4>
 <ul>
+    <table>
     {% for url in max_download_urls %}
-    <li> 
-         <a href="/bookbar/downloadurldetail/{{url.id}}/0">{{url.filename}} {{url.extension_name}} {{url.clear_type}} {{url.download_num}} </a>
-    </li>
+    <tr>
+         <td><li></li></td>
+         <td><a href="/bookbar/downloadurldetail/{{url.id}}/0">{{url.filename}}{{url.extension_name}}</a> </td>
+         <td>{{url.cleartype}}   </td>
+         <td>{{url.download_num}} </td>
+    </tr>
     {% endfor %}
+    </table>
 </ul>
 
 <h4> max show article </h4>
@@ -49,3 +55,4 @@
 
 </div>
 
+{% endblock %}

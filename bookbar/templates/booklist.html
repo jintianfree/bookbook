@@ -1,85 +1,66 @@
-<html>
 
-<head>
-<style type="text/css">
-td {
-    background-color: #EFEFEF;
-    border: 1px solid #AAA;
-}
-
-th {
-    background-color: #D5D5D5;
-    border: 1px solid #AAA;
-    text-align: left;
-}
+{% extends "base.html" %}
+{% block content %}
 
 
-</style>
+{% for book in books %}
 
+{% include 'bookdetail.html' %}
 
-</head>
-
-<body>
-
-    {% for book in books %}
-
-    {% include 'bookdetail.html' %}
-
-    <table>
-        <tr>
-            <th> filename </th>
-            <th> type </th>
-            <th> download </th>
-            <th> up </th>
-            <th> down </th>
-            <th> clear type </th>
-            <th> user </th>
-            <th> time </th>
-        <tr>
-        {% for urls in url_sets %}
-            {% ifequal forloop.counter0 forloop.parentloop.counter0 %}
-                {% for url in urls %}
-        <tr>
-            <td>{{url.filename}}</td>
-            <td>{{url.extension_name}}</td>
-            <td>{{url.download_num}}</td>
-            <td>{{url.up_num}}</td>
-            <td>{{url.down_num}}</td>
-            <td>{{url.cleartype}}</td>
-            <td>{{url.user_name}}</td>
-            <td>{{url.create_time}}</td>
-            <td><a href="/bookbar/downloadbook/{{url.id}}/">download</a></td>
-            <td><a href="">remark</a></td>
-        </tr>
-                {% endfor %}
-            {% endifequal %}
-        {% endfor%}
-
-        <tr>
-            <td colspan="4" style="padding:0"> 
-                <a href="/bookbar/adddownloadurl/{{book.id}}/">add a new downloadurl </a>
-            </td>
-
-            <td colspan="4" style="padding:0"> 
-                <a href="/bookbar/downloadurllist/{{book.id}}/0/">view more</a>
-            </td>
-        </tr>
-    </table>
-    
-    <table>
-    {% for articles in article_sets %}
+<table>
+    <tr>
+        <th> filename </th>
+        <th> type </th>
+        <th> download </th>
+        <th> up </th>
+        <th> down </th>
+        <th> clear type </th>
+        <th> user </th>
+        <th> time </th>
+    <tr>
+    {% for urls in url_sets %}
         {% ifequal forloop.counter0 forloop.parentloop.counter0 %}
-            {% for article in articles %}
-        <tr>
-        <td>{{article.user_name}}</td>
-        <td>{{article.create_time}}</td>
-        </tr>
+            {% for url in urls %}
+    <tr>
+        <td>{{url.filename}}</td>
+        <td>{{url.extension_name}}</td>
+        <td>{{url.download_num}}</td>
+        <td>{{url.up_num}}</td>
+        <td>{{url.down_num}}</td>
+        <td>{{url.cleartype}}</td>
+        <td>{{url.user_name}}</td>
+        <td>{{url.create_time}}</td>
+        <td><a href="/bookbar/downloadbook/{{url.id}}/">download</a></td>
+        <td><a href="">remark</a></td>
+    </tr>
             {% endfor %}
         {% endifequal %}
     {% endfor%}
-    </table>
-    
-    {% endfor %}
 
-</body>
-</html>
+    <tr>
+        <td colspan="4" style="padding:0"> 
+            <a href="/bookbar/adddownloadurl/{{book.id}}/">add a new downloadurl </a>
+        </td>
+
+        <td colspan="4" style="padding:0"> 
+            <a href="/bookbar/downloadurllist/{{book.id}}/0/">view more</a>
+        </td>
+    </tr>
+</table>
+
+<table>
+{% for articles in article_sets %}
+    {% ifequal forloop.counter0 forloop.parentloop.counter0 %}
+        {% for article in articles %}
+    <tr>
+    <td>{{article.user_name}}</td>
+    <td>{{article.create_time}}</td>
+    </tr>
+        {% endfor %}
+    {% endifequal %}
+{% endfor%}
+</table>
+
+{% endfor %}
+
+{% endblock %}

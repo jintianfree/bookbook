@@ -1,11 +1,16 @@
  
+{% extends "base.html" %}
+{% block content %}
+
+
 {% include 'bookdetail.html' %}
 
 <form action="" method="post">
-{% csrf_token %}
-<table>
-{{ downloadurlform.as_table }}
-</table>
-<input type="submit" value="Submit" />
+    {% csrf_token %}
+    <table>
+        {{downloadurlform.as_table }}
+    </table>
+    <input type="submit" value="Submit" />
 </form>
 
+{% endblock %}

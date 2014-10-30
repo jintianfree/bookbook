@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+
 
 <style type="text/css">
 #id_content {
@@ -6,7 +9,6 @@ height:100px;
 }
 </style>
 
-{% include 'header.html' %}
 {% include 'bookdetail.html' %}
 
 {% for url in urls %}
@@ -28,6 +30,7 @@ height:100px;
     </tr>
 </table>
 
+<div id="id_comments_div">
 <h3> Comments </h3>
 <table border="1">
 {% for comment in comments %}
@@ -45,10 +48,11 @@ height:100px;
             {{current_page_show}}/{{total_page}}
         </td>
         <td>
-            <a href="/bookbar/downloadurldetail/{{url.id}}/{{prev_page}}">Prev</a> <a href="/bookbar/downloadurldetail/{{url.id}}/{{next_page}}">Next</a>
+            <a href="/bookbar/downloadurldetail/{{url.id}}/{{prev_page}}#id_comments_div">Prev</a> <a href="/bookbar/downloadurldetail/{{url.id}}/{{next_page}}#id_comments_div">Next</a>
         </td>
     </tr>
 </table>
+</div>
 
 <form action="" method="post">
 {% csrf_token %}
@@ -61,3 +65,4 @@ height:100px;
     </table>
 </form>
 
+{% endblock %}
