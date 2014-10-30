@@ -1,0 +1,25 @@
+
+{% include 'header.html' %}
+
+<table border="1">
+    {% for article in articles %}
+    <tr>
+        <td>{{article.title}}</td>
+        <td>{{article.user_name}}</td>
+        <td>{{article.create_time}}</td>
+        <td>{{article.show_num}}</td>
+        <td><a href="/bookbar/articledetail/{{article.id}}/0/">detail</a></td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td>
+            {{current_page_show}}/{{total_page}}
+        </td>
+        <td>
+            <a href="/bookbar/articlelist/{{category}}/{{prev_page}}/">Prev</a> 
+            <a href="/bookbar/articlelist/{{category}}/{{next_page}}/">Next</a>
+        </td>
+    </tr>
+</table>
+
+<a href="/bookbar/addarticle">add article</a>

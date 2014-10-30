@@ -19,7 +19,7 @@ from bookbar.models import ClearType
 from bookbar.models import Comment
 from bookbar.models import Article
 
-def bookbar(request, category, pageindex):
+def bookbar(request, category):
     max_download_urls = BookDownloadURL.objects.order_by('-download_num')[0:10]
     max_show_articles = Article.objects.order_by('-show_num')[0:10]
     latest_download_urls = BookDownloadURL.objects.order_by('-create_time')[0:10]
@@ -74,32 +74,223 @@ def addarticle(request):
 
     article.save()
 
-    url = '/bookbar/addarticleend/' + str(article.id)
+    url = '/bookbar/addarticleend/' + str(article.id) + "/0/0/"
     return HttpResponseRedirect(url)
-    #return render_to_response('addarticleend.html',
-    #    {'article':article},
-    #    context_instance=RequestContext(request))
 
-def addarticleend(request, article_id):
-    if not Article.objects.all().count > 0:
+def addarticleend_get(request, article_id, related_page_index, find_page_index):
+    if not Article.objects.filter(id=article_id).count > 0:
         return HttpResponse("error")
 
-    article = Article.objects.all()[0]
+    article = Article.objects.filter(id=article_id)[0]
 
-    relative_books = []
+    books = []
     booknames = article.bookname.split(';')
 
     for bookname in booknames:
-       books = Book.objects.filter(title__icontains=bookname)
-       if(len(books) > 5):
-           books = books[:5]
-       if (len(relative_books) < 50):
-           relative_books.extend(books)
+       all_books = Book.objects.filter(title__icontains=bookname).all()
+
+       for book in all_books:
+           if book not in article.book.all():
+               books.append(book)
+    related_books_info = get_array_page_i(books, "related_books", int(related_page_index), 2)
+
+    if 'find_book_name' in request.GET:
+        all_books = []
+        books = []
+        all_books = Book.objects.filter(title__icontains=request.GET['find_book_name'])
+
+        for book in all_books:
+           if book not in article.book.all():
+               books.append(book)
+   
+        finded_books_info = get_array_page_i(books, "finded_books", int(find_page_index), 2)
+        finded_books_info.update({'find_book_name': request.GET['find_book_name']})
+    else:
+        finded_books_info = get_array_page_i([], "", 0, 1)
+        finded_books_info.update({'find_book_name': ""})
+    
+    context = {
+        'related_books_info': related_books_info,
+        'finded_books_info': finded_books_info,
+        'maped_books':  article.book.all(),
+        'bookform': BookForm(),
+        'article_id':article_id,
+    }
 
     return render_to_response('addarticleend.html',
-        {'books':relative_books},
+        context,
         context_instance=RequestContext(request))
 
+
+def addarticleend_post(request, article_id, related_page_index, find_page_index):
+    article = Article.objects.filter(id=article_id)[0]
+    getstr=""
+
+    if request.POST['submit_type'] == 'map_related_book':
+        book_id = int(request.POST['submit_value'].split('_')[0])
+        book = Book.objects.filter(id=book_id)[0]
+        article.book.add(book)
+        article.save()
+    elif request.POST['submit_type'] == 'find_book':
+         getstr = "?find_book_name=" + request.POST['find_book_name']
+    elif request.POST['submit_type'] == 'map_finded_book':
+        book_id = int(request.POST['submit_value'].split('_')[0])
+        book = Book.objects.filter(id=book_id)[0]
+        article.book.add(book)
+        article.save()
+        getstr = "?find_book_name=" + request.POST['find_book_name']
+    elif request.POST['submit_type'] == 'add_new_and_map':
+        bookform = BookForm(request.POST)
+
+        if not bookform.is_valid():
+            return render_to_response('addarticleend.html', 
+            {'bookform':bookform},
+            context_instance = RequestContext(request))
+
+        # TODO: only support anonymous now
+        anonymous = User.objects.filter(name = "anonymous")
+        if anonymous.count() == 0:
+            user = User(name="anonymous", password="password")
+            user.save()
+        else:
+            user = anonymous[0]
+     
+        book = Book()
+        book.title = bookform.cleaned_data['title']
+        book.publisher = bookform.cleaned_data['publisher']
+        book.publisher_time = bookform.cleaned_data['publisher_time']
+        book.category = bookform.cleaned_data['category']
+        book.tag = bookform.cleaned_data['tag']
+        book.author_name = bookform.cleaned_data['author_name']
+        book.translator_name = bookform.cleaned_data['translator_name']
+        book.pic_url = bookform.cleaned_data['pic_url']
+        book.isbn = bookform.cleaned_data['isbn']
+        
+        book.save()
+
+        article.book.add(book)
+        article.save()
+
+    return HttpResponseRedirect('/bookbar/addarticleend/' 
+        + article_id + "/" + related_page_index + "/" + find_page_index + getstr)
+
+def addarticleend(request, article_id, related_page_index, find_page_index):
+    if request.method == 'GET':
+        return addarticleend_get(request, article_id, related_page_index, find_page_index)
+    else:
+        return addarticleend_post(request, article_id, related_page_index, find_page_index)
+
+
+def articledetail(request, article_id, page_index):
+    if not Article.objects.filter(id=article_id).count > 0:
+        return HttpResponse("error")
+
+    article = Article.objects.filter(id=article_id)[0]
+    article.show_num += 1
+    article.save()
+
+    context = get_query_set_page_i(article.comment.all(), "comments", int(page_index), 2)
+
+    context.update({ 'article':article,})
+    
+    if request.method == 'GET':
+        context.update({'commentform':CommentForm()})
+        return render_to_response('articledetail.html', 
+            context,
+            context_instance = RequestContext(request))
+    else:
+        commentform = CommentForm(request.POST) 
+        if commentform.is_valid():
+            # TODO: only support anonymous now
+            anonymous = User.objects.filter(name = "anonymous")
+            if anonymous.count() == 0:
+                user = User(name="anonymous", password="password")
+                user.save()
+            else:
+                user = anonymous[0]
+
+            comment=Comment()
+            comment.content = commentform.cleaned_data['content']
+            comment.user_name = user.name
+            comment.user = user
+            comment.save()
+
+            article.comment.add(comment)
+            article.save()
+ 
+            url = "/bookbar/articledetail/" + article_id + "/" + page_index + "/"
+            return HttpResponseRedirect(url)
+        else:
+            context.update({'commentform':commentform})
+            return render_to_response('articledetail.html', 
+                context,
+                context_instance = RequestContext(request))
+ 
+
+def articlelist(request, category, pageindex):
+    articles = Article.objects.order_by('show_num')
+
+    context = get_query_set_page_i(articles, "articles", int(pageindex), 2)
+
+    context.update({'category':category})
+
+    return render_to_response('articlelist.html',
+        context,
+        context_instance = RequestContext(request))
+
+
+
+            
+'''
+def addarticleend_(request, article_id):
+    if not Article.objects.filter(id=article_id).count > 0:
+        return HttpResponse("error")
+
+    # GET
+    if request.method == 'GET':
+        article = Article.objects.filter(id=article_id)[0]
+    
+        related_books = []
+        booknames = article.bookname.split(';')
+    
+        for bookname in booknames:
+           all_books = Book.objects.filter(title__icontains=bookname).all()
+
+           books = []
+           for book in all_books:
+               if book not in article.book.all():
+                   books.append(book)
+    
+           if(len(books) > 5):
+               books = books[:5]
+           if (len(related_books) < 50):
+               related_books.extend(books)
+    
+        context = {
+            'maped_book_num':article.book.count(),
+            'maped_books':article.book.all(),
+            'related_books':related_books,
+            'related_book_num': len(related_books),
+            'bookform':BookForm(),
+        }
+        
+        return render_to_response('addarticleend.html',
+            context,
+            context_instance=RequestContext(request))
+    
+    # POST
+    if request.POST['submit_type'] == 'map_related_book':
+        book_id = int(request.POST['submit_value'].split('_')[0])
+        book = Book.objects.filter(id=book_id)[0]
+        article = Article.objects.filter(id=article_id)[0]
+        article.book.add(book)
+        article.save()
+ 
+        return HttpResponseRedirect('/bookbar/addarticleend/' + article_id)
+
+    if request.POST['submit_type'] == 'add_new_and_map':
+        bookform = BookForm(request.POST)
+'''
 
 def addbook(request):
     # GET
@@ -254,6 +445,16 @@ def downloadurllist(request, bookid, page_index):
         context,
         context_instance = RequestContext(request))
 
+def downloadurlalllist(request, category, page_index):
+    urls = BookDownloadURL.objects.order_by('download_num')
+
+    context = get_query_set_page_i(urls, "urls", int(page_index), 2)
+    context.update({'category':category})
+
+    return render_to_response('downloadurlalllist.html',
+        context,
+        context_instance = RequestContext(request))
+
 def booksmalllist(request, page_index):
     context = get_query_set_page_i(
         Book.objects.all(), "books", int(page_index), 2)
@@ -276,6 +477,60 @@ def downloadbook(request, url_id):
     else:
         return HttpResponse("error")
 
+
+def get_array_page_i(array, array_name, i, one_page_count):
+    total = len(array)
+
+    total_page = total / one_page_count
+
+    if total % one_page_count != 0:
+        total_page += 1
+
+    if total_page == 0:
+        return {
+            'current_page_show':0,
+            'current_page_amount':0,
+            'current_page':0, 
+            'prev_page':0, 
+            'next_page':0, 
+            'total_page':0, 
+            array_name: array
+        } 
+
+    current_page = i
+    if current_page < 0:
+        current_page = 0
+    if current_page >= total_page:
+        current_page = total_page -1
+
+    prev_page = current_page - 1
+    if prev_page < 0:
+        prev_page = 0
+  
+    next_page = current_page + 1
+    if next_page >= total_page:
+        next_page = total_page - 1
+    
+    sub1 = array[current_page * one_page_count:]
+
+    if(len(sub1) > one_page_count):
+        sub2 = sub1[:one_page_count]
+    else:
+        sub2 = sub1
+
+    current_page_show = current_page + 1
+
+    current_page_amount = len(sub2)
+
+    return {
+        'current_page_show': current_page_show,
+        'current_page_amount': current_page_amount,
+        'current_page': current_page, 
+        'prev_page': prev_page,
+        'next_page': next_page, 
+        'total_page':total_page, 
+        array_name: sub2
+    }
 
 def get_query_set_page_i(set, set_name, i, one_page_count):
     total = set.count()

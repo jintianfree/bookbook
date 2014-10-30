@@ -1,6 +1,8 @@
 
 {% include 'header.html' %}
 
+<div style="width:800px;margin:20px auto;">
+
 <h4> max download url </h4>
 <ul>
     {% for url in max_download_urls %}
@@ -14,7 +16,7 @@
 <ul>
     {% for article in max_show_articles %}
     <li> 
-    {{article.title}} {{article.show_num}} {{article.create_time}}
+    <a href="/bookbar/articledetail/{{article.id}}/0/">{{article.title}} {{article.show_num}} {{article.create_time}}</a>
     </li>
     {% endfor %}
 </ul>
@@ -32,7 +34,7 @@
 <ul>
     {% for article in latest_show_articles %}
     <li> 
-        {{article.title}} {{article.show_num}} {{article.create_time}}
+     <a href="/bookbar/articledetail/{{article.id}}/0/">   {{article.title}} {{article.show_num}} {{article.create_time}} </a>
     </li>
     {% endfor %}
 </ul>
@@ -45,4 +47,5 @@
     <li>4</li>
 </ul>
 
+</div>
 

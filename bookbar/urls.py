@@ -5,7 +5,7 @@ from django.conf.urls import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('bookbar',
-    url(r'^(\d+)/(\d+)/$', 'views.bookbar', name='bookbar'),
+    url(r'^(\d+)/$', 'views.bookbar', name='bookbar'),
     url(r'^addbook$', 'views.addbook', name='addbook'),
     url(r'^adddownloadurl/(\d+)/$', 'views.adddownloadurl', name='adddownloadurl'),
     url(r'^booklist/(\d+)/(\d+)/$', 'views.booklist', name='booklist'),
@@ -14,7 +14,10 @@ urlpatterns = patterns('bookbar',
     url(r'^downloadbook/(\d+)/$', 'views.downloadbook', name='downloadbook'),
     url(r'^downloadurldetail/(\d+)/(\d+)/$', 'views.downloadurldetail', name='downloadurldetail'),
     url(r'^addarticle$', 'views.addarticle', name='addarticle'),
-    url(r'^addarticleend/(\d+)/$', 'views.addarticleend', name='addarticleend'),
+    url(r'^addarticleend/(\d+)/(\d+)/(\d+)/$', 'views.addarticleend', name='addarticleend'),
+    url(r'^articledetail/(\d+)/(\d+)/$', 'views.articledetail', name='articledetail'),
+    url(r'^downloadurlalllist/(\d+)/(\d+)/$', 'views.downloadurlalllist', name='downloadurlalllist'),
+    url(r'^articlelist/(\d+)/(\d+)/$', 'views.articlelist', name='articlelist'),
 
     # Examples:
     # url(r'^$', 'bookbook.views.home', name='home'),

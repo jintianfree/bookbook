@@ -1,0 +1,46 @@
+
+{% include 'header.html' %}
+
+
+{{article.title}}
+{% autoescape off %}
+{{article.content}}
+{% endautoescape %}
+
+{% if comments %}
+<h3> Comments </h3>
+<table border="1">
+
+{% for comment in comments %}
+    <tr>
+        <td> {{comment.content}}</td>    
+    </tr>
+
+    <tr>
+        <td> {{comment.create_time}}</td>
+        <td> {{comment.user_name}}</td>
+    </tr>
+{% endfor %}
+    <tr>
+        <td>
+            {{current_page_show}}/{{total_page}}
+        </td>
+        <td>
+            <a href="/bookbar/articledetail/{{article.id}}/{{prev_page}}/">Prev</a> <a href="/bookbar/articledetail/{{article.id}}/{{next_page}}/">Next</a>
+        </td>
+    </tr>
+</table>
+
+{% endif %}
+
+<form action="" method="post">
+{% csrf_token %}
+    <table border="1">
+        <tr>
+            {{commentform.content}}
+        <tr>
+            <td><input type="submit" value="add comment"></td>
+        </tr>
+    </table>
+</form>
+

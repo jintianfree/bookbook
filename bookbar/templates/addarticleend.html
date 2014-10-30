@@ -3,55 +3,109 @@
 function check(obj) {
     document.getElementById("submit_type").value = obj.name
     document.getElementById("submit_value").value = obj.id
+
+    /* obj.form.submit();  */
 }
 
 </script>
 
 1. view this article</br>
 
-2. continue add article <br/>
+2. continue add a article <br/>
 
-3. <a href="/">go home</a>
+3. <a href="/">go home</a> <br/>
 
-<br/>
-4. system has find some book, click to add map
-<br/>
 
-<input type="text" id="submit_type"></input>
-<input type="text" id="submit_value"></input>
 
-<table border="1">
-    {% for book in books %}
-    <tr>
-        <td> {{book.title}} </td>
-        <td> {{book.category}} </td>
-        <td> {{book.author_name}} </td>
-        <td> <input type="submit" id="{{book.id}}_map" name="map" value="map" onClick="check(this)"></input> </td>
-    <tr>
-    {% endfor %}
-</table>
-
-<br/>
-5. find myself and add map
-<br/>
-
-<input type="text" value="book name"></input>
-<input type="submit" id="find" name="find" value="find" onClick="check(this)"></input>
-
-<table border="1">
-    <tr>
-        <td> book name </td>
-        <td> author name </td>
-        <td> publisher time </td>
-        <td> <input type="submit" id="{{book_id}}_find_and_map" name="map" value="add" onClick="check(this)"></input> </td>
-    <tr>
-</table>
-
-<br/>
-6. can not find add a new book
-
-    <form action="" method="post">
+<form  action="" method="post">
     {% csrf_token %}
+
+    <input type="hidden" id="submit_type" name="submit_type"></input> 
+    <input type="hidden" id="submit_value" name="submit_value"></input>
+
+
+    {% if maped_books %}
+    {% ifnotequal maped_books.count 0 %}
+        <h3> maped books </h3>
+        <ul>
+        {% for book in maped_books %}
+            <li> {{book.title}} {{book.category}} {{book.author_name}}
+        {% endfor %}
+        </ul>
+    {% endifnotequal %}
+    {% endif %}
+
+
+
+
+
+    {# <input type="text" name="related_page_index" value="{{related_books_info.current_page}}"></input> #}
+
+    {% if related_books_info %}
+    {% ifnotequal related_books_info.current_page_amount 0 %}
+        <h3> system has find some book, click to add map </h3>
+
+        <table border="1" >
+            {% for book in related_books_info.related_books %}
+            <tr>
+                <td> {{book.title}} </td>
+                <td> {{book.category}} </td>
+                <td> {{book.author_name}} </td>
+                <td> 
+                    <input type="submit" id="{{book.id}}_related" name="map_related_book" value="map" onClick="check(this)"> </input> 
+               </td>
+            <tr>
+            {% endfor %}
+            <tr>
+                <td> {{related_books_info.current_page_show}} / {{related_books_info.total_page}}</td>
+                <td> <a href="/bookbar/addarticleend/{{article_id}}/{{related_books_info.prev_page}}/{{finded_books_info.current_page}}/">PREV</a></td>
+                <td> <a href="/bookbar/addarticleend/{{article_id}}/{{related_books_info.next_page}}/{{finded_books_info.current_page}}/">NEXT</a></td>
+                <td></td>
+            </tr>
+        </table>
+    {% endifnotequal %}
+    {% endif %}
+
+
+
+
+
+
+
+    <input type="text" name="find_book_name" value={{finded_books_info.find_book_name}}></input>
+    <input type="submit" id="find_book" name="find_book" value="find" onClick="check(this)"> </input>
+
+    {% if finded_books_info %}
+    {% ifnotequal finded_books_info.current_page_amount 0 %}
+        <h3>find myself and add map </h3>
+        <table border="1">
+            {% for book in finded_books_info.finded_books %}
+            <tr>
+                <td>{{book.title}}</td>
+                <td>{{book.category}}</td>
+                <td>{{book.author_name}} </td>
+                <td> 
+                    <input type="submit" id="{{book.id}}_finded" name="map_finded_book" value="map" onClick="check(this)"> </input> 
+               </td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td> {{finded_books_info.current_page_show}} / {{finded_books_info.total_page}}</td>
+                <td> <a href="/bookbar/addarticleend/{{article_id}}/{{related_books_info.current_page}}/{{finded_books_info.prev_page}}/?find_book_name={{finded_books_info.find_book_name}}">PREV</a></td>
+                <td> <a href="/bookbar/addarticleend/{{article_id}}/{{related_books_info.current_page}}/{{finded_books_info.next_page}}/?find_book_name={{finded_books_info.find_book_name}}">NEXT</a></td>
+                <td></td>
+            </tr>
+
+        </table>
+    {% endifnotequal %}
+    {% endif %}
+
+
+
+
+
+    <h3> can not find add a new book </h3>
+
     <table border="1">
         <tr>
             <td><span style="color:red">*</span>title:</td>   
@@ -104,14 +158,17 @@ function check(obj) {
         <tr>
             <td>ISBN:</td>
             <td>{{bookform.isbn}}</td>
-            <td>{{bookform.isbn.erros}}</td>
+            <td>{{bookform.isbn.errors}}</td>
         </tr>
         
         <tr>
             <td></td>
-            <td><input type="submit" id="add_new_and_map" name="add_new_and_map" value="submit"></td>
-            <td></td>
+            <td><input type="submit" id="add_new_and_map" name="add_new_and_map" value="submit" onClick="check(this)"></td>
+            <td>{% if bookform.errors %} 
+             <a href="">Cancel</a> 
+                {% endif %}</td>
         </tr>
     </table>
-    </form>
+
+</form>
 

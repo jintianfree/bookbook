@@ -50,13 +50,14 @@ adddownloadurlend.html
 ad.html               转入下载页面
 bookdetail.html       书的详细信息  下面列出url 和comment
 booksmalllist.html    书的列表     
-downloadurllist.html  书的下载列表
+downloadurllist.html  同一本书的下载地址列表 /bookid/pageindex   
 addbook.html          添加书的页面
 adddownloadurl.html   添加下载的页面  
-bookbar_home.html     bookbar 主页
+bookbar_home.html     bookbar 主页            /category/
 booklist.html         书的详细 比较详细
 downloadurldetail.html   下载信息的详细页面  显示评论 添加评论
 header.html
+downloadurlalllist.html  所有下载地址列表 按下载量排序  /category/pageindex
 
 显示文章的功能   
 文章阅读次数统计
@@ -80,3 +81,9 @@ addarticleend 页面
 2、提供相关的书 进行map
 3、自己查找书map  查找书 显示的书要分页
 4、添加一本新书 添加并map
+
+
+================================================================================
+20141029
+限制每个文章map的个数 提供举报功能 由管理员 unmap掉 错误的map
+downloadurllist.html  未实现分页
