@@ -1,33 +1,35 @@
 
-<html> 
+{% extends "base.html" %}
 
-<head> 
-    <script> 
-    var i = 3;
- 
-    function sett() 
-    { 
-        if(i >= 0) {
-            document.getElementById("theDiv").innerHTML=i; 
-            setTimeout("sett()",1000); 
-        } else if(i > -2) {
-            setTimeout("sett()",1000); 
-        } else {
-            document.getElementById("showDiv").style.display = "block";
-            i = 0;
-        }
+{% block content %}
 
-        i--;
-    } 
-    </script> 
-</head> 
 
-<body onload="sett()"> 
-    Download will start after <span id="theDiv"></span> second ...<br/>
-    <div  id="showDiv" style="display:none">
-    if it doesn't download automatic, chick the download button manual<br/>
-    <a href="{{url.url}}"> download </a>
-    </div>
-</body> 
+<script> 
+var i = 3;
 
-</html>
+function sett() 
+{ 
+    if(i >= 0) {
+        document.getElementById("theDiv").innerHTML=i; 
+        setTimeout("sett()",1000); 
+    } else if(i > -2) {
+        setTimeout("sett()",1000); 
+    } else {
+        document.getElementById("showDiv").style.display = "block";
+        i = 0;
+    }
+
+    i--;
+} 
+
+setTimeout("sett()",1000); 
+
+</script>
+
+Download will start after <span id="theDiv">4</span> second ...<br/>
+
+<div  id="showDiv" style="display:none">
+    if it doesn't download automatic, chick the download button manual. <a href="{{url.url}}"> download </a>
+</div>
+
+{% endblock %}

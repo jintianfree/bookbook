@@ -1,25 +1,22 @@
-<html>
-<head>
-</head>
+{% extends "base.html" %}
 
-<body>
+{% block content %}
+
 
 add download url ok! <br/>
 
 thanks<br/>
 
+You Can:
 
-1.view this download url<br/>
+1. view this download url<br/>
 
 2. <a href="/bookbar/booklist/{{book.id}}/1/">view this book</a>
 
-3.add article<br/>
+3. add article<br/>
 
-4 <a href="/bookbar/adddownloadurl/{{book.id}}/">continue add a download url</a>
-
+4  <a href="/bookbar/adddownloadurl/{{book.id}}/">continue add a download url</a>
 
 5. <a href="/">go home</a>
 
-</body>
-
-</html>
+{% endblock %}

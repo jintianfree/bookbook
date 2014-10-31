@@ -46,20 +46,49 @@ downloaddetail 功能  查看评论以及进行评论  up down  功能
 一定要加入分一个功能才能正式发布
 考虑是否加入验证码功能
 
+主页
+bookbar_home.html      bookbar 主页            /category/
 
-addbookend.html  
-adddownloadurlend.html  
-ad.html               转入下载页面
-bookdetail.html       书的详细信息  下面列出url 和comment
-booksmalllist.html    书的列表     
-downloadurllist.html  同一本书的下载地址列表 /bookid/pageindex   
-addbook.html          添加书的页面
-adddownloadurl.html   添加下载的页面  
-bookbar_home.html     bookbar 主页            /category/
-booklist.html         书的详细 比较详细
-downloadurldetail.html   下载信息的详细页面  显示评论 添加评论
+
+全列表页面
+booksmalllist.html     书的列表  所有书的列表
+downloadurlalllist.html 所有下载地址列表 按下载量排序  /category/pageindex
+articlelist.html        
+
+
+详细页
+downloadurldetail.html 下载信息的详细页面  分页显示评论 添加评论
+articledetail.html      展示文章 分页显示评论 添加评论
+booklist.html          
+                        书的详细 
+                        下载地址列表分页显示（可以跳转到downloadurldetail.html） 
+                        文章列表分页显示 (可以跳转到articledetail.html)
+                        评论列表分页显示 
+                        添加评论功能   /bookid/pageindex
+
+
+添加页面
+adddownloadurl.html    添加下载的页面  
+addarticle.html
+addbook.html           添加书的页面
+
+
+addbookend.html        添加书完成页面 提供查看此书 添加下载地址 添加文章  继续添加书 链接
+adddownloadurlend.html 添加下载地址完成页面 提供查看此下载地址 查看此书 查看此书的文章 继续添加下载地址 链接  
+addarticleend.html   
+
+
+基础模板页面
+base.html               基础模板 定义页面整体框架
 header.html
-downloadurlalllist.html  所有下载地址列表 按下载量排序  /category/pageindex
+bookdetail.html        书的详细信息  作为基础模板 其他模板include
+
+
+其他
+ad.html                转入下载页面  显示广告
+downloadurllist.html   同一本书的下载地址列表  在查看一本书的下载地址详细时 （downloadurldetail.html）
+                       点击other 进入该页面  分页显示该书的全部下载呆滞 /bookid/pageindex
+                       
 
 显示文章的功能   
     20141031 OK
@@ -97,6 +126,18 @@ addarticleend 页面
 限制每个文章map的个数 提供举报功能 由管理员 unmap掉 错误的map
 downloadurllist.html  未实现分页
 
-20141031
+20141031-1
 文章分类（图书推荐、勘误、读书笔记、读书方法）
 匿名用户记录IP
+
+20141031-2
+整个网站的建议 吐槽
+防止恶意用户重复提交
+网站公告
+
+20141031-3
+首页显示下载的地方 应该显示book
+booklist加入有针对书的评价  
+需要对url article comment 进行分页
+点击url 和 article 查看详细信息
+

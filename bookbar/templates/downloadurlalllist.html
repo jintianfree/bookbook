@@ -2,21 +2,49 @@
 
 {% block content %}
 
-<table border="1">
+<style type="text/css">
+.td_category {
+    width:100px;
+}
+
+.td_name {
+    width:270px;
+}
+
+.td_user {
+    width:100px;
+}
+
+.td_time {
+    width:110px;
+}
+
+.td_num {
+    width:50px;
+}
+</style>
+
+
+<ul>
+<table border="0">
     {% for url in urls %}
     <tr>
-        <td>{{url.filename}}</td>
-        <td>{{url.extension_name}}</td>
-        <td>{{url.download_num}}</td>
-        <td>{{url.up_num}}</td>
-        <td>{{url.down_num}}</td>
-        <td>{{url.cleartype}}</td>
-        <td>{{url.user_name}}</td>
-        <td>{{url.create_time}}</td>
-        <td><a href="/bookbar/downloadurldetail/{{url.id}}/0">detail</a></td>
+        <td><li></li></td>
+        <td class="td_name">
+            <a href="/bookbar/downloadurldetail/{{url.id}}/0">{{url.filename|slice:"30"}}{{url.extension_name}}</a> 
+        </td>
+        <td class="td_user">{{url.user_name|slice:"15"}}</td>
+        <td class="td_time">{{url.create_time|date:"m-d i:s"}}</td>
+        <td class="td_num">{{url.download_num}}</td>
         <td><a href="/bookbar/downloadbook/{{url.id}}/">download</a></td>
     </tr>
     {% endfor %}
+</table>
+</ul>
+
+<hr/>
+
+<table>
     <tr>
         <td>
             {{current_page_show}}/{{total_page}}
@@ -31,3 +59,4 @@
 </table>
 
 {% endblock %}
+

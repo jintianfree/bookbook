@@ -2,27 +2,52 @@
 
 {% block content %}
 
-<table border="1">
+<style type="text/css">
+.td_category {
+    width:100px;
+}
+.td_name {
+    width:270px;
+}
+.td_tag {
+    width:180px;
+}
+</style>
+
+<ul>
+<table border="0">
     <tr>
-        <th>category</th>
-        <th>name</th>
-        <th>tag</th>
-    <tr>
+        <th></th>
+        <th class="td_category"></th>
+        <th class="td_name"></th>
+        <th class="td_tag"></th>
+    </tr>
+
     {% for book in books%}
     <tr>
+        <td><li></li></td>
         <td>[{{book.category}}] </td>
-        <td><a href="/bookbar/booklist/{{book.id}}/0">{{book.title}}</a></td>
-        <td>{{book.tag}}</td>
-    <tr>
+        <td><a href="/bookbar/booklist/{{book.id}}/0">{{book.title|slice:"30"}}</a></td>
+        <td>{{book.tag|slice:"30"}}</td>
+    </tr>
     {% endfor %}
 
+</table>
+</ul>
+
+<hr/>
+<table>
     <tr>
         <td>{{current_page_show}}/{{total_page}}</td>
-        <td> <a href="/bookbar/booksmalllist/{{prev_page}}">Prev Page</a> <a href="/bookbar/booksmalllist/{{next_page}}">Next Page</a></td>
-    <tr>
+        <td> 
+            <a href="/bookbar/booksmalllist/{{prev_page}}">Prev Page</a>
+            <a href="/bookbar/booksmalllist/{{next_page}}">Next Page</a>
+        </td>
+        <td>
+            <a href="/bookbar/addbook">add book</a>
+        </td>
+    </tr>
 </table>
-
-<a href="/bookbar/addbook">add book</a>
 
 {% endblock %}
 

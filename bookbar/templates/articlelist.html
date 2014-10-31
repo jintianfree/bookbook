@@ -2,27 +2,61 @@
 
 {% block content %}
 
-<table border="1">
+<style type="text/css">
+.td_category {
+    width:100px;
+}
+.td_name {
+    width:270px;
+}
+.td_tag {
+    width:180px;
+}
+
+.td_user {
+    width:100px;
+}
+
+.td_time {
+    width:110px;
+}
+
+.td_num {
+    width:50px;
+}
+
+</style>
+
+<ul>
+<table border="0">
     {% for article in articles %}
     <tr>
-        <td>{{article.title}}</td>
-        <td>{{article.user_name}}</td>
-        <td>{{article.create_time}}</td>
-        <td>{{article.show_num}}</td>
-        <td><a href="/bookbar/articledetail/{{article.id}}/0/">detail</a></td>
+        <td><li></li></td>
+        <td class="td_name"><a href="/bookbar/articledetail/{{article.id}}/0/">{{article.title|slice:"30"}}</a></td>
+        <td class="td_user">{{article.user_name|slice:"15"}}</td>
+        <td class="td_time">{{article.create_time|date:"m-d i:s"}}</td>
+        <td class="td_num">{{article.show_num}}</td>
     </tr>
     {% endfor %}
+</table>
+</ul>
+
+<hr/>
+
+<table>
     <tr>
         <td>
             {{current_page_show}}/{{total_page}}
         </td>
         <td>
-            <a href="/bookbar/articlelist/{{category}}/{{prev_page}}/">Prev</a> 
-            <a href="/bookbar/articlelist/{{category}}/{{next_page}}/">Next</a>
+            <a href="/bookbar/articlelist/{{category}}/{{prev_page}}/">Prev Page</a> 
+            <a href="/bookbar/articlelist/{{category}}/{{next_page}}/">Next Page</a>
+        </td>
+        <td>
+            <a href="/bookbar/addarticle">add article</a>
         </td>
     </tr>
 </table>
 
-<a href="/bookbar/addarticle">add article</a>
 
 {% endblock %}

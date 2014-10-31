@@ -4,18 +4,15 @@
 
 {% include 'bookdetail.html' %}
 
+<h3> download list </h3>
 <table border="1">
     {% for url in urls %}
     <tr>
-        <td>{{url.filename}}</td>
-        <td>{{url.extension_name}}</td>
-        <td>{{url.download_num}}</td>
-        <td>{{url.up_num}}</td>
-        <td>{{url.down_num}}</td>
+        <td><a href="/bookbar/downloadurldetail/{{url.id}}/0">{{url.filename}}{{url.extension_name}}</a></td>
         <td>{{url.cleartype}}</td>
+        <td>{{url.download_num}}</td>
         <td>{{url.user_name}}</td>
-        <td>{{url.create_time}}</td>
-        <td><a href="/bookbar/downloadurldetail/{{url.id}}/0">detail</a></td>
+        <td>{{url.create_time|date:"Y-m-d H:i:s"}}</td>
         <td><a href="/bookbar/downloadbook/{{url.id}}/">download</a></td>
     </tr>
     {% endfor %}

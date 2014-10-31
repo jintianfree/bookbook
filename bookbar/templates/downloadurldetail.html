@@ -17,14 +17,42 @@ height:100px;
 <h3> downurl detail </h3>
 <table border="1">
     <tr>
-        <td>{{url.filename}}</td>
-        <td>{{url.extension_name}}</td>
-        <td>{{url.download_num}}</td>
-        <td>{{url.up_num}}</td>
-        <td>{{url.down_num}}</td>
+        <td></td>
+        <td>{{url.filename}}{{url.extension_name}}</td>
+    <tr/>
+    <tr>
+        <td></td>
+        <td>{{url.filename}}{{url.extension_name}}</td>
+    <tr/>
+
+    <tr>
+        <td></td>
         <td>{{url.cleartype}}</td>
+    <tr/>
+
+    <tr>
+        <td></td>
+        <td>{{url.download_num}}</td>
+    <tr/>
+
+    <tr>
+        <td></td>
         <td>{{url.user_name}}</td>
-        <td>{{url.create_time}}</td>
+    <tr/>
+
+    <tr>
+        <td></td>
+        <td>{{url.create_time|date:"Y-m-d H:i:s"}}</td>
+    </tr>
+
+    <tr>
+        <td></td>
+        <td>{{url.up_num}}</td>
+     </tr>
+    <tr>
+        <td></td>
+        <td>{{url.down_num}}</td>
+     </tr>
         <td><a href="/bookbar/downloadbook/{{url.id}}/">download</a></td>
         <td><a href="/bookbar/downloadurllist/{{book.id}}/0/">other download</a></td>
     </tr>
@@ -36,6 +64,7 @@ height:100px;
 {% for comment in comments %}
     <tr>
         <td> {{comment.content}}</td>    
+        <td></td>
     </tr>
 
     <tr>

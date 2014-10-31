@@ -1,8 +1,27 @@
 
 {% extends "base.html" %}
+
 {% block content %}
 
-<div style="width:800px;margin:20px auto;">
+<style type="text/css">
+.td1 {
+    width:260px;
+}
+.td_user {
+    width:100px;
+}
+
+.td_time {
+    width:110px;
+}
+
+.td_num {
+    width:50px;
+}
+</style>
+
+
+<div style="width:100%;margin:20px auto;">
 
 <h4> max download url </h4>
 <ul>
@@ -10,9 +29,12 @@
     {% for url in max_download_urls %}
     <tr>
          <td><li></li></td>
-         <td><a href="/bookbar/downloadurldetail/{{url.id}}/0">{{url.filename}}{{url.extension_name}}</a> </td>
-         <td>{{url.cleartype}}   </td>
-         <td>{{url.download_num}} </td>
+         <td class="td1">
+             <a href="/bookbar/downloadurldetail/{{url.id}}/0">{{url.filename|slice:"30"}}{{url.extension_name}}</a> 
+         </td>
+         <td class="td_user">{{url.user_name|slice:"15"}}</td>
+         <td class="td_time">{{url.create_time|date:"m-d H:i"}}</td>
+         <td class="td_num" >{{url.download_num}} </td>
     </tr>
     {% endfor %}
     </table>
@@ -24,9 +46,12 @@
     {% for article in max_show_articles %}
     <tr>
          <td><li></li></td>
-         <td> <a href="/bookbar/articledetail/{{article.id}}/0/">{{article.title}}</a></td>
-         <td>{{article.show_num}}</td>
-         <td>{{article.create_time|date:"Y-m-d H:i:s"}}</td>
+         <td class="td1"> 
+             <a href="/bookbar/articledetail/{{article.id}}/0/">{{article.title|slice:"30"}}</a>
+         </td>
+         <td class="td_user">{{article.user_name|slice:"15"}}</td>
+         <td class="td_time">{{article.create_time|date:"m-d i:s"}}</td>
+         <td class="td_num" >{{article.show_num}}</td>
     </tr>
     {% endfor %}
     </table>
@@ -38,9 +63,11 @@
     {% for url in latest_download_urls %}
     <tr>
          <td><li></li></td>
-         <td><a href="/bookbar/downloadurldetail/{{url.id}}/0">{{url.filename}} {{url.extension_name}}</a></td>
-         <td>{{url.clear_type}}</td>
-         <td>{{url.create_time|date:"Y-m-d H:i:s"}}</td>
+         <td class="td1">
+             <a href="/bookbar/downloadurldetail/{{url.id}}/0">{{url.filename|slice:"30"}} {{url.extension_name}}</a>
+         </td>
+         <td class="td_user">{{url.user_name|slice:"15"}}</td>
+         <td class="td_time">{{url.create_time|date:"m-d H:i"}}</td>
     </tr>
     {% endfor %}
     </table>
@@ -52,9 +79,11 @@
     {% for article in latest_show_articles %}
     <tr>
          <td><li></li></td>
-         <td><a href="/bookbar/articledetail/{{article.id}}/0/">{{article.title}}</a></td>
-         <td>{{article.show_num}}</td>
-         <td>{{article.create_time|date:"Y-m-d H:i:s"}}</td>
+         <td class="td1">
+             <a href="/bookbar/articledetail/{{article.id}}/0/">{{article.title|slice:"30"}}</a>
+         </td>
+         <td class="td_user">{{article.user_name|slice:"15"}}</td>
+         <td class="td_time">{{article.create_time|date:"m-d H:i"}}</td>
     </tr>
     {% endfor %}
     </table>
@@ -71,3 +100,4 @@
 </div>
 
 {% endblock %}
+
