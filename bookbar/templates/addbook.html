@@ -1,7 +1,13 @@
 
 {% extends "base.html" %}
-{% block content %}
 
+{% block head %}
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}/calendar/tcal.css" />
+    <script type="text/javascript" src="{{STATIC_URL}}/calendar/tcal.js"></script> 
+{% endblock %}
+
+{% block content %}
 
 <form action="" method="post">
 {% csrf_token %}
@@ -44,7 +50,9 @@
     
     <tr>
         <td>publisher date:</td>
-        <td>{{bookform.publisher_time}}</td>
+        <td>
+            <input type="text" name="publisher_time" id="id_publisher_time" class="tcal"/>
+        </td>
         <td>{{bookform.publisher_time.errors}}</td>
     </tr>
     

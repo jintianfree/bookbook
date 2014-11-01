@@ -1,38 +1,18 @@
 {% extends "base.html" %}
 
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}/css/global.css"/>
+{% endblock %}
+
+
 {% block content %}
-
-<style type="text/css">
-.td_category {
-    width:100px;
-}
-.td_name {
-    width:270px;
-}
-.td_tag {
-    width:180px;
-}
-
-.td_user {
-    width:100px;
-}
-
-.td_time {
-    width:110px;
-}
-
-.td_num {
-    width:50px;
-}
-
-</style>
 
 <ul>
 <table border="0">
     {% for article in articles %}
     <tr>
         <td><li></li></td>
-        <td class="td_name"><a href="/bookbar/articledetail/{{article.id}}/0/">{{article.title|slice:"30"}}</a></td>
+        <td class="td_title"><a href="/bookbar/articledetail/{{article.id}}/0/">{{article.title|slice:"30"}}</a></td>
         <td class="td_user">{{article.user_name|slice:"15"}}</td>
         <td class="td_time">{{article.create_time|date:"m-d i:s"}}</td>
         <td class="td_num">{{article.show_num}}</td>

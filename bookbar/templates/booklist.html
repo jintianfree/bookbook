@@ -7,7 +7,10 @@
 
 {% include 'bookdetail.html' %}
 
+<hr/>
+
 <table>
+    {% if url_sets.count %}
     <tr>
         <th> filename </th>
         <th> type </th>
@@ -18,6 +21,8 @@
         <th> user </th>
         <th> time </th>
     <tr>
+    {% endif %}
+
     {% for urls in url_sets %}
         {% ifequal forloop.counter0 forloop.parentloop.counter0 %}
             {% for url in urls %}
@@ -47,6 +52,8 @@
         </td>
     </tr>
 </table>
+
+<hr/>
 
 <table>
 {% for articles in article_sets %}

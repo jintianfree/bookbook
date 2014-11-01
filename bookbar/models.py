@@ -3,12 +3,12 @@ from django.db import models
 # Create your models here.
 
 class User(models.Model):
-    name      = models.CharField(max_length=64, primary_key=True)
-    password  = models.CharField(max_length=64)
+    name      = models.CharField(max_length=32, primary_key=True)
+    password  = models.CharField(max_length=32)
     join_time = models.DateTimeField(auto_now_add=True)
 
 class Category(models.Model):
-    name = models.CharField(max_length=64)
+    name = models.CharField(max_length=20)
 
     def __unicode__(self):
         return self.name
@@ -16,20 +16,23 @@ class Category(models.Model):
 class Comment(models.Model):
     content     = models.CharField(max_length=4096)
     create_time = models.DateTimeField(auto_now_add=True)
-    user_name   = models.CharField(max_length=64) # user.name or anonymous user's ip
+    user_name   = models.CharField(max_length=32) # user.name or anonymous user's ip
     user        = models.ForeignKey('User')
 
 class Book(models.Model):
-    title           = models.CharField(max_length=100)
+    title           = models.CharField(max_length=32)
     category        = models.ForeignKey('Category')
-    author_name     = models.CharField(max_length=64)
+    author_name     = models.CharField(max_length=20)
 
-    tag             = models.CharField(max_length=1024, blank=True)
-    translator_name = models.CharField(max_length=64, blank=True)
-    publisher       = models.CharField(max_length=100, blank=True)
+    tag             = models.CharField(max_length=64, blank=True)
+    translator_name = models.CharField(max_length=20, blank=True)
+    publisher       = models.CharField(max_length=32, blank=True)
     publisher_time  = models.DateField(blank=True, null=True)
     pic_url         = models.URLField(blank=True)
     isbn            = models.CharField(max_length=64, blank=True)
+    comment      = models.ManyToManyField('Comment')
+    up_num       = models.IntegerField()
+    down_num     = models.IntegerField()
 
 class ExtensionName(models.Model):
     name = models.CharField(max_length=16)
@@ -48,13 +51,13 @@ class ClearType(models.Model):
         return self.type
 
 class BookDownloadURL(models.Model):
-    filename     = models.CharField(max_length=1024)
+    filename     = models.CharField(max_length=32)
     extension_name = models.ForeignKey('ExtensionName')
     book         = models.ForeignKey('Book')
     url          = models.URLField()
     create_time  = models.DateTimeField(auto_now_add=True)
     download_num = models.IntegerField()
-    user_name    = models.CharField(max_length=64)  # same to comment.user_name
+    user_name    = models.CharField(max_length=20)  # same to comment.user_name
     user         = models.ForeignKey('User')
     comment      = models.ManyToManyField('Comment')
     up_num       = models.IntegerField()
@@ -62,9 +65,9 @@ class BookDownloadURL(models.Model):
     cleartype    = models.ForeignKey('ClearType')
 
 class Article(models.Model):
-    title       = models.CharField(max_length=128)
+    title       = models.CharField(max_length=50)
     content     = models.TextField()
-    user_name   = models.CharField(max_length=64)   # same to comment.user_name
+    user_name   = models.CharField(max_length=20)   # same to comment.user_name
     user        = models.ForeignKey('User')
     bookname    = models.CharField(max_length=1024, blank=True) # book name it related, split by ; or ,
     book        = models.ManyToManyField('Book')

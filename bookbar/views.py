@@ -38,7 +38,11 @@ def bookbar(request, category):
 def addarticle(request):
     # GET
     if request.method == 'GET':
-        articleform = ArticleForm()
+        if 'bookname' in request.GET:
+            articleform = ArticleForm(initial={'bookname': request.GET['bookname']})
+        else:
+            articleform = ArticleForm()
+
         context = {'articleform':articleform}
 
         return render_to_response('addarticle.html', context, 
@@ -65,7 +69,7 @@ def addarticle(request):
     article = Article()
     article.title = articleform.cleaned_data['title']
     article.content = articleform.cleaned_data['content']
-    article.user_name = user.name
+    article.user_name = request.META['REMOTE_ADDR'] # TODO:
     article.user = user
     article.up_num = 0
     article.down_num = 0
@@ -84,7 +88,7 @@ def addarticleend_get(request, article_id, related_page_index, find_page_index):
     article = Article.objects.filter(id=article_id)[0]
 
     books = []
-    booknames = article.bookname.split(';')
+    booknames = article.bookname.split('#')
 
     for bookname in booknames:
        all_books = Book.objects.filter(title__icontains=bookname).all()
@@ -165,6 +169,8 @@ def addarticleend_post(request, article_id, related_page_index, find_page_index)
         book.translator_name = bookform.cleaned_data['translator_name']
         book.pic_url = bookform.cleaned_data['pic_url']
         book.isbn = bookform.cleaned_data['isbn']
+        book.up_num = 0
+        book.down_num = 0
         
         book.save()
 
@@ -211,7 +217,7 @@ def articledetail(request, article_id, page_index):
 
             comment=Comment()
             comment.content = commentform.cleaned_data['content']
-            comment.user_name = user.name
+            comment.user_name = request.META['REMOTE_ADDR'] # TODO:
             comment.user = user
             comment.save()
 
@@ -333,12 +339,67 @@ def addbook(request):
     book.translator_name = bookform.cleaned_data['translator_name']
     book.pic_url = bookform.cleaned_data['pic_url']
     book.isbn = bookform.cleaned_data['isbn']
+    book.up_num = 0
+    book.down_num = 0
     
     book.save()
 
     return render_to_response('addbookend.html',  
             {'book':book}, 
             context_instance=RequestContext(request))
+
+
+def bookalldetail(request, bookid, urlpageindex, articlepageindex, commentpageindex):
+    num_one_page = 5
+
+    books = Book.objects.filter(id=bookid)
+    if books.count == 0:
+        return HttpResponse("error")
+
+    book = books[0]
+
+    url_dict     = get_query_set_page_i(book.bookdownloadurl_set.all(), "urls", int(urlpageindex), num_one_page)
+    article_dict = get_query_set_page_i(book.article_set.all(), "articles", int(articlepageindex), num_one_page)
+    comment_dict = get_query_set_page_i(book.comment.all(), "comments", int(commentpageindex), num_one_page)
+
+    context = {'book':book,
+               'url_dict':url_dict,
+               'article_dict':article_dict,
+               'comment_dict':comment_dict,}
+
+    if request.method == 'GET':
+        context.update({'commentform': CommentForm()})
+        return render_to_response('bookalldetail.html', 
+            context,
+            context_instance=RequestContext(request))
+    else :
+        commentform = CommentForm(request.POST)
+        if not commentform.is_valid():
+            context.update({'commentform': commentform})
+            return render_to_response('bookalldetail.html', 
+                context,
+                context_instance=RequestContext(request))
+        
+        # TODO: only support anonymous now
+        anonymous = User.objects.filter(name = "anonymous")
+        if anonymous.count() == 0:
+            user = User(name="anonymous", password="password")
+            user.save()
+        else:
+            user = anonymous[0]
+
+        comment=Comment()
+        comment.content = commentform.cleaned_data['content']
+        comment.user_name = request.META['REMOTE_ADDR'] # TODO:
+        comment.user = user
+        comment.save()
+     
+        book.comment.add(comment)
+        book.save()
+
+        url='/bookbar/bookalldetail/' + bookid + '/' + urlpageindex + '/' + articlepageindex + '/' +  commentpageindex + '/'
+
+        return HttpResponseRedirect(url)
 
 def booklist(request, bookid, pageindex):
     if bookid == '0':
@@ -418,7 +479,7 @@ def adddownloadurl(request, bookid):
     url.book = books[0]
     url.url  = downloadurlform.cleaned_data['url']
     url.download_num = 0
-    url.user_name = user.name
+    url.user_name = request.META['REMOTE_ADDR'] # TODO:
     url.user = user
     url.up_num = 0
     url.down_num = 0
@@ -695,7 +756,7 @@ def downloadurldetail(request, url_id, page_index):
  
         comment=Comment()
         comment.content = commentform.cleaned_data['content']
-        comment.user_name = user.name
+        comment.user_name = request.META['REMOTE_ADDR'] # TODO:
         comment.user = user
         comment.save()
     

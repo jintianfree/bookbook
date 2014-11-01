@@ -1,36 +1,18 @@
 {% extends "base.html" %}
 
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}/css/global.css"/>
+{% endblock %}
+
+
 {% block content %}
-
-<style type="text/css">
-.td_category {
-    width:100px;
-}
-
-.td_name {
-    width:270px;
-}
-
-.td_user {
-    width:100px;
-}
-
-.td_time {
-    width:110px;
-}
-
-.td_num {
-    width:50px;
-}
-</style>
-
 
 <ul>
 <table border="0">
     {% for url in urls %}
     <tr>
         <td><li></li></td>
-        <td class="td_name">
+        <td class="td_title">
             <a href="/bookbar/downloadurldetail/{{url.id}}/0">{{url.filename|slice:"30"}}{{url.extension_name}}</a> 
         </td>
         <td class="td_user">{{url.user_name|slice:"15"}}</td>

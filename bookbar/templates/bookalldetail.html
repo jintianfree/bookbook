@@ -1,0 +1,116 @@
+
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}/css/global.css"/>
+{% endblock %}
+
+{% block content %}
+
+{% include 'bookdetail.html' %}
+
+<hr/>
+
+{% if url_dict.urls.count %}
+<ul>
+<table>
+    {% for url in url_dict.urls %}
+    <tr>
+        <td><li></li></td>
+        <td class="td_title"> {{url.filename|slice:"30"}}{{url.extension_name}} </td>
+        <td class="td_user"> {{url.user_name|slice:"15"}} </td>
+        <td class="td_time"> {{url.create_time|date:"m-d i:s"}} </td>
+        <td class="td_num"> {{url.download_num}} </td>
+    </tr>
+    {% endfor %}
+</table>
+</ul>
+{% endif %}
+
+<table border="0">
+    <tr>
+        <td> {{url_dict.current_page_show}} / {{url_dict.total_page}} </td>
+        <td>
+            <a href="/bookbar/bookalldetail/{{book.id}}/{{url_dict.prev_page}}/{{article_dict.current_page}}/{{comment_dict.current_page}}/">PrevPage</a>
+        </td>
+        <td>
+            <a href="/bookbar/bookalldetail/{{book.id}}/{{url_dict.next_page}}/{{article_dict.current_page}}/{{comment_dict.current_page}}/">NextPage</a>
+        </td>
+        <td>
+            <a href="/bookbar/adddownloadurl/{{book.id}}/">Add a new downloadurl </a>
+        </td>
+    </tr>
+</table>
+
+<hr/>
+
+<ul>
+<table border="0">
+    {% for article in article_dict.articles %}
+    <tr>
+        <td><li></li></td>
+        <td class="td_title"> {{article.title|slice:"30"}} </td>
+        <td class="td_user"> {{article.user_name|slice:"15"}} </td>
+        <td class="td_time"> {{article.create_time|date:"m-d i:s"}} </td>
+        <td class="td_num"> {{article.show_num}}</td>
+    </tr>
+    {% endfor %}
+</table>
+</ul>
+
+<table>
+    <tr>
+        <td> {{article_dict.current_page_show}} / {{article_dict.total_page}} </td>
+        <td>
+            <a href="/bookbar/bookalldetail/{{book.id}}/{{url_dict.current_page}}/{{article_dict.prev_page}}/{{comment_dict.current_page}}/">PrevPage</a>
+        </td>
+        <td>
+            <a href="/bookbar/bookalldetail/{{book.id}}/{{url_dict.current_page}}/{{article_dict.next_page}}/{{comment_dict.current_page}}/">NextPage</a>
+        </td>
+
+        <td>
+            <a href="/bookbar/addarticle?bookname={{book.title}}">Add a new article </a>
+        </td>
+    </tr>
+</table>
+
+<hr/>
+
+{% if comment_dict.comments.count %}
+<table border="1">
+    {% for comment in comment_dict.comments %}
+    <tr>
+        <td clospan="2"> {{comment.content}} </td>
+    </tr>
+
+    <tr>
+        <td> {{comment.user_name|slice:"15"}} </td>
+        <td> {{comment.create_time|date:"m:d i:s"}}</td>
+    </tr>
+    {% endfor %}
+
+    <tr>
+        <td>{{comment_dict.current_page_show}} / {{comment_dict.total_page}}</td>
+        <td>
+            <a href="/bookbar/bookalldetail/{{book.id}}/{{url_dict.current_page}}/{{article_dict.current_page}}/{{comment_dict.prev_page}}/">PrevPage</a>
+        </td>
+        <td>
+            <a href="/bookbar/bookalldetail/{{book.id}}/{{url_dict.current_page}}/{{article_dict.current_page}}/{{comment_dict.next_page}}/">NextPage</a>
+        </td>
+    </tr>
+</table>
+{% endif %}
+
+
+<form action="" method="post">
+    {% csrf_token %}
+    <table border="1">
+        <tr>
+            <td> {{commentform.content}} </td>
+        <tr>
+            <td><input type="submit" value="add comment"></td>
+        </tr>
+    </table>
+</form>
+
+{% endblock %}

@@ -8,6 +8,7 @@ from bookbar.models import Article
 class BookForm(forms.ModelForm):
     class Meta:
         model = Book
+        exclude = ('comment', 'up_num', 'down_num')
     def clean_title(self):
         title = self.cleaned_data['title']
         if Book.objects.filter(title=title).count() != 0 :

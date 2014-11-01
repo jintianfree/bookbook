@@ -1,25 +1,18 @@
 {% extends "base.html" %}
 
-{% block content %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}/css/global.css"/>
+{% endblock %}
 
-<style type="text/css">
-.td_category {
-    width:100px;
-}
-.td_name {
-    width:270px;
-}
-.td_tag {
-    width:180px;
-}
-</style>
+
+{% block content %}
 
 <ul>
 <table border="0">
     <tr>
         <th></th>
         <th class="td_category"></th>
-        <th class="td_name"></th>
+        <th class="td_title"></th>
         <th class="td_tag"></th>
     </tr>
 
@@ -27,7 +20,7 @@
     <tr>
         <td><li></li></td>
         <td>[{{book.category}}] </td>
-        <td><a href="/bookbar/booklist/{{book.id}}/0">{{book.title|slice:"30"}}</a></td>
+        <td><a href="/bookbar/bookalldetail/{{book.id}}/0/0/0/">{{book.title|slice:"30"}}</a></td>
         <td>{{book.tag|slice:"30"}}</td>
     </tr>
     {% endfor %}
