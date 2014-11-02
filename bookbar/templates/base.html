@@ -16,21 +16,23 @@
 
     <div id="body_div">
         <div id="header_div">   
-        {% block header %}  
-            {% include 'header.html' %}
-        {% endblock %} 
+        {% include 'header.html' %}
+        {% block header %}  {% endblock %} 
         </div>
 
         <div id="content_div">  
-        {% block content %} 
-
-        {% endblock %} 
+        {% block content %} {% endblock %} 
         </div>
 
         <div id="footer_div">   
-        {% block footer %}  
-
-        {% endblock %} 
+        {% block footer %}  {% endblock %} 
+            <div id="footer_bottom">
+            <a> &#x7F51;&#x7AD9;&#x58F0;&#x660E;</a>  {# wang zhan sheng ming #}
+            <a> &#x8054;&#x7CFB;&#x6211;&#x4EEC; </a> {# lian xi wo men #}
+            <a> &#x5E7F;&#x544A;&#x670D;&#x52A1;</a>  {# guang gao fu wu #}
+            @2014 <a href="http://www.cnblogs.com/jintianfree/">  &#x5317;&#x534A;&#x7403;&#x7684;&#x5929;&#x7A7A; </a>
+            <a href="/bookbar/addadvice/0/"> &#x6211;&#x8981;&#x5410;&#x69FD; </a> {# wo yao to cao #}
+            </div>
         </div>
     <div>
 

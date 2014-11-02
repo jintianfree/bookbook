@@ -1,0 +1,53 @@
+
+{% extends "base.html" %}
+{% block content %}
+
+<form action="" method="post">
+{% csrf_token %}
+    <table border="1" class="table_comment">
+        <tr>
+            <td class="td_comment" >{{commentform.content}} </td> 
+            <td> {{commentform.content.errors}}</td>
+        </tr>
+
+        <tr>
+            <td colspan="2"><input type="submit" value="&#x6211;&#x8981;&#x5410;&#x69FD;"></td>
+        </tr>
+
+        {% if msg_ok %}
+        <tr>
+            <td colspan="2"> {{msg_ok}}</td>
+        </tr>
+        {% endif %}
+
+    </table>
+</form>
+
+{% if comments %}
+<table border="1">
+
+{% for comment in comments %}
+    <tr>
+        <td> {{comment.content}}</td>    
+    </tr>
+
+    <tr>
+        <td> {{comment.create_time}}</td>
+        <td> {{comment.user_name}}</td>
+    </tr>
+{% endfor %}
+    <tr>
+        <td>
+            {{current_page_show}}/{{total_page}}
+        </td>
+        <td>
+            <a href="/bookbar/addadvice/{{prev_page}}/">Prev</a> <a href="/bookbar/addadvice/{{next_page}}/">Next</a>
+        </td>
+    </tr>
+</table>
+
+{% endif %}
+
+
+
+{% endblock %}

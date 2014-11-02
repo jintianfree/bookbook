@@ -2,6 +2,13 @@ from django.db import models
 
 # Create your models here.
 
+class WebSite(models.Model):
+    name    = models.CharField(max_length=32)
+    comment = models.ManyToManyField('Comment')
+
+    def __unicode__(self):
+        return self.name
+
 class User(models.Model):
     name      = models.CharField(max_length=32, primary_key=True)
     password  = models.CharField(max_length=32)
@@ -18,6 +25,9 @@ class Comment(models.Model):
     create_time = models.DateTimeField(auto_now_add=True)
     user_name   = models.CharField(max_length=32) # user.name or anonymous user's ip
     user        = models.ForeignKey('User')
+
+    def __unicode__(self):
+        return self.content
 
 class Book(models.Model):
     title           = models.CharField(max_length=32)

@@ -18,6 +18,7 @@ from bookbar.models import ExtensionName
 from bookbar.models import ClearType
 from bookbar.models import Comment
 from bookbar.models import Article
+from bookbar.models import WebSite
 
 def bookbar(request, category):
     max_download_urls = BookDownloadURL.objects.order_by('-download_num')[0:10]
@@ -778,4 +779,47 @@ def downloadurldetail(request, url_id, page_index):
         return render_to_response('downloadurldetail.html',
             context,
             context_instance = RequestContext(request))
+ 
+def addadvice(request, pageindex):
+    if WebSite.objects.count() == 0:
+        return HttpResponse("error")
+
+    website = WebSite.objects.all()[0]
+
+    if request.method == 'GET':
+        context = {'commentform':CommentForm()}
+    else:
+        commentform = CommentForm(request.POST) 
+
+        if commentform.is_valid():
+
+            # TODO: only support anonymous now
+            anonymous = User.objects.filter(name = "anonymous")
+            if anonymous.count() == 0:
+                user = User(name="anonymous", password="password")
+                user.save()
+            else:
+                user = anonymous[0]
+
+            comment = Comment()
+            comment.content = commentform.cleaned_data['content']
+            comment.user_name = request.META['REMOTE_ADDR'] # TODO:
+            comment.user = user
+            comment.save()
+
+            website.comment.add(comment)
+            website.save()
+
+            context = {'commentform':CommentForm(), 'msg_ok': 'add successfully ' }
+        else:
+            context = {'commentform':commentform}
+
+    one_page_count = 10
+    comment_dict = get_query_set_page_i(website.comment.all(), "comments", int(pageindex), one_page_count)
+
+    context.update(comment_dict)
+
+    return render_to_response('advice.html', 
+        context,
+        context_instance = RequestContext(request))           
  
