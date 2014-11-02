@@ -17,7 +17,9 @@
     {% for url in url_dict.urls %}
     <tr>
         <td><li></li></td>
-        <td class="td_title"> {{url.filename|slice:"30"}}{{url.extension_name}} </td>
+        <td class="td_title"> 
+            <a href="/bookbar/downloadurldetail/{{book.id}}/0/">{{url.filename|slice:"30"}}{{url.extension_name}}</a>
+        </td>
         <td class="td_user"> {{url.user_name|slice:"15"}} </td>
         <td class="td_time"> {{url.create_time|date:"m-d i:s"}} </td>
         <td class="td_num"> {{url.download_num}} </td>
@@ -49,7 +51,9 @@
     {% for article in article_dict.articles %}
     <tr>
         <td><li></li></td>
-        <td class="td_title"> {{article.title|slice:"30"}} </td>
+        <td class="td_title"> 
+            <a href="/bookbar/articledetail/{{book.id}}/0/">{{article.title|slice:"30"}} </a>
+        </td>
         <td class="td_user"> {{article.user_name|slice:"15"}} </td>
         <td class="td_time"> {{article.create_time|date:"m-d i:s"}} </td>
         <td class="td_num"> {{article.show_num}}</td>
@@ -77,15 +81,16 @@
 <hr/>
 
 {% if comment_dict.comments.count %}
-<table border="1">
+<h6> Comments</h6>
+<table border="0">
     {% for comment in comment_dict.comments %}
     <tr>
-        <td clospan="2"> {{comment.content}} </td>
+        <td colspan="3"> {{comment.content}} </td>
     </tr>
 
     <tr>
-        <td> {{comment.user_name|slice:"15"}} </td>
-        <td> {{comment.create_time|date:"m:d i:s"}}</td>
+        <td colspan="2"> {{comment.user_name|slice:"15"}} </td>
+        <td> {{comment.create_time|date:"m-d i:s"}}</td>
     </tr>
     {% endfor %}
 
@@ -101,13 +106,21 @@
 </table>
 {% endif %}
 
+<style type="text/css">
+#id_content {
+width:90%;
+height:50px;
+}
+</style>
+
 
 <form action="" method="post">
     {% csrf_token %}
     <table border="1">
         <tr>
-            <td> {{commentform.content}} </td>
+             {{commentform.content}} 
         <tr>
+        </tr>
             <td><input type="submit" value="add comment"></td>
         </tr>
     </table>
