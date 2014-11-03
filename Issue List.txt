@@ -166,3 +166,8 @@ bookalldetail  url artile跳转功能
 downloadurldetail/1/0/   完善下载按钮
 不能下载 报错功能
 新窗口弹出下载链接
+
+20141103
+简化 new book  new url 的操作  直接new url 页面  填书名  作者  类别  url信息 提交
+然后保存一个book 保存一个url  自动map上  如果book 存在 就使用已有的book
+
