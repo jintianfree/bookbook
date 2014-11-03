@@ -20,6 +20,12 @@ class Category(models.Model):
     def __unicode__(self):
         return self.name
 
+class ArticleCategory(models.Model):
+    name = models.CharField(max_length=20)
+
+    def __unicode__(self):
+        return self.name
+
 class Comment(models.Model):
     content     = models.CharField(max_length=4096)
     create_time = models.DateTimeField(auto_now_add=True)
@@ -86,4 +92,5 @@ class Article(models.Model):
     down_num    = models.IntegerField()
     comment     = models.ManyToManyField('Comment')
     show_num    = models.IntegerField()
+    category    = models.ForeignKey('ArticleCategory')
 

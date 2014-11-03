@@ -12,6 +12,7 @@
     {% for url in urls %}
     <tr>
         <td><li></li></td>
+        <td class="td_category"> [{{url.cleartype}}] </td>
         <td class="td_title">
             <a href="/bookbar/downloadurldetail/{{url.id}}/0">{{url.filename|slice:"30"}}{{url.extension_name}}</a> 
         </td>

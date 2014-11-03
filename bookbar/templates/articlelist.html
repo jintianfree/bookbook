@@ -12,6 +12,7 @@
     {% for article in articles %}
     <tr>
         <td><li></li></td>
+        <td class="td_category"> [{{article.category}}]</td>
         <td class="td_title"><a href="/bookbar/articledetail/{{article.id}}/0/">{{article.title|slice:"30"}}</a></td>
         <td class="td_user">{{article.user_name|slice:"15"}}</td>
         <td class="td_time">{{article.create_time|date:"m-d i:s"}}</td>

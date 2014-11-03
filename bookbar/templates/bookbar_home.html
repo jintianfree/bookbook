@@ -19,6 +19,7 @@
     {% for url in max_download_urls %}
     <tr>
          <td><li></li></td>
+         <td class="td_category"> [{{url.cleartype}}] </td>
          <td class="td_title">
              <a href="/bookbar/downloadurldetail/{{url.id}}/0">{{url.filename|slice:"30"}}{{url.extension_name}}</a> 
          </td>
@@ -36,6 +37,7 @@
     {% for article in max_show_articles %}
     <tr>
          <td><li></li></td>
+         <td class="td_category"> [{{article.category}}]</td>
          <td class="td_title"> 
              <a href="/bookbar/articledetail/{{article.id}}/0/">{{article.title|slice:"30"}}</a>
          </td>
@@ -53,6 +55,7 @@
     {% for url in latest_download_urls %}
     <tr>
          <td><li></li></td>
+         <td class="td_category"> [{{url.cleartype}}] </td>
          <td class="td_title">
              <a href="/bookbar/downloadurldetail/{{url.id}}/0">{{url.filename|slice:"30"}} {{url.extension_name}}</a>
          </td>
@@ -69,6 +72,7 @@
     {% for article in latest_show_articles %}
     <tr>
          <td><li></li></td>
+         <td class="td_category"> [{{article.category}}]</td>
          <td class="td_title">
              <a href="/bookbar/articledetail/{{article.id}}/0/">{{article.title|slice:"30"}}</a>
          </td>
@@ -77,14 +81,6 @@
     </tr>
     {% endfor %}
     </table>
-</ul>
-
-<h4> good read method</h4>
-<ul>
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
 </ul>
 
 </div>

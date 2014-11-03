@@ -76,6 +76,7 @@ def addarticle(request):
     article.down_num = 0
     article.show_num = 0
     article.bookname = articleform.cleaned_data['bookname']
+    article.category = articleform.cleaned_data['category']
 
     article.save()
 
