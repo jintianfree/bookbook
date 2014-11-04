@@ -7,6 +7,7 @@
     <script type="text/javascript" src="{{STATIC_URL}}/calendar/tcal.js"></script> 
 {% endblock %}
 
+
 {% block content %}
 
 <form action="" method="post">
@@ -67,7 +68,9 @@
         <td>{{bookform.isbn}}</td>
         <td>{{bookform.isbn.errors}}</td>
     </tr>
-    
+     
+    {{downloadurlform.as_table }}
+
     <tr>
         <td></td>
         <td><input type="submit" value="submit"></td>
@@ -75,4 +78,5 @@
     </tr>
 </table>
 </form>
+
 {% endblock %}

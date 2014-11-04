@@ -50,6 +50,9 @@ class Book(models.Model):
     up_num       = models.IntegerField()
     down_num     = models.IntegerField()
 
+    def __unicode__(self):
+        return self.title
+
 class ExtensionName(models.Model):
     name = models.CharField(max_length=16)
 
@@ -80,6 +83,9 @@ class BookDownloadURL(models.Model):
     down_num     = models.IntegerField()
     cleartype    = models.ForeignKey('ClearType')
 
+    def __unicode__(self):
+        return self.filename + self.extension_name 
+
 class Article(models.Model):
     title       = models.CharField(max_length=50)
     content     = models.TextField()
@@ -93,4 +99,7 @@ class Article(models.Model):
     comment     = models.ManyToManyField('Comment')
     show_num    = models.IntegerField()
     category    = models.ForeignKey('ArticleCategory')
+
+    def __unicode__(self):
+        return self.title
 

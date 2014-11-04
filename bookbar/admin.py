@@ -17,4 +17,5 @@ admin.site.register(ClearType)
 admin.site.register(WebSite)
 admin.site.register(Book)
 admin.site.register(ArticleCategory)
+admin.site.register(Article)
 

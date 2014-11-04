@@ -824,3 +824,80 @@ def addadvice(request, pageindex):
         context,
         context_instance = RequestContext(request))           
  
+def sharebook(request):
+    # GET
+    if request.method == 'GET':
+        bookform     = BookForm(
+            initial={
+                'pic_url':'www.bookbook.tk/static/default_book_pic.jpg'
+            }
+        )
+        downloadurlform = BookDownloadURLForm(
+            initial={}
+        )
+        context      = {
+            'bookform': bookform, 
+            'downloadurlform': downloadurlform,
+        }
+
+        return render_to_response('sharebook.html', context,
+            context_instance = RequestContext(request))
+
+    # POST
+    downloadurlform = BookDownloadURLForm(request.POST)
+    bookform = BookForm(request.POST)
+
+    context      = {
+        'bookform': bookform, 
+        'downloadurlform': downloadurlform,
+    }
+
+    if not downloadurlform.is_valid():
+        return render_to_response('sharebook.html', context,
+            context_instance = RequestContext(request))
+    if not bookform.is_valid():
+        return render_to_response('sharebook.html', context,
+            context_instance = RequestContext(request))
+
+    book = Book()
+    book.title = bookform.cleaned_data['title']
+    book.publisher = bookform.cleaned_data['publisher']
+    book.publisher_time = bookform.cleaned_data['publisher_time']
+    book.category = bookform.cleaned_data['category']
+    book.tag = bookform.cleaned_data['tag']
+    book.author_name = bookform.cleaned_data['author_name']
+    book.translator_name = bookform.cleaned_data['translator_name']
+    book.pic_url = bookform.cleaned_data['pic_url']
+    book.isbn = bookform.cleaned_data['isbn']
+    book.up_num = 0
+    book.down_num = 0
+    
+    book.save()
+
+    # TODO: only support anonymous now
+    anonymous = User.objects.filter(name = "anonymous")
+    if anonymous.count() == 0:
+        user = User(name="anonymous", password="password")
+        user.save()
+    else:
+        user = anonymous[0]
+ 
+    url = BookDownloadURL() 
+    url.filename = downloadurlform.cleaned_data['filename']
+    url.extension_name = downloadurlform.cleaned_data['extension_name']
+    url.book = book
+    url.url  = downloadurlform.cleaned_data['url']
+    url.download_num = 0
+    url.user_name = request.META['REMOTE_ADDR'] # TODO:
+    url.user = user
+    url.up_num = 0
+    url.down_num = 0
+    url.cleartype = downloadurlform.cleaned_data['cleartype']
+    
+    url.save()
+
+    return render_to_response('addbookend.html',  
+            {'book':book}, 
+            context_instance=RequestContext(request))
+
+
