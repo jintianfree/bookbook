@@ -185,4 +185,7 @@ downloadurldetail/1/0/   完善下载按钮
 现在没有资源啊 怎么共享下载链接 这个必须解决啊
 需要处理数据库存满的情况  
 点击提交 下一页功能时  定位到当前页面位置
+Has found some book  不准！！
+首页view    more
+
 
