@@ -34,19 +34,22 @@
 <hr/>
 
 {% if comments %}
-<h3> Comments </h3>
-<table border="1">
+<h3> &#x56FE;&#x4E66;&#x8BC4;&#x8BBA;</h3>
+
+<table border="0" style="max-width:65%">
 
 {% for comment in comments %}
     <tr>
-        <td> {{comment.content}}</td>    
+        <td colspan="2" style="word-wrap:break-word;word-break:break-all;padding-bottom:10px;padding-top:20px;" > {{comment.content}}</td>    
     </tr>
 
     <tr>
-        <td> {{comment.create_time}}</td>
-        <td> {{comment.user_name}}</td>
+
+        <td> {{comment.user_name|slice:"15"}} </td>
+        <td> {{comment.create_time|date:"m-d i:s"}}</td>
     </tr>
 {% endfor %}
+
     <tr>
         <td>
             {{current_page_show}}/{{total_page}}
@@ -59,21 +62,13 @@
 
 {% endif %}
 
-
-<style type="text/css">
-#id_content {
-width:90%;
-height:50px;
-}
-</style>
-
 <form action="" method="post">
-{% csrf_token %}
+    {% csrf_token %}
     <table border="1">
         <tr>
             {{commentform.content}}
         <tr>
-            <td><input type="submit" value="add comment"></td>
+            <td><input type="submit" value="&#x6DFB;&#x52A0;&#x8BC4;&#x8BBA;"></td>
         </tr>
     </table>
 </form>

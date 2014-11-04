@@ -15,6 +15,7 @@
 
 <hr/>
 
+<h3>&#x4E0B;&#x8F7D;&#x5730;&#x5740;</h3>
 {% if url_dict.urls.count %}
 <ul>
 <table>
@@ -50,6 +51,7 @@
 
 <hr/>
 
+<h3>&#x5173;&#x8054;&#x6587;&#x7AE0;</h3>
 <ul>
 <table border="0">
     {% for article in article_dict.articles %}
@@ -84,16 +86,16 @@
 
 <hr/>
 
+<h3> &#x56FE;&#x4E66;&#x8BC4;&#x8BBA;</h3>
 {% if comment_dict.comments.count %}
-<h6> Comments</h6>
-<table border="0">
+<table border="0" style="max-width:65%">
     {% for comment in comment_dict.comments %}
     <tr>
-        <td colspan="3"> {{comment.content}} </td>
+        <td colspan="2" style="word-wrap:break-word;word-break:break-all;padding-bottom:10px;padding-top:20px;" > {{comment.content}}</td>    
     </tr>
 
     <tr>
-        <td colspan="2"> {{comment.user_name|slice:"15"}} </td>
+        <td> {{comment.user_name|slice:"15"}} </td>
         <td> {{comment.create_time|date:"m-d i:s"}}</td>
     </tr>
     {% endfor %}
@@ -102,20 +104,11 @@
         <td>{{comment_dict.current_page_show}} / {{comment_dict.total_page}}</td>
         <td>
             <a href="/bookbar/bookalldetail/{{book.id}}/{{url_dict.current_page}}/{{article_dict.current_page}}/{{comment_dict.prev_page}}/">PrevPage</a>
-        </td>
-        <td>
             <a href="/bookbar/bookalldetail/{{book.id}}/{{url_dict.current_page}}/{{article_dict.current_page}}/{{comment_dict.next_page}}/">NextPage</a>
         </td>
     </tr>
 </table>
 {% endif %}
-
-<style type="text/css">
-#id_content {
-width:90%;
-height:50px;
-}
-</style>
 
 
 <form action="" method="post">
@@ -125,7 +118,7 @@ height:50px;
              {{commentform.content}} 
         <tr>
         </tr>
-            <td><input type="submit" value="add comment"></td>
+            <td><input type="submit" value="&#x6DFB;&#x52A0;&#x8BC4;&#x8BBA;"></td>
         </tr>
     </table>
 </form>

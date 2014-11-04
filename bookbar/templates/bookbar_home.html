@@ -15,9 +15,14 @@
 
 <div style="width:100%;margin:20px auto;">
 
-<h4> max download url </h4>
 <ul>
-    <table>
+    <table border="0">
+    <tr>
+        <td colspan="6">
+            <h4> &#x6700;&#x591A;&#x4E0B;&#x8F7D; <!-- zui duo xia zai --> </h4>
+        </td>
+    </tr>
+
     {% for url in max_download_urls %}
     <tr>
          <td><li></li></td>
@@ -30,12 +35,25 @@
          <td class="td_num" >{{url.download_num}} </td>
     </tr>
     {% endfor %}
+
+    <tr>
+        <td colspan="4"> 
+        </td>
+        <td>
+            <a href="/bookbar/downloadurlalllist/0/0/">view more </a> 
+        </td>
+        <td></td>
+    </tr>
     </table>
 </ul>
 
-<h4> max show article </h4>
+
 <ul>
     <table>
+    <tr>
+        <td colspan="6"><h4> &#x6700;&#x591A;&#x9605;&#x8BFB; </h4></td> <!-- zui duo xian shi -->
+    </tr>
+
     {% for article in max_show_articles %}
     <tr>
          <td><li></li></td>
@@ -48,12 +66,24 @@
          <td class="td_num" >{{article.show_num}}</td>
     </tr>
     {% endfor %}
+
+    <tr>
+        <td colspan="4"> 
+        </td>
+        <td>
+            <a href="/bookbar/booksmalllist/0/">view more </a> 
+        </td>
+        <td></td>
+    </tr>
     </table>
 </ul>
 
-<h4> latest download url </h4>
 <ul>
     <table>
+    <tr>
+        <td colspan="6"> <h4>&#x6700;&#x65B0;&#x4E0A;&#x4F20;</h4> </td>
+    </tr>
+
     {% for url in latest_download_urls %}
     <tr>
          <td><li></li></td>
@@ -65,12 +95,22 @@
          <td class="td_time">{{url.create_time|date:"m-d H:i"}}</td>
     </tr>
     {% endfor %}
+
+    <tr>
+        <td colspan="4"> </td>
+        <td>
+            <a href="/bookbar/downloadurlalllist/0/0/">view more </a> 
+        </td>
+    </tr>
     </table>
 </ul>
 
-<h4> latest show article </h4>
 <ul>
     <table>
+    <tr>
+        <td colspan="6"> <h4>&#x6700;&#x65B0;&#x53D1;&#x5E03;</h4> </td>
+    </tr>
+
     {% for article in latest_show_articles %}
     <tr>
          <td><li></li></td>
@@ -82,6 +122,14 @@
          <td class="td_time">{{article.create_time|date:"m-d H:i"}}</td>
     </tr>
     {% endfor %}
+
+    <tr>
+        <td colspan="4"> </td>
+        <td>
+            <a href="/bookbar/booksmalllist/0/">view more </a> 
+        </td>
+    </tr>
+
     </table>
 </ul>
 

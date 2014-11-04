@@ -42,61 +42,63 @@
 
 </style>
 
-<table border="1" id="book_detail">
+
+<table border="0" style="width:100%">
     <tr>
-        <th colspan="4"> book detail </th>
+        <td colspan="3" style="height:50px"></td>
     </tr>
 
     <tr>
-        <th id="title">title:</th>
-        <td id="value">{{book.title}}</td>
-
-        <td rowspan="4">
-            <img id="book_pic_img" src="{{book.pic_url}}"/>
+        <td style="width:200px;height:250px">
+            <img style="width:100%;height:100%" src="{{book.pic_url}}"/>
         </td>
 
-        <td rowspan="4" id="ad">ad0</td>
+        <td>
+            <h2> {{book.title}} </h2> <br/> 
+
+            {% if book.author_name %}
+                {{book.author_name}} &#x8457; <!-- zhu -->
+            {% endif %}
+
+            {% if book.translator_name %}
+                {{book.translator_name}} &#x8BD1; <!-- yi --> 
+            {% endif %}
+
+            <br/><br/>
+
+            {% if book.category %}
+                &#x5206;&#x7C7B;: {{book.category}} <br/> <br/>
+            {% endif %}
+
+            {% if book.tag %}
+                &#x6807;&#x7B7E;: {{book.tag}} <br/><br/>
+            {% endif %}
+
+            {% if book.publisher %}
+                {{book.publisher}} 
+            {% endif %}
+
+            {% if book.publisher_time %}
+                {{book.publisher_time|date:"Y-m"}}
+            {% endif %}
+
+            <br/><br/>
+
+            {% if book.isbn %}
+                ISBN: {{book.isbn}} <br/><br/>
+            {% endif %}
+
+            <a target="_blank" href="http://www.amazon.cn/b?_encoding=UTF8&camp=536&creative=3200&linkCode=ur2&node=658414051&tag=jintianfree-23">&#x4E9A;&#x9A6C;&#x900A;&#x8D2D;&#x4E70;</a><img src="http://ir-cn.amazon-adsystem.com/e/ir?t=jintianfree-23&l=ur2&o=28" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+
+        </td>
+
+        <td style="width:300px;height:250px">
+            <iframe src="http://rcm-cn.amazon-adsystem.com/e/cm?t=jintianfree-23&o=28&p=12&l=ur1&category=books&banner=17QS543P7Q3HA98XZV82&f=ifr" width="300" height="250" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
+        </td>
     </tr>
 
     <tr>
-        <th>category:</th>
-        <td>{{book.category}}</td>
+        <td colspan="3" style="height:50px"></td>
     </tr>
-    
-    <tr>
-        <th>tag:</th>
-        <td>{{book.tag}}</td>
-    </tr>
-
-    <tr>
-        <th>author name:</th>
-        <td>{{book.author_name}}</td>
-
-    </tr>
-
-    <tr>
-        <th>translator name:</th>
-        <td>{{book.translator_name}}</td>
-
-        <td rowspan="4" id="book_ad_td">ad1</td>
-        <td rowspan="4" id="book_ad_td">ad2</td>
-    </tr>
-    
-    <tr>
-        <th>publisher:</th>
-        <td>{{book.publisher}}</td>
-    </tr>
-    
-    <tr>
-        <th>publisher date:</th>
-        <td>{{book.publisher_time}}</td>
-    </tr>
-
-    <tr>
-        <th id="book_ISBN_td">ISBN:</th>
-        <td>{{book.isbn}}</td>
-    </tr>
-
-
 </table>
- 
+

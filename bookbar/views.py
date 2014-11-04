@@ -859,20 +859,25 @@ def sharebook(request):
         return render_to_response('sharebook.html', context,
             context_instance = RequestContext(request))
 
-    book = Book()
-    book.title = bookform.cleaned_data['title']
-    book.publisher = bookform.cleaned_data['publisher']
-    book.publisher_time = bookform.cleaned_data['publisher_time']
-    book.category = bookform.cleaned_data['category']
-    book.tag = bookform.cleaned_data['tag']
-    book.author_name = bookform.cleaned_data['author_name']
-    book.translator_name = bookform.cleaned_data['translator_name']
-    book.pic_url = bookform.cleaned_data['pic_url']
-    book.isbn = bookform.cleaned_data['isbn']
-    book.up_num = 0
-    book.down_num = 0
+    title = bookform.cleaned_data['title']
+    books = Book.objects.filter(title = title)
+    if books.count() > 0:
+        book = books[0]
+    else:
+        book = Book()
+        book.title = bookform.cleaned_data['title']
+        book.publisher = bookform.cleaned_data['publisher']
+        book.publisher_time = bookform.cleaned_data['publisher_time']
+        book.category = bookform.cleaned_data['category']
+        book.tag = bookform.cleaned_data['tag']
+        book.author_name = bookform.cleaned_data['author_name']
+        book.translator_name = bookform.cleaned_data['translator_name']
+        book.pic_url = bookform.cleaned_data['pic_url']
+        book.isbn = bookform.cleaned_data['isbn']
+        book.up_num = 0
+        book.down_num = 0
     
-    book.save()
+        book.save()
 
     # TODO: only support anonymous now
     anonymous = User.objects.filter(name = "anonymous")
