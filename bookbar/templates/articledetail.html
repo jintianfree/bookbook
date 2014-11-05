@@ -33,12 +33,55 @@
 
 <hr/>
 
-{% if comments %}
+<div id="map_book_div">
+{% if book_dict.total_page %}
+<h3> &#x5173;&#x8054;&#x56FE;&#x4E66;</h3>
+<ul>
+<table border="0">
+    <tr>
+        <th></th>
+        <th class="td_category"></th>
+        <th class="td_title"></th>
+        <th class="td_tag"></th>
+    </tr>
+
+    {% for book in book_dict.books %}
+    <tr>
+        <td><li></li></td>
+        <td>[{{book.category}}] </td>
+        <td><a href="/bookbar/bookalldetail/{{book.id}}/0/0/0/">{{book.title|slice:"30"}}</a></td>
+        <td>{{book.tag|slice:"30"}}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+</ul>
+
+<hr/>
+<table>
+    <tr>
+        <td>{{book_dict.current_page_show}}/{{book_dict.total_page}}</td>
+        <td> 
+            <a href="/bookbar/articledetail/{{article.id}}/{{book_dict.prev_page}}/{{comment_dict.current_page}}/#map_book_div">Prev</a>
+            <a href="/bookbar/articledetail/{{article.id}}/{{book_dict.next_page}}/{{comment_dict.current_page}}/#map_book_div">Next</a>
+        </td>
+        <td>
+        </td>
+    </tr>
+</table>
+{% endif %}
+</div> <!-- map_book_div -->
+
+
+<hr/>
+
+<div id="comment_div">
+{% if comment_dict.total_page %}
 <h3> &#x56FE;&#x4E66;&#x8BC4;&#x8BBA;</h3>
 
 <table border="0" style="max-width:65%">
 
-{% for comment in comments %}
+{% for comment in comment_dict.comments %}
     <tr>
         <td colspan="2" style="word-wrap:break-word;word-break:break-all;padding-bottom:10px;padding-top:20px;" > {{comment.content}}</td>    
     </tr>
@@ -52,15 +95,17 @@
 
     <tr>
         <td>
-            {{current_page_show}}/{{total_page}}
+            {{comment_dict.current_page_show}}/{{comment_dict.total_page}}
         </td>
         <td>
-            <a href="/bookbar/articledetail/{{article.id}}/{{prev_page}}/">Prev</a> <a href="/bookbar/articledetail/{{article.id}}/{{next_page}}/">Next</a>
+            <a href="/bookbar/articledetail/{{article.id}}/{{book_dict.current_page}}/{{comment_dict.prev_page}}/#comment_div">Prev</a> <a href="/bookbar/articledetail/{{article.id}}/{{book_dict.current_page}}/{{comment_dict.next_page}}/#comment_div">Next</a>
         </td>
     </tr>
 </table>
-
 {% endif %}
+
+</div> <!-- comment div -->
+
 
 <form action="" method="post">
     {% csrf_token %}

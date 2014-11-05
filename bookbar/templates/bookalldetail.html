@@ -58,7 +58,7 @@
     <tr>
         <td><li></li></td>
         <td class="td_title"> 
-            <a href="/bookbar/articledetail/{{book.id}}/0/">{{article.title|slice:"30"}} </a>
+            <a href="/bookbar/articledetail/{{book.id}}/0/0/">{{article.title|slice:"30"}} </a>
         </td>
         <td class="td_user"> {{article.user_name|slice:"15"}} </td>
         <td class="td_time"> {{article.create_time|date:"m-d i:s"}} </td>
@@ -72,14 +72,14 @@
     <tr>
         <td> {{article_dict.current_page_show}} / {{article_dict.total_page}} </td>
         <td>
-            <a href="/bookbar/bookalldetail/{{book.id}}/{{url_dict.current_page}}/{{article_dict.prev_page}}/{{comment_dict.current_page}}/">PrevPage</a>
+            <a href="/bookbar/bookalldetail/{{book.id}}/{{url_dict.current_page}}/{{article_dict.prev_page}}/{{comment_dict.current_page}}/">Prev</a>
         </td>
         <td>
-            <a href="/bookbar/bookalldetail/{{book.id}}/{{url_dict.current_page}}/{{article_dict.next_page}}/{{comment_dict.current_page}}/">NextPage</a>
+            <a href="/bookbar/bookalldetail/{{book.id}}/{{url_dict.current_page}}/{{article_dict.next_page}}/{{comment_dict.current_page}}/">Next</a>
         </td>
 
         <td>
-            <a href="/bookbar/addarticle?bookname={{book.title}}">Add a new article </a>
+            <a style="display:none" href="/bookbar/addarticle?bookname={{book.title}}">Add a new article </a>
         </td>
     </tr>
 </table>
@@ -103,8 +103,8 @@
     <tr>
         <td>{{comment_dict.current_page_show}} / {{comment_dict.total_page}}</td>
         <td>
-            <a href="/bookbar/bookalldetail/{{book.id}}/{{url_dict.current_page}}/{{article_dict.current_page}}/{{comment_dict.prev_page}}/">PrevPage</a>
-            <a href="/bookbar/bookalldetail/{{book.id}}/{{url_dict.current_page}}/{{article_dict.current_page}}/{{comment_dict.next_page}}/">NextPage</a>
+            <a href="/bookbar/bookalldetail/{{book.id}}/{{url_dict.current_page}}/{{article_dict.current_page}}/{{comment_dict.prev_page}}/">Prev</a>
+            <a href="/bookbar/bookalldetail/{{book.id}}/{{url_dict.current_page}}/{{article_dict.current_page}}/{{comment_dict.next_page}}/">Next</a>
         </td>
     </tr>
 </table>

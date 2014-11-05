@@ -13,7 +13,7 @@
     <tr>
         <td><li></li></td>
         <td class="td_category"> [{{article.category}}]</td>
-        <td class="td_title"><a href="/bookbar/articledetail/{{article.id}}/0/">{{article.title|slice:"30"}}</a></td>
+        <td class="td_title"><a href="/bookbar/articledetail/{{article.id}}/0/0/">{{article.title|slice:"30"}}</a></td>
         <td class="td_user">{{article.user_name|slice:"15"}}</td>
         <td class="td_time">{{article.create_time|date:"m-d i:s"}}</td>
         <td class="td_num">{{article.show_num}}</td>
@@ -30,11 +30,11 @@
             {{current_page_show}}/{{total_page}}
         </td>
         <td>
-            <a href="/bookbar/articlelist/{{category}}/{{prev_page}}/">Prev Page</a> 
-            <a href="/bookbar/articlelist/{{category}}/{{next_page}}/">Next Page</a>
+            <a href="/bookbar/articlelist/{{category}}/{{prev_page}}/">Prev</a> 
+            <a href="/bookbar/articlelist/{{category}}/{{next_page}}/">Next</a>
         </td>
         <td>
-            <a href="/bookbar/addarticle">add article</a>
+            <a style="display:none" href="/bookbar/addarticle">add article</a>
         </td>
     </tr>
 </table>

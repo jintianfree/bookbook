@@ -189,7 +189,7 @@ def addarticleend(request, article_id, related_page_index, find_page_index):
         return addarticleend_post(request, article_id, related_page_index, find_page_index)
 
 
-def articledetail(request, article_id, page_index):
+def articledetail(request, article_id, book_page_index, comment_page_index):
     if not Article.objects.filter(id=article_id).count > 0:
         return HttpResponse("error")
 
@@ -197,9 +197,12 @@ def articledetail(request, article_id, page_index):
     article.show_num += 1
     article.save()
 
-    context = get_query_set_page_i(article.comment.all(), "comments", int(page_index), 2)
+    one_page_num = 10
 
-    context.update({ 'article':article,})
+    book_dict = get_query_set_page_i(article.book.all(), "books", int(book_page_index), one_page_num)
+    comment_dict = get_query_set_page_i(article.comment.all(), "comments", int(comment_page_index), one_page_num)
+
+    context = {'article': article, 'book_dict':book_dict, 'comment_dict':comment_dict}
     
     if request.method == 'GET':
         context.update({'commentform':CommentForm()})
@@ -226,7 +229,7 @@ def articledetail(request, article_id, page_index):
             article.comment.add(comment)
             article.save()
  
-            url = "/bookbar/articledetail/" + article_id + "/" + page_index + "/"
+            url = "/bookbar/articledetail/" + article_id + "/" + book_page_index + "/" + comment_page_index + "/"
             return HttpResponseRedirect(url)
         else:
             context.update({'commentform':commentform})
