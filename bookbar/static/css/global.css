@@ -6,6 +6,19 @@ body {
     padding: 0px;
 }
 
+a:link, a:visited, a:active {
+    color: #015FB6;
+}
+
+a {
+    outline: 0px none;
+}
+
+li {
+    padding-top:5px;
+    padding-bottom:5px;
+}
+
 #header_div {
 border-style:solid; 
 border-width:1px; 
@@ -93,10 +106,4 @@ height:100px;
     padding-right: 10px;
 }
 
-a:link, a:visited, a:active {
-    color: #015FB6;
-}
 
-a {
-    outline: 0px none;
-}
