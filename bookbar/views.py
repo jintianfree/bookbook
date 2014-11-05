@@ -46,7 +46,7 @@ def addarticle(request):
 
         context = {'articleform':articleform}
 
-        return render_to_response('addarticle.html', context, 
+        return render_to_response('addarticle2.html', context, 
             context_instance = RequestContext(request))
 
     # POST
@@ -55,7 +55,7 @@ def addarticle(request):
     context     = {'articleform':articleform, }
 
     if not articleform.is_valid():
-        return render_to_response('addarticle.html', 
+        return render_to_response('addarticle2.html', 
             context, 
             context_instance = RequestContext(request))
 
