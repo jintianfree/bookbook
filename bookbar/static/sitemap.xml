@@ -8,101 +8,322 @@
 
 <url>
   <loc>http://www.bookbook.tk/bookbar/0/</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
   <loc>http://www.bookbook.tk/bookbar/booksmalllist/0/</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
   <loc>http://www.bookbook.tk/bookbar/downloadurlalllist/0/0/</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
   <loc>http://www.bookbook.tk/bookbar/articlelist/0/0/</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
   <loc>http://www.bookbook.tk/bookbar/downloadurldetail/1/0/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/downloadurldetail/5/0/</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
   <loc>http://www.bookbook.tk/bookbar/downloadurldetail/2/0/</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
-  <loc>http://www.bookbook.tk/bookbar/articledetail/2/0/</loc>
+  <loc>http://www.bookbook.tk/bookbar/downloadurldetail/8/0/</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
-  <loc>http://www.bookbook.tk/bookbar/articledetail/1/0/</loc>
+  <loc>http://www.bookbook.tk/bookbar/downloadurldetail/9/0/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/downloadurldetail/3/0/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/downloadurldetail/4/0/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/downloadurldetail/6/0/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/downloadurldetail/7/0/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/downloadurldetail/10/0/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/articledetail/4/0/0/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/articledetail/1/0/0/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/articledetail/2/0/0/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/articledetail/3/0/0/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/articledetail/5/0/0/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/downloadurldetail/11/0/</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
   <loc>http://www.bookbook.tk/bookbar/addadvice/0/</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
   <loc>http://www.bookbook.tk/bookbar/bookalldetail/1/0/0/0/</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
   <loc>http://www.bookbook.tk/bookbar/bookalldetail/2/0/0/0/</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
   <loc>http://www.bookbook.tk/bookbar/bookalldetail/3/0/0/0/</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
   <loc>http://www.bookbook.tk/bookbar/bookalldetail/4/0/0/0/</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
   <loc>http://www.bookbook.tk/bookbar/bookalldetail/5/0/0/0/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/bookalldetail/6/0/0/0/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/bookalldetail/7/0/0/0/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/bookalldetail/8/0/0/0/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/bookalldetail/9/0/0/0/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/bookalldetail/10/0/0/0/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/booksmalllist/1/</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
   <loc>http://www.bookbook.tk/bookbar/addbook</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/downloadbook/3/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/downloadbook/4/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/downloadbook/6/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/downloadbook/7/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/downloadbook/10/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/downloadbook/11/</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
   <loc>http://www.bookbook.tk/bookbar/downloadbook/2/</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
-  <loc>http://www.bookbook.tk/bookbar/downloadbook/1/</loc>
+  <loc>http://www.bookbook.tk/bookbar/downloadbook/8/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/downloadbook/9/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/downloadbook/5/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/downloadurlalllist/0/1/</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
   <loc>http://www.bookbook.tk/bookbar/addarticle</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/downloadbook/1/</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
   <loc>http://www.bookbook.tk/bookbar/downloadurllist/1/0/</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
-  <loc>http://www.bookbook.tk/bookbar/downloadurldetail/1/1/</loc>
+  <loc>http://www.bookbook.tk/bookbar/downloadurllist/5/0/</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
   <loc>http://www.bookbook.tk/bookbar/downloadurllist/2/0/</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
-  <loc>http://www.bookbook.tk/bookbar/downloadurldetail/2/1/</loc>
+  <loc>http://www.bookbook.tk/bookbar/downloadurllist/8/0/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/downloadurllist/9/0/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/downloadurllist/3/0/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/downloadurllist/4/0/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/downloadurllist/6/0/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/downloadurllist/7/0/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/downloadurllist/10/0/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/downloadurllist/11/0/</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
   <loc>http://www.bookbook.tk/bookbar/adddownloadurl/1/</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
-  <loc>http://www.bookbook.tk/bookbar/addarticle?bookname=鸟哥的Linux私房菜：基础学习篇</loc>
+  <loc>http://www.bookbook.tk/bookbar/addarticle?bookname=鸟哥的linux私房菜</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
   <loc>http://www.bookbook.tk/bookbar/adddownloadurl/2/</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
-  <loc>http://www.bookbook.tk/bookbar/addarticle?bookname=LINUX设备驱动程序</loc>
-</url>
-<url>
-  <loc>http://www.bookbook.tk/bookbar/bookalldetail/2/0/0/1/</loc>
+  <loc>http://www.bookbook.tk/bookbar/addarticle?bookname=Linux设备驱动程序</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
   <loc>http://www.bookbook.tk/bookbar/adddownloadurl/3/</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
-  <loc>http://www.bookbook.tk/bookbar/addarticle?bookname=Linux内核源代码情景分析</loc>
+  <loc>http://www.bookbook.tk/bookbar/addarticle?bookname=程序员的自我修养—链接、装载与库</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
   <loc>http://www.bookbook.tk/bookbar/adddownloadurl/4/</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
-  <loc>http://www.bookbook.tk/bookbar/addarticle?bookname=深入理解LINUX内核</loc>
+  <loc>http://www.bookbook.tk/bookbar/addarticle?bookname=自己动手写操作系统</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
   <loc>http://www.bookbook.tk/bookbar/adddownloadurl/5/</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
-  <loc>http://www.bookbook.tk/bookbar/addarticle?bookname=深入理解LINUX网络技术内幕</loc>
+  <loc>http://www.bookbook.tk/bookbar/addarticle?bookname=新概念英语第一册</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/adddownloadurl/6/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/addarticle?bookname=新概念英语第二册</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/adddownloadurl/7/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/addarticle?bookname=新概念英语第3册</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/adddownloadurl/8/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/addarticle?bookname=新概念英语%20第四册</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/adddownloadurl/9/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/addarticle?bookname=UNIX网络编程卷2进程间通信</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/adddownloadurl/10/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/addarticle?bookname=UNIX网络编程卷1</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/bookalldetail/11/0/0/0/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/adddownloadurl/11/</loc>
+  <changefreq>always</changefreq>
+</url>
+<url>
+  <loc>http://www.bookbook.tk/bookbar/addarticle?bookname=UNIX环境高级编程</loc>
+  <changefreq>always</changefreq>
 </url>
 </urlset>
