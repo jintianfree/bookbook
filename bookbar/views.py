@@ -36,6 +36,46 @@ def bookbar(request, category):
     return render_to_response('bookbar_home.html', context, 
             context_instance = RequestContext(request))
 
+def edit_article(request, article_id):
+    articles = Article.objects.filter(id=article_id)
+    if articles.count() == 0:
+        return HttpResponse("error")
+
+    article = articles[0]    
+    
+    if request.method == 'GET':
+        article_form = ArticleForm(initial = {
+            'bookname': article.bookname,
+            'title'   : article.title,
+            'content' : article.content,
+            'category': article.category,
+        })
+
+        context = {'articleform':article_form}
+
+        return render_to_response('addarticle2.html', context, 
+            context_instance = RequestContext(request))
+
+    # POST
+    article_form = ArticleForm(request.POST)
+    context     = {'articleform':article_form, }
+
+    if not article_form.is_valid():
+        return render_to_response('addarticle2.html', 
+            context, 
+            context_instance = RequestContext(request))
+
+
+    article.title    = article_form.cleaned_data['title']
+    article.content  = article_form.cleaned_data['content']
+    article.bookname = article_form.cleaned_data['bookname']
+    article.category = article_form.cleaned_data['category']
+
+    article.save()
+
+    url = "/bookbar/articledetail/" + article_id + "/0/0/" 
+    return HttpResponseRedirect(url)
+
 def addarticle(request):
     # GET
     if request.method == 'GET':

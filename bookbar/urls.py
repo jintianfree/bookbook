@@ -21,6 +21,7 @@ urlpatterns = patterns('bookbar',
     url(r'^articlelist/(\d+)/(\d+)/$', 'views.articlelist', name='articlelist'),
     url(r'^addadvice/(\d+)/$', 'views.addadvice', name='addadvice'),
     url(r'^sharebook/$', 'views.sharebook', name='sharebook'),
+    url(r'^edit_article/(\d+)/$', 'views.edit_article', name='edit_article'),
 
     # Examples:
     # url(r'^$', 'bookbook.views.home', name='home'),

@@ -15,27 +15,45 @@
 
 {% block content %}
 
+<table>
+    <tr>
+        <td style="word-wrap:break-word;word-break:break-all;">
+           <h2> {{article.title}} </h2>
+        </td>
+    </tr>
 
-<h2> {{article.title}} </h2>
+    <tr>
+       <td> <hr/> </td>
+    </tr>
 
-<hr/>
+    <tr>
+        <td style="word-wrap:break-word;word-break:break-all;">
+            {% autoescape off %}
+            {{article.content}}
+            {% endautoescape %}
+        </td>
+   </tr>
 
-{% autoescape off %}
-{{article.content}}
-{% endautoescape %}
-
-<br/> <br/> <br/>
+   <tr>
+      <td>
+          <br/> <br/> <br/>
 
 <!-- start baidu share -->
 <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="&#x5206;&#x4EAB;&#x5230;QQ&#x7A7A;&#x95F4;"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="&#x5206;&#x4EAB;&#x5230;&#x65B0;&#x6D6A;&#x5FAE;&#x535A;"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="&#x5206;&#x4EAB;&#x5230;&#x817E;&#x8BAF;&#x5FAE;&#x535A;"></a><a href="#" class="bds_renren" data-cmd="renren" title="&#x5206;&#x4EAB;&#x5230;&#x4EBA;&#x4EBA;&#x7F51;"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="&#x5206;&#x4EAB;&#x5230;&#x5FAE;&#x4FE1;"></a></div>
 <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":["mshare","qzone","tsina","bdysc","weixin","renren","tqq","bdxc","tqf","douban","tsohu","bdhome","sqq","thx","qq","ibaidu","taobao","hi","baidu","sohu","t163","qy","meilishuo","mogujie","diandian","huaban","leho","share189","duitang","tfh","youdao","qingbiji","people","ff","kanshou","yaolan","xg","iguba","twi","s51","linkedin","print"],"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"&#x5206;&#x4EAB;&#x5230;&#xFF1A;","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 <!-- end baidu share -->
 
-<hr/>
+        </td>
+    </tr>
+</table>
+
 
 <div id="map_book_div">
+
 {% if book_dict.total_page %}
+<hr/>
 <h3> &#x5173;&#x8054;&#x56FE;&#x4E66;</h3>
+
 <ul>
 <table border="0">
     <tr>
@@ -54,21 +72,18 @@
     </tr>
     {% endfor %}
 
-</table>
-</ul>
-
-<hr/>
-<table>
     <tr>
+        <td> </td>
         <td>{{book_dict.current_page_show}}/{{book_dict.total_page}}</td>
         <td> 
             <a href="/bookbar/articledetail/{{article.id}}/{{book_dict.prev_page}}/{{comment_dict.current_page}}/#map_book_div">Prev</a>
             <a href="/bookbar/articledetail/{{article.id}}/{{book_dict.next_page}}/{{comment_dict.current_page}}/#map_book_div">Next</a>
         </td>
-        <td>
-        </td>
+        <td> </td>
     </tr>
 </table>
+</ul>
+
 {% endif %}
 </div> <!-- map_book_div -->
 
@@ -106,6 +121,7 @@
 
 </div> <!-- comment div -->
 
+<hr/>
 
 <form action="" method="post">
     {% csrf_token %}
