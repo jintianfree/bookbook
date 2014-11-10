@@ -1,0 +1,134 @@
+
+<script> 
+
+var last_td_id=""
+
+function quote(obj)
+{
+    var id = parseInt(obj.id);
+    var content_id = String(id) + "_content";
+
+
+	var a = document.getElementById(content_id)
+	var b = document.getElementById("id_content")
+
+    b.value = a.innerHTML
+}
+
+function check(obj) 
+{ 
+    
+    if(last_td_id != "") {
+        document.getElementById(last_td_id).innerHTML=""; 
+    }
+
+    var id = parseInt(obj.id);
+    var td_id = String(id) + "_td";
+    var b = "" +
+"<form action=\"\" method=\"post\">"+
+"{% csrf_token %}"+
+"<input type=\"hidden\" id=\"id_title\" name=\"title\" value=\"" + "{{topic.title}}" + "\">  </input>" +
+"<input type=\"hidden\" id=\"id_book_name\" name=\"book_name\" value=\"x {{topic.book_name}} \"></input>" +
+"{{form.content|addslashes }}" +
+"{{form.content.errors|addslashes }}" +
+"<input type=\"submit\" value=\"answer\"></input>" +
+"<input type=\"hidden\" name=\"topic_id\" value=\"" + String(id) + "\"></input>" +
+"</form>" +
+"";
+
+    document.getElementById(td_id).innerHTML=b; 
+
+    last_td_id=td_id;
+} 
+
+</script>
+
+
+
+question:
+<br/>
+<table border="1">
+    <tr>
+        <td> {{topic.book_name}} </td>
+    </tr>
+
+    <tr>
+        <td> {{topic.title}} </td>
+    </tr>
+
+    <tr>
+        <td> {{topic.content}} </td>
+    </tr>
+
+</table>
+
+answer:
+<br/>
+
+<table border="1">
+    {% for topic_answer in topic.topic_set.all %}
+    <tr>
+        <td> {{topic_answer.book_name}} </td>
+    </tr>
+
+    <tr>
+
+        <td > <a href="/bookqa/qa_detail/{{topic_answer.id}}/"> <label id="{{topic_answer.id}}_content">{{topic_answer.title}}</label> </a></td>
+    </tr>
+
+    <tr>
+        <td> {{topic_answer.content}} </td>
+    </tr>
+
+    <tr>
+        <td>
+        <table>
+            {% for answer in topic_answer.topic_set.all %}
+            <tr>
+                <td> {{answer.book_name}} </td>
+            </tr>
+        
+            <tr>
+                <td> {{answer.title}} </td>
+            </tr>
+        
+            <tr>
+                <td> {{answer.content}} </td>
+            </tr>
+            {% endfor %}
+        </table>
+        </td>
+    </tr>
+
+    <tr> 
+        <td> 
+            {% if topic_answer.level <= 1 %}
+            <input type="button" id="{{topic_answer.id}}_buttion" name="answer" onClick="check(this)"></input>
+            {% else %}
+            <input type="button" id="{{topic_answer.id}}_buttion" name="answer" onClick="quote(this)"></input>
+            {% endif %}
+ 
+        </td>
+    </tr>
+
+    <tr> 
+        <td id="{{topic_answer.id}}_td"> </td>
+    </tr>
+    {% endfor%} 
+
+</table>
+
+{% if topic.level <= 1%}
+<form action="" method="post">
+<table>
+    {% csrf_token %}
+    {{form.as_table}}
+    <tr>
+    <td>
+        <input type="submit" value="xx"></input>
+        <input type="hidden" value="{{topic.id}}" name="topic_id"></input>
+    </td>
+    </tr>
+</table>
+</form>
+{% endif %}

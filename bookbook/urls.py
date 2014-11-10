@@ -6,9 +6,11 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^bookbar/', include('bookbar.urls')),
-    url(r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', {'url':'/static/favicon.ico'}),
     url(r'^$', 'django.views.generic.simple.redirect_to', {'url':'/bookbar/0/'}),
+    url(r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', {'url':'/static/favicon.ico'}),
+
+    url(r'^bookbar/', include('bookbar.urls')),
+    url(r'^bookqa/', include('bookqa.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

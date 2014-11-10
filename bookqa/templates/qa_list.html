@@ -1,0 +1,15 @@
+
+<table border="1">
+    {% for topic in topics %}
+    <tr>
+        <td>{{topic.book_name}}</td>
+        <td><a href="/bookqa/qa_detail/{{topic.id}}/">{{topic.title}}</a> </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{form.as_table}}
+    <input type="submit" value="question"></input>
+</form>
