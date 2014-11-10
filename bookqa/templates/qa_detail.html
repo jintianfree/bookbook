@@ -1,3 +1,7 @@
+{% extends "qa_base.html" %}
+
+{% block content %}
+
 
 <script> 
 
@@ -13,6 +17,15 @@ function quote(obj)
 	var b = document.getElementById("id_content")
 
     b.value = a.innerHTML
+}
+
+function cancel(obj)
+{
+    if(last_td_id != "") {
+        document.getElementById(last_td_id).innerHTML=""; 
+    }
+
+
 }
 
 function check(obj) 
@@ -31,7 +44,9 @@ function check(obj)
 "<input type=\"hidden\" id=\"id_book_name\" name=\"book_name\" value=\"x {{topic.book_name}} \"></input>" +
 "{{form.content|addslashes }}" +
 "{{form.content.errors|addslashes }}" +
+"<br/>" +
 "<input type=\"submit\" value=\"answer\"></input>" +
+"<input type=\"button\" value=\"cancel\" onClick=\"cancel(this)\"></input>" +
 "<input type=\"hidden\" name=\"topic_id\" value=\"" + String(id) + "\"></input>" +
 "</form>" +
 "";
@@ -47,17 +62,25 @@ function check(obj)
 
 question:
 <br/>
-<table border="1">
+<table border="1" style="width:100%">
     <tr>
-        <td> {{topic.book_name}} </td>
+        <td rowspan="3" style="width:70px"> view </td>
+        <td rowspan="3" style="width:70px"> answer </td>
+        <td rowspan="3" style="width:70px"> up / down </td>
     </tr>
 
     <tr>
-        <td> {{topic.title}} </td>
+        <td colspan="3"> [{{topic.book_name}}] <a href="/bookqa/qa_detail/{{topic.id}}/">{{topic.title}}</a> </td>
     </tr>
 
     <tr>
-        <td> {{topic.content}} </td>
+        <td>{{topic.user_name}}</td>
+        <td>{{topic.create_time}}</td>
+    </tr>
+
+
+    <tr>
+        <td colspan="6"> {{topic.content}} </td>
     </tr>
 
 </table>
@@ -65,70 +88,95 @@ question:
 answer:
 <br/>
 
-<table border="1">
+<table border="1" style="width:100%">
     {% for topic_answer in topic.topic_set.all %}
     <tr>
-        <td> {{topic_answer.book_name}} </td>
+        <td rowspan="7" style="width:70px"> view </td>
+        <td rowspan="7" style="width:70px"> answer </td>
+        <td rowspan="7" style="width:70px"> up / down </td>
+    </tr>
+<!--
+    <tr>
+        <td colspan="3"> <a href="/bookqa/qa_detail/{{topic_answer.id}}/">{{topic_answer.title}}</a></td>
+    </tr>
+
+
+    <tr>
+        <td>{{topic.book_name}}</td>
+        <td>{{topic.user_name}}</td>
+        <td>{{topic.create_time}}</td>
+    </tr>
+-->
+    <tr>
+        <td colspan="2" id="{{topic_answer.id}}_content"> {{topic_answer.content}} </td>
+    </tr>
+
+
+    <tr>
+        <td>{{topic.user_name}}</td>
+        <td>{{topic.create_time}}</td>
     </tr>
 
     <tr>
-
-        <td > <a href="/bookqa/qa_detail/{{topic_answer.id}}/"> <label id="{{topic_answer.id}}_content">{{topic_answer.title}}</label> </a></td>
+        <td colspan="2"> <br/> </td> 
     </tr>
 
     <tr>
-        <td> {{topic_answer.content}} </td>
-    </tr>
-
-    <tr>
-        <td>
-        <table>
-            {% for answer in topic_answer.topic_set.all %}
-            <tr>
-                <td> {{answer.book_name}} </td>
-            </tr>
-        
-            <tr>
-                <td> {{answer.title}} </td>
-            </tr>
-        
-            <tr>
-                <td> {{answer.content}} </td>
-            </tr>
-            {% endfor %}
-        </table>
+        <td>xxx</td>
+        <td colspan="1">
+            <table border="1" width="100%">
+                {% for answer in topic_answer.topic_set.all|slice:":2" %}
+                <tr>
+                    <td> {{answer.content}} </td>
+                </tr>
+                <tr>
+                    <td>{{topic.user_name}}  {{topic.create_time}}</td>
+                </tr>
+                <tr>
+                    <td><br/><hr/></td>
+                </tr>
+                {% endfor %}
+            </table>
         </td>
     </tr>
 
     <tr> 
-        <td> 
+        <td></td>
+        <td colspan="1"> 
             {% if topic_answer.level <= 1 %}
             <input type="button" id="{{topic_answer.id}}_buttion" name="answer" onClick="check(this)"></input>
             {% else %}
             <input type="button" id="{{topic_answer.id}}_buttion" name="answer" onClick="quote(this)"></input>
             {% endif %}
  
+            <a href="/bookqa/qa_detail/{{topic_answer.id}}/">view more</a>
         </td>
     </tr>
 
     <tr> 
-        <td id="{{topic_answer.id}}_td"> </td>
+        <td colspan="1"> 
+        <td colspan="1" id="{{topic_answer.id}}_td"> </td>
+    </tr>
+
+    <tr>
+        <td colspan="5"><br/><br/><hr/> </td>
     </tr>
     {% endfor%} 
 
 </table>
 
+<div id="reply_div_id">
 {% if topic.level <= 1%}
-<form action="" method="post">
-<table>
+    <form action="" method="post">
     {% csrf_token %}
-    {{form.as_table}}
-    <tr>
-    <td>
-        <input type="submit" value="xx"></input>
+        <input type="hidden" id="id_title" name="title" value="{{topic.title}}" ></input>
+        <input type="hidden" id="id_book_name" name="book_name" value="{{topic.book_name}}" ></input>
         <input type="hidden" value="{{topic.id}}" name="topic_id"></input>
-    </td>
-    </tr>
-</table>
+        {{form.content.errors}}
+        {{form.content}}
+        <input type="submit" value="xx"></input>
 </form>
 {% endif %}
+</div>
+
+{% endblock %}

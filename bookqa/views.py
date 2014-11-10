@@ -31,29 +31,66 @@ def bookqa(request):
 
 
 def qa_list(request):
-    topics = Topic.objects.filter(parent__isnull=True)
+    if request.method == "POST":
+        return HttpResponse("error: do not support post  ")
 
+    if 'page_num_to_show' in request.GET:
+        page_num_to_show = request.GET['page_num_to_show']
+        if page_num_to_show == "":
+            page_num_to_show = "0"
+    else:
+        page_num_to_show = "0"
+
+    if 'key_word' in request.GET:
+        key_word = request.GET['key_word']
+    else:
+        key_word = ""
+
+    if 'book_name' in request.GET:
+        book_name = request.GET['book_name']
+    else:
+        book_name = ""
+
+    if book_name != "":
+        try:
+            book_name = BookName.objects.get(name__contains=request.GET['book_name'])
+            topics = book_name.topic_set.all()
+        except BookName.DoesNotExist:
+            topics = Topic.objects.filter(title='xxxxxxxxxx')
+    else:
+        #topics = Topic.objects.filter(parent__isnull=True)
+        topics = Topic.objects.all()
+
+    if key_word != "":
+        topics = topics.filter(content__contains=request.GET['key_word'])
+        
+    # raise BaseException
+
+    if 'search_answer' in request.GET:
+        topics = topics.filter(level__gt=0)
+    else:
+        topics = topics.filter(level=0)
+
+    context = get_query_set_page_i(topics, "topics", int(page_num_to_show), 2)
+    context.update({'key_word':key_word})
+
+    return render_to_response('qa_list.html', context, 
+            context_instance = RequestContext(request))
+
+def qa_add_question(request):
     if request.method == 'GET':
-
-        context = {
-            'topics': topics,
-            'form'  : TopicForm(),
-        }
-  
-        return render_to_response('qa_list.html', context, 
+        form = TopicForm()
+        context = { 'form': form, }
+        return render_to_response('qa_add_question.html', context, 
             context_instance = RequestContext(request))
-
+        
     # POST
-    
     form = TopicForm(request.POST)
+
     if not form.is_valid():
-        context = {
-            'topics': topics,
-            'form': form,
-        }
-        return render_to_response('qa_list.html', context, 
+        context = { 'form': form, }
+        return render_to_response('qa_add_question.html', context, 
             context_instance = RequestContext(request))
-  
     try:
         book_name = BookName.objects.get(name=form.cleaned_data['book_name'])
     except BookName.DoesNotExist:
@@ -73,35 +110,23 @@ def qa_list(request):
 
     topic.save()
 
-
-    #topics = Topic.objects.filter(parent__isnull=True)
-
-    context = {
-            'topics': topics,
-            'form'  : TopicForm(),
-        }
-  
-    return render_to_response('qa_list.html', context, 
-            context_instance = RequestContext(request))
+    return HttpResponseRedirect('/bookqa/qa_list/')
 
 def qa_detail(request, qa_id):
     topics = Topic.objects.filter(id=qa_id)
+
     if topics.count() == 0:
         return HttpResponse("error: topic does not exist ")
 
     if request.method == 'GET':
-
         context = {
            'topic':topics[0],
            'form'  : TopicForm(),
         }
-
- 
         return render_to_response('qa_detail.html', context, 
             context_instance = RequestContext(request))
 
     # POST
-
     if 'topic_id' in request.POST:
         topic_id = request.POST['topic_id']
     else:
@@ -127,7 +152,6 @@ def qa_detail(request, qa_id):
         book_name = BookName(name=form.cleaned_data['book_name'])
         book_name.save()
 
-
     topic = Topic()
     topic.title = form.cleaned_data['title']
     topic.content = form.cleaned_data['content']
@@ -146,3 +170,54 @@ def qa_detail(request, qa_id):
     return HttpResponseRedirect(url)
 
 
+def get_query_set_page_i(set, set_name, i, one_page_count):
+    total = set.count()
+ 
+    total_page = total / one_page_count
+
+    if total % one_page_count != 0:
+        total_page += 1
+
+    if total_page == 0:
+        return {
+            'current_page_show':0,
+            'current_page':0, 
+            'prev_page':0, 
+            'next_page':0, 
+            'total_page':0, 
+            set_name:set, 
+    } 
+
+    current_page = i
+    if current_page < 0:
+        current_page = 0
+    if current_page >= total_page:
+        current_page = total_page -1
+
+    prev_page = current_page - 1
+    if prev_page < 0:
+        prev_page = 0
+  
+    next_page = current_page + 1
+    if next_page >= total_page:
+        next_page = total_page - 1
+    
+    set1 = set[current_page * one_page_count:]
+
+
+    if(set1.count() > one_page_count):
+        set2 = set1[:one_page_count]
+    else:
+        set2 = set1
+
+    current_page_show = current_page + 1
+
+    return {
+        'current_page_show': current_page_show, 
+        'current_page': current_page, 
+        'prev_page': prev_page,
+        'next_page': next_page, 
+        'total_page':total_page, 
+        set_name:set2
+    }
+     
