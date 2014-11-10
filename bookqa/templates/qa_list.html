@@ -16,42 +16,75 @@ function next_page() {
 <form action="" method="get">
 
 <input type="hidden" name="page_num_to_show" id="id_page_num_to_show"></input>
+<!--
 <input type="text"   name="key_word" value="{{key_word}}"></input> 
 <input type="submit" name="search_question" value="search question"></input> 
 <input type="submit" name="search_answer" value="search answer"></input>
+-->
 <input type="hidden" name="prev_page_num" id = "id_prev_page_num"value="{{prev_page}}"></input>
 <input type="hidden" name="next_page_num" id = "id_next_page_num"value="{{next_page}}"></input>
 
-<table border="1" style="width:100%">
+<style type="text/css">
+.qa-voting {
+    background: none repeat scroll 0% 0% #F1FBFE;
+    border: 1px solid #CDE2ED;
+    border-radius: 2px;
+    float: left;
+    height: 48px;
+    overflow: hidden;
+    margin: 6px 16px 0px 0px;
+    padding: 8px 0px;
+    width: 60px;
+}
+
+.qa-a-count-none {
+    background: none repeat scroll 0% 0% #F9FFEC;
+    border: 1px solid #DBE6CB;
+    border-radius: 2px;
+    text-align: center;
+    width: 60px;
+    height: 48px;
+    overflow: hidden;
+    float: left;
+    margin: 6px 16px 0px 0px;
+    padding: 8px 0px;
+}
+</style>
+
+<table border="0" style="width:100%">
     {% for topic in topics %}
     <tr>
-        <td rowspan="3" style="width:70px"> view </td>
-        <td rowspan="3" style="width:70px"> answer </td>
-        <td rowspan="3" style="width:70px"> up / down </td>
-    </tr>
-
+        <td colspan="4">
+            <br/><br/><hr/>
+        </td>
     <tr>
-        <td colspan="3"> [{{topic.book_name}}] <a href="/bookqa/qa_detail/{{topic.id}}/">{{topic.title}}</a> </td>
+    <tr>
+        <td rowspan="2" style="width:50px"> <div class="qa-voting">view </div></td>
+        <td rowspan="2" style="width:50px"> <div class="qa-a-count-none"> answer </div></td>
+        <!-- <td rowspan="3" style="width:50px"> up / down </td> -->
+        <td colspan="2"> [{{topic.book_name}}] <a href="/bookqa/qa_detail/{{topic.id}}/">{{topic.title}}</a> </td>
     </tr>
 
     <tr>
         <td>USER: {{topic.user_name}}</td>
         <td>TIME: {{topic.create_time}}</td>
-        <td>
     </tr>
-
-    <tr>
-        <td colspan="6">
-        <br/><br/><hr/>
-        </td>
-    </tr>
-
     {% endfor %}
 
     <tr>
-        <td> {{current_page_show}} / {{total_page}} </td>
-        <td> <input type="submit" name="prev_page_button" value="Prev" onClick="prev_page()"></input></td>
-        <td> <input type="submit" name="next_page_button" value="Next" onClick="next_page()"></input></td>
+        <td colspan="4">
+            <br/><br/><hr/>
+        </td>
+    <tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td> 
+            {{current_page_show}} / {{total_page}}
+            <input type="submit" name="prev_page_button" value="Prev" onClick="prev_page()"></input>
+            <input type="submit" name="next_page_button" value="Next" onClick="next_page()"></input>
+        </td>
     </tr>
 </table>
 </form>

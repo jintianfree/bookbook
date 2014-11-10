@@ -58,113 +58,113 @@ function check(obj)
 
 </script>
 
+<style type="text/css">
+.qa-voting {
+    background: none repeat scroll 0% 0% #F1FBFE;
+    border: 1px solid #CDE2ED;
+    border-radius: 2px;
+    float: left;
+    height: 48px;
+    overflow: hidden;
+    margin: 6px 16px 0px 0px;
+    padding: 8px 0px;
+    width: 60px;
+}
+</style>
 
 
-question:
+
 <br/>
-<table border="1" style="width:100%">
+<br/>
+<br/>
+<table border="0" style="width:100%">
     <tr>
+        <!--
         <td rowspan="3" style="width:70px"> view </td>
         <td rowspan="3" style="width:70px"> answer </td>
-        <td rowspan="3" style="width:70px"> up / down </td>
+        -->
+        <td rowspan="3" style="width:70px;position:relative;"> <div class="qa-voting"> up / down</div> </td>
+        <td> [{{topic.book_name}}] <a href="/bookqa/qa_detail/{{topic.id}}/">{{topic.title}}</a> </td>
     </tr>
 
     <tr>
-        <td colspan="3"> [{{topic.book_name}}] <a href="/bookqa/qa_detail/{{topic.id}}/">{{topic.title}}</a> </td>
+        <td> {{topic.content}} </td>
     </tr>
 
     <tr>
-        <td>{{topic.user_name}}</td>
-        <td>{{topic.create_time}}</td>
+        <td>{{topic.user_name}} {{topic.create_time}}</td>
     </tr>
-
-
-    <tr>
-        <td colspan="6"> {{topic.content}} </td>
-    </tr>
-
 </table>
 
-answer:
+<br/>
 <br/>
 
-<table border="1" style="width:100%">
+<table border="0" style="width:100%">
     {% for topic_answer in topic.topic_set.all %}
-    <tr>
-        <td rowspan="7" style="width:70px"> view </td>
-        <td rowspan="7" style="width:70px"> answer </td>
-        <td rowspan="7" style="width:70px"> up / down </td>
-    </tr>
-<!--
-    <tr>
-        <td colspan="3"> <a href="/bookqa/qa_detail/{{topic_answer.id}}/">{{topic_answer.title}}</a></td>
-    </tr>
-
 
     <tr>
-        <td>{{topic.book_name}}</td>
-        <td>{{topic.user_name}}</td>
-        <td>{{topic.create_time}}</td>
-    </tr>
--->
-    <tr>
-        <td colspan="2" id="{{topic_answer.id}}_content"> {{topic_answer.content}} </td>
-    </tr>
-
-
-    <tr>
-        <td>{{topic.user_name}}</td>
-        <td>{{topic.create_time}}</td>
+        <td colspan="2"><br/><br/><hr/></td>
     </tr>
 
     <tr>
-        <td colspan="2"> <br/> </td> 
+        <td rowspan="2" style="width:70px;position:relative;"> <div class="qa-voting"> up / down</div> </td>
+
+        <td id="{{topic_answer.id}}_content"> {{topic_answer.content}} </td>
     </tr>
 
     <tr>
-        <td>xxx</td>
-        <td colspan="1">
-            <table border="1" width="100%">
+        <td>{{topic.user_name}} {{topic.create_time}}</td>
+    </tr>
+
+    <tr>
+        <td></td>
+        <td>
+            <table border="0" width="80%">
                 {% for answer in topic_answer.topic_set.all|slice:":2" %}
                 <tr>
+                    <td rowspan="3" style="width:50px"></td>
                     <td> {{answer.content}} </td>
                 </tr>
+
                 <tr>
                     <td>{{topic.user_name}}  {{topic.create_time}}</td>
                 </tr>
+
                 <tr>
-                    <td><br/><hr/></td>
+                    <td><div style="border-bottom:1px dashed;width=100%"></div></td>
                 </tr>
                 {% endfor %}
+ 
+                <tr>
+                    <td style="width:50px"></td>
+                    <td> 
+                       {% if topic_answer.level <= 1 %}
+                       <input type="button" id="{{topic_answer.id}}_buttion" name="answer" value="&#x56DE;&#x590D;" onClick="check(this)"></input>
+                       {% else %}
+                       <input type="button" id="{{topic_answer.id}}_buttion" name="answer" value="&#x5F15;&#x7528;" onClick="quote(this)"></input>
+                       {% endif %}
+                       <a href="/bookqa/qa_detail/{{topic_answer.id}}/">view more</a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td id="{{topic_answer.id}}_td"> </td>
+                </tr>
             </table>
         </td>
     </tr>
-
-    <tr> 
-        <td></td>
-        <td colspan="1"> 
-            {% if topic_answer.level <= 1 %}
-            <input type="button" id="{{topic_answer.id}}_buttion" name="answer" onClick="check(this)"></input>
-            {% else %}
-            <input type="button" id="{{topic_answer.id}}_buttion" name="answer" onClick="quote(this)"></input>
-            {% endif %}
- 
-            <a href="/bookqa/qa_detail/{{topic_answer.id}}/">view more</a>
-        </td>
-    </tr>
-
-    <tr> 
-        <td colspan="1"> 
-        <td colspan="1" id="{{topic_answer.id}}_td"> </td>
-    </tr>
-
-    <tr>
-        <td colspan="5"><br/><br/><hr/> </td>
-    </tr>
     {% endfor%} 
 
+    <tr>
+        <td colspan="2"><br/><br/><hr/></td>
+    </tr>
 </table>
 
+<br/>
+<br/>
+<br/>
+<br/>
 <div id="reply_div_id">
 {% if topic.level <= 1%}
     <form action="" method="post">
@@ -174,7 +174,8 @@ answer:
         <input type="hidden" value="{{topic.id}}" name="topic_id"></input>
         {{form.content.errors}}
         {{form.content}}
-        <input type="submit" value="xx"></input>
+        <br/>
+        <input type="submit" value="&#x56DE;&#x590D;"></input>
 </form>
 {% endif %}
 </div>

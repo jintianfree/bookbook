@@ -1,0 +1,24 @@
+.qa-voting {
+    background: none repeat scroll 0% 0% #F1FBFE;
+    border: 1px solid #CDE2ED;
+    border-radius: 2px;
+    float: left;
+    height: 48px;
+    overflow: hidden;
+    margin: 6px 16px 0px 0px;
+    padding: 8px 0px;
+    width: 60px;
+}
+
+.qa-a-count-none {
+    background: none repeat scroll 0% 0% #F9FFEC;
+    border: 1px solid #DBE6CB;
+    border-radius: 2px;
+    text-align: center;
+    width: 60px;
+    height: 48px;
+    overflow: hidden;
+    float: left;
+    margin: 6px 16px 0px 0px;
+    padding: 8px 0px;
+}
