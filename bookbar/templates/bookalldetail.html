@@ -7,6 +7,8 @@
 </title>
 
 <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}/css/global.css"/>
+
+<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=3544153356" type="text/javascript" charset="utf-8"></script>
 {% endblock %}
 
 {% block content %}
@@ -84,7 +86,13 @@
     </tr>
 </table>
 
+<br/><br/>
 <hr/>
+<br/><br/>
+
+<wb:comments url="auto" border="y" fontsize="12" width="auto" skin="silver" appkey="3544153356" ralateuid="5110020820" ></wb:comments>
+
+<div style="display:none">
 
 <h3> &#x56FE;&#x4E66;&#x8BC4;&#x8BBA;</h3>
 {% if comment_dict.comments.count %}
@@ -122,5 +130,6 @@
         </tr>
     </table>
 </form>
+</div>
 
 {% endblock %}

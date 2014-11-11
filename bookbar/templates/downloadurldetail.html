@@ -7,6 +7,8 @@
 
     <meta name="description" content="&#x81F4;&#x529B;&#x4E8E;&#x6253;&#x9020;&#x4E00;&#x4E2A;&#x8BFB;&#x4E66; &#x5B66;&#x4E60; &#x4EA4;&#x6D41;&#x7684;&#x5E73;&#x53F0;"/>
     <meta name="keywords" content="{{url.filename}},{{book.title}}"/>
+
+    <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=3544153356" type="text/javascript" charset="utf-8"></script>
 {% endblock %}
 
 
@@ -74,8 +76,13 @@
     </tr>
 </table>
 
-<hr/>
+<hr/><br/><br/>
 
+
+<wb:comments url="auto" border="y" fontsize="12" width="auto" skin="silver" appkey="3544153356" ralateuid="5110020820" ></wb:comments>
+
+
+<div style="display:none;"> <!-- use wei bo ping lun box -->
 <div id="id_comments_div">
 <h3> &#x8BC4;&#x8BBA; </h3>
 <table border="0" style="max-width:65%">
@@ -112,5 +119,6 @@
         </tr>
     </table>
 </form>
+</div>
 
 {% endblock %}
