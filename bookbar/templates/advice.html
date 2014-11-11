@@ -1,7 +1,25 @@
 
 {% extends "base.html" %}
+
+{% block head %}
+
+<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=3544153356" type="text/javascript" charset="utf-8"></script>
+{% endblock %}
+
 {% block content %}
 
+<script>
+var ping_lun_box = "" +
+    "<wb:comments url=\""   +
+    "http://bookbook.tk"   + 
+    window.location.pathname +
+    "\" border=\"y\" fontsize=\"12\" width=\"auto\" appkey=\"3544153356\" ></wb:comments>"
+
+document.write(ping_lun_box);
+</script>
+
+
+<div style="display:none">
 <form action="" method="post">
 {% csrf_token %}
     <table border="1" class="table_comment">
@@ -47,6 +65,8 @@
 </table>
 
 {% endif %}
+
+</div>
 
 
 
