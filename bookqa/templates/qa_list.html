@@ -59,11 +59,7 @@ function next_page() {
 
 <table border="0" style="width:100%">
     {% for topic in topics %}
-    <tr>
-        <td colspan="4">
-            <br/><br/><hr/>
-        </td>
-    <tr>
+
     <tr>
         <td rowspan="2" style="width:50px"> <div class="qa-voting">view </div></td>
         <td rowspan="2" style="width:50px"> <div class="qa-a-count-none"> answer </div></td>
@@ -75,11 +71,17 @@ function next_page() {
         <td>USER: {{topic.user_name}}</td>
         <td>TIME: {{topic.create_time}}</td>
     </tr>
-    {% endfor %}
 
     <tr>
         <td colspan="4">
             <br/><br/><hr/>
+        </td>
+    <tr>
+    {% endfor %}
+
+    <tr>
+        <td colspan="4">
+            <br/><br/>
         </td>
     <tr>
     <tr>

@@ -132,6 +132,7 @@ function check(obj)
 
 <br/> <br/><hr/>
 
+{% if topic.topic_set.count %}
 <table border="0" style="width:100%">
     {% for topic_answer in topic.topic_set.all %}
 
@@ -193,6 +194,7 @@ function check(obj)
         <td colspan="2"><br/><br/><hr/></td>
     </tr>
 </table>
+{% endif %}
 
 <br/>
 <br/>

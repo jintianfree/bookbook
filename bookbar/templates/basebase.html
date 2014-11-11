@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb" lang="zh-cn">
+<head>
+    <meta charset=utf-8 />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}/css/global.css"/>
+
+    {% block head %}  
+    {% endblock %} 
+</head>
+
+<body>
+    <table border="0" style="width:100%">
+        <tr>
+            <td> {% block top_left %} {% endblock %} </td>
+            <td style="width:800px;height:100px;"> {% block top_centre %} {% endblock %} </td>
+            <td> {% block top_right %} {% endblock %} </td>
+        </tr>
+
+        <tr>
+            <td style="height:400px;min-height:400px;"> {% block middle_left %} {% endblock %} </td>
+            <td> {% block middle_centre %} {% endblock %} </td>
+            <td> {% block middle_right%} {% endblock %} </td>
+        </tr>
+
+        <tr>
+            <td style="height:100px;"> {% block bottom_left %} {% endblock %} </td>
+            <td> {% block bottom_centre%} {% endblock %} </td>
+            <td> {% block bottom_right%} {% endblock %} </td>
+        </tr>
+    </table>
+</body>
+
+</html>
+

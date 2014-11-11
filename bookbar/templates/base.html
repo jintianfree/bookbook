@@ -1,48 +1,16 @@
+{% extends "basebase.html" %}
 
-<!DOCTYPE html>
-<html lang="zh-cn">
-<head>
-    <meta charset=utf-8 />
-    <meta http-equiv="content-style-type" content="text/css"/>
-    <meta http-equiv="content-script-type" content="text/javascript"/>
-    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}/css/global.css"/>
+{% block top_centre %}
+    {% include 'header.html' %}
+    {% block header %}  {% endblock %} 
+{% endblock %}
 
-    {% block head %}  
-    {% endblock %} 
-</head>
+{% block middle_centre %}
+    {% block content %} {% endblock %} 
+{% endblock %}
 
-<body>
-
-    <div id="body_div">
-        <div id="header_div">   
-        {% include 'header.html' %}
-        {% block header %}  {% endblock %} 
-        </div>
-
-        <div id="content_div">  
-        {% block content %} {% endblock %} 
-        </div>
-
-        <div id="footer_div">   
-        {% block footer %}  {% endblock %} 
-            <div id="footer_bottom">
-            <a> &#x7F51;&#x7AD9;&#x58F0;&#x660E;</a>  {# wang zhan sheng ming #}
-            <a> &#x8054;&#x7CFB;&#x6211;&#x4EEC; </a> {# lian xi wo men #}
-            <a> &#x5E7F;&#x544A;&#x670D;&#x52A1;</a>  {# guang gao fu wu #}
-            @2014 <a target="_blank" href="http://www.cnblogs.com/jintianfree/">  &#x5317;&#x534A;&#x7403;&#x7684;&#x5929;&#x7A7A; </a>
-            <a target="_blank" href="/bookbar/addadvice/0/"> &#x6211;&#x8981;&#x5410;&#x69FD; </a> {# wo yao to cao #}
-            </div>
-        </div>
-    <div>
-
-    <div id="baidu_statistics">
-        <script type="text/javascript">
-            var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-            document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F106ec048090ea151aa771c78588d3cf5' type='text/javascript'%3E%3C/script%3E"));
-        </script>
-    </div>
-
-</body>
-
-</html>
+{% block bottom_centre %}
+    {% block footer %}  {% endblock %} 
+    {% include 'footer.html' %}
+{% endblock %}
 
