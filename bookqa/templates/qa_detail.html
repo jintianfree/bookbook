@@ -59,7 +59,10 @@ function check(obj)
 </script>
 
 <style type="text/css">
+
 .qa-voting {
+    color: #555;
+    font-weight:bold;
     background: none repeat scroll 0% 0% #F1FBFE;
     border: 1px solid #CDE2ED;
     border-radius: 2px;
@@ -69,22 +72,53 @@ function check(obj)
     margin: 6px 16px 0px 0px;
     padding: 8px 0px;
     width: 60px;
+    text-align:center;
 }
 </style>
 
+<br/> <br/> <br/>
 
-
-<br/>
-<br/>
-<br/>
+{% if topic.parent %}
 <table border="0" style="width:100%">
     <tr>
-        <!--
-        <td rowspan="3" style="width:70px"> view </td>
-        <td rowspan="3" style="width:70px"> answer </td>
-        -->
-        <td rowspan="3" style="width:70px;position:relative;"> <div class="qa-voting"> up / down</div> </td>
-        <td> [{{topic.book_name}}] <a href="/bookqa/qa_detail/{{topic.id}}/">{{topic.title}}</a> </td>
+        <td colspan="2"> 
+            <h3>
+            [{{topic.parent.book_name}}] <a href="/bookqa/qa_detail/{{topic.parent.id}}/">{{topic.parent.title}}</a> 
+            </h3>
+        </td>
+    </tr>
+
+    <tr>
+        <td rowspan="3" style="width:70px;position:relative;"> <div class="qa-voting"> up </div> </td>
+    </tr>
+
+    <tr>
+        <td> {{topic.parent.content}} </td>
+    </tr>
+
+    <tr>
+        <td>{{topic.parent.user_name}} {{topic.parent.create_time}}</td>
+    </tr>
+</table>
+{% endif %}
+
+<br/> <br/> <br/>
+
+<table border="0" style="width:100%">
+    {% if not topic.parent %}
+    <tr>
+        <td colspan="2"> 
+            <h3>
+            [{{topic.book_name}}] <a href="/bookqa/qa_detail/{{topic.id}}/">{{topic.title}}</a>
+            </h3>
+        </td>
+    </tr>
+    {% endif %}
+
+    <tr>
+        <td rowspan="3" style="width:70px;position:relative;"> 
+            <div class="qa-voting"> up </div> 
+        </td>
     </tr>
 
     <tr>
@@ -96,18 +130,17 @@ function check(obj)
     </tr>
 </table>
 
-<br/>
-<br/>
+<br/> <br/><hr/>
 
 <table border="0" style="width:100%">
     {% for topic_answer in topic.topic_set.all %}
 
     <tr>
-        <td colspan="2"><br/><br/><hr/></td>
+        <td colspan="2"><br/><br/></td>
     </tr>
 
     <tr>
-        <td rowspan="2" style="width:70px;position:relative;"> <div class="qa-voting"> up / down</div> </td>
+        <td rowspan="2" style="width:70px;position:relative;"> <div class="qa-voting"> up </div> </td>
 
         <td id="{{topic_answer.id}}_content"> {{topic_answer.content}} </td>
     </tr>
