@@ -1,5 +1,4 @@
 
-<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=3544153356" type="text/javascript" charset="utf-8"></script>
 
 <style type="text/css">
 
@@ -24,14 +23,15 @@
 }
 
 </style>
-
+ 
+<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101169043" data-redirecturi="bookbook.tk" charset="utf-8"></script>
 <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=3544153356" type="text/javascript" charset="utf-8"></script>
 
 <div id="logo">
     <table border="0">
         <tr>
             <td>
-                <h1 style="display:inline;"><a href="/bookbar/0">BOOK</a> </h1>
+                <h1 style="display:inline;"><a href="/bookbar/0">BOOKBAR</a> </h1>
             </td>
             <td style="width:200px">
                 <script type="text/javascript">document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E%3Cscript charset="utf-8" src="http://rp.baidu.com/rp3w/3w.js?sid=16632368784966857390') + '&t=' + (Math.ceil(new Date()/3600000)) + unescape('"%3E%3C/script%3E'));</script>
@@ -44,11 +44,17 @@
                     <span><a href="/bookbar/0">&#x9996;&#x9875; /</a></span> <!-- shou ye  -->
                     <span><a href="/bookbar/booksmalllist/0">&#x56FE;&#x4E66; /</a></span><!-- tu shu -->
                     <span><a href="/bookbar/downloadurlalllist/0/0/">&#x4E0B;&#x8F7D; /</a> </span><!-- xia zai -->
-                    <span><a href="/bookbar/articlelist/0/0/">&#x6587;&#x7AE0;</a></span><!-- wen zhang -->
-                    <span><a href="/bookqa">BOOKQA</a></span><!-- wen zhang -->
+                    <span><a href="/bookbar/articlelist/0/0/">&#x6587;&#x7AE0; /</a></span><!-- wen zhang -->
+                    <span><a href="/bookqa">BOOKQA /</a></span><!-- wen zhang -->
                     <span>
                         <wb:login-button type="5,3" onlogin="login" onlogout="logout">&#x767B;&#x5F55;&#x6309;&#x94AE;</wb:login-button> 
                     </span>
+                    <span id="qqLoginBtn"></span>
+                    <script type="text/javascript">
+                        QC.Login({
+                        btnId:"qqLoginBtn"   
+                        });
+                    </script>
                 </span>
             </td>
         </tr>

@@ -1,5 +1,8 @@
 {% extends "qa_base.html" %}
+
 {% block head %}
+<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=3544153356" type="text/javascript" charset="utf-8"></script>
+
     <meta charset="utf-8" />
     
     <style>
@@ -104,6 +107,34 @@ height:20px;
             <td>{{form.content}}</td>
         </tr>
   
+<script type="text/javascript">
+            //if( WB2.checkLogin()) {
+alert(2);
+
+WB2.login();
+WB2.login(function(){
+WB2.anyWhere(
+    function(W) {
+        W.parseCMD(
+            "account/get_uid.json", 
+            function(sResult, bStatus) {
+                try{
+                    //to do something...
+                   alert(sResult.uid)
+alert(3);
+                }catch(e){
+alert(3);
+                }
+            },
+            { access_token:'2.00VucJNDoLuqrDc39b6319ac2rJeTC' },
+            { method: 'get' }
+       );
+    }
+);
+
+});
+//            }
+        </script>
     
         <tr>
             <td>

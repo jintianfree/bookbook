@@ -221,3 +221,5 @@ def get_query_set_page_i(set, set_name, i, one_page_count):
         set_name:set2
     }
      
+#def user_qa_list(request):
+
