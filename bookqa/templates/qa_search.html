@@ -1,0 +1,24 @@
+{% extends "qa_base.html" %}
+
+{% block content %}
+
+<form action="" method="get">
+
+category:
+<select name="category">
+    <option value="0"> --- </option> 
+    {% for category in categorys %}
+        <option value="{{category.id}}">{{category}}</option> 
+    {% endfor %}
+</select> 
+
+<input type="text" name="tag"></input>
+
+<input type="text" name="user"></input>
+
+<input type="text" name="keyword"></input>
+
+</form>
+
+{% endblock %}
+

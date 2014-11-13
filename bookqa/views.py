@@ -14,25 +14,6 @@ from bookqa.models import Comment
 from bookqa.forms import TopicForm
 from bookqa.forms import CommentForm
 
-def bookqa(request):
-   
-    topics = Topic.objects.filter(parent__isnull=True)
-
-    for topic in topics:
-        if topic.topic_set.count() > 0:
-            comment = topic.topic_set.all()
- 
-    
-    context = {
-        'comment': comment,
-        'topics': topics,
-        'form'  : TopicForm(),
-    }
- 
-    return render_to_response('bookqa.html', context, 
-            context_instance = RequestContext(request))
-
-
 def qa_list(request, category_id, page_num):
     if request.method == "POST":
         return HttpResponse("error: do not support post  ")
@@ -46,6 +27,7 @@ def qa_list(request, category_id, page_num):
     one_page_count = 2
 
     context = {
+        "categorys": Category.objects.all(),
         "topic_dict":
         get_query_set_page_i(topics, "topics", int(page_num), one_page_count),
         "category_id": category_id
@@ -111,7 +93,7 @@ def comment_detail(request, comment_id, child_comment_page_num):
         context = {
             'comment':comment,
             'child_comment_dict':
-            get_query_set_page_i(child_comments, "child_comments", int(child_comment_page_num), one_page_count),
+                get_query_set_page_i(child_comments, "child_comments", int(child_comment_page_num), one_page_count),
             'form': CommentForm(),
         }
 
@@ -119,11 +101,13 @@ def comment_detail(request, comment_id, child_comment_page_num):
             context_instance = RequestContext(request))
 
     form = CommentForm(request.POST)
+
     if not form.is_valid():
         context = {
             'comment':comment,
             'form': form,
         }
+
         return render_to_response('comment_detail.html', context, 
             context_instance = RequestContext(request))
 
@@ -146,9 +130,8 @@ def comment_detail(request, comment_id, child_comment_page_num):
     child_comment.save()
 
     url = "/bookqa/comment_detail/" + comment_id + "/0/"
-    return HttpResponseRedirect(url)
 
-   
+    return HttpResponseRedirect(url)
 
 def topic_detail(request, topic_id, comment_page_num):
     try:
@@ -257,5 +240,19 @@ def get_query_set_page_i(set, set_name, i, one_page_count):
         set_name:set2
     }
      
+def tag_list(request, page_num):
+    tags = QaTag.objects.all()
+    one_page_count = 2
+
+    context = {
+        'tag_dict': get_query_set_page_i(tags, "tags", int(page_num), one_page_count),
+    }
+
+    return render_to_response('tag_list.html', context, 
+        context_instance = RequestContext(request))
+
+def qa_search(request, page_num):
+    topics = Topic.objects.all()
+
 #def user_qa_list(request):
 

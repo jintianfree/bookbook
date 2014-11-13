@@ -17,25 +17,39 @@
     width: 60px;
     text-align:center;
 }
+.qa-a-count-none {
+    text-align:center;
+    color: #555;
+    font-weight:bold;
+    background: none repeat scroll 0% 0% #F9FFEC;
+    border: 1px solid #DBE6CB;
+    border-radius: 2px;
+    text-align: center;
+    width: 60px;
+    height: 48px;
+    overflow: hidden;
+    float: left;
+    margin: 6px 16px 0px 0px;
+    padding: 8px 0px;
+}
 </style>
 
-<table border="0" style="width:100%">
+<table border="1" style="width:100%">
     <tr>
-        <td colspan="2"> 
-            <a href="">[{{topic.category}}]</a>
-            <h3> <a href="/bookqa/qa_detail/{{topic.id}}/0/">{{topic.title}}</a> </h3>
-        </td>
+        <td rowspan="3" style="width:50px"> <div class="qa-voting"> answer </div></td>
+        <td rowspan="3" style="width:50px"> <div class="qa-a-count-none"> up </div></td>
+        <!-- <td rowspan="3" style="width:50px"> up / down </td> -->
+        
+        <td><a href="/bookqa/qa_list/{{topic.category.id}}/0/"> [{{topic.category}}] </a></td>
+        <td><a href="/bookqa/topic_detail/{{topic.id}}/0/">{{topic.title}}</a> </td>
     </tr>
 
-    <tr>
-        <td rowspan="3" style="width:70px;position:relative;"> 
-            <div class="qa-voting"> up </div> 
-        </td>
-    </tr>
+    <tr> <td colspan="2"> {{topic.tag}} </td> </tr>
 
-    <tr> <td> {{topic.content}} </td> </tr>
+    <tr> <td colspan="2">{{topic.user_name}} {{topic.create_time}}</td> </tr>
 
-    <tr> <td>{{topic.user_name}} {{topic.create_time}}</td> </tr>
+    <tr> <td colspan="2"></td> <td colspan="2"> {{topic.content}} </td> </tr>
+
 </table>
 
 {% if best_comment %}
@@ -45,27 +59,40 @@
 
 {{comment_dict}}
 {% if comment_dict.total_page %}
-<table border="1">
+<table border="1" width="100%">
     {% for comment in comment_dict.comments %}
     <tr>
+        <td style="width:50px"> <div class="qa-voting"> answer </div></td>
+        <td style="width:50px"> <div class="qa-a-count-none"> up </div></td>
         <td> {{comment.content}} </td>
-        <td> {{comment.user_name}}</td>
-        <td> {{comment.create_time}}</td>
     </tr>
     <tr>
+        <td></td> <td></td>
+        <td> {{comment.user_name}}{{comment.create_time}}</td>
+    </tr>
+
+    <tr>
+        <td></td> <td></td>
         <td>
+        <table width="80%" style="padding-left:50px" border="1">
             {% for child_comment in comment.comment_set.all %}
-            {{child_comment.content}}
-            {{child_comment.user_name}}
-            {{child_comment.create_time}}
+            <tr> <td> {{child_comment.content}} </td> </tr>
+            <tr> <td> {{child_comment.user_name}} {{child_comment.create_time}} </td> </tr>
             {% endfor %}
-            <a href="/bookqa/comment_detail/{{child_comment.id}}/0/"> comment </a>
-            <a href="/bookqa/comment_detail/{{child_comment.id}}/0/"> view more </a>
+
+            <tr>
+                <td>
+                    <a target="_blank" href="/bookqa/comment_detail/{{comment.id}}/0/"> comment </a>
+                    <a target="_blank" href="/bookqa/comment_detail/{{comment.id}}/0/"> view more </a>
+                </td>
+            </tr>
+        </table>
         </td>
     </tr>
     {% endfor %}
 
     <tr>
+        <td></td> <td></td>
         <td>
             {{comment_dict.current_page_show}} / {{comment_dict.total_page}}
             <a href="/bookqa/topic_detail/{{topic.id}}/{{comment_dict.prev_page}}/">Prev</a>

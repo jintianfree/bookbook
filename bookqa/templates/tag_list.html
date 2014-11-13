@@ -1,0 +1,18 @@
+
+{% extends "qa_base.html" %}
+
+{% block content %}
+
+<ul>
+    {% for tag in tag_dict.tags %}
+    <li> {{tag}} x {{tag.topic_set.all.count}} </li>
+    {% endfor %}
+</ul>
+
+{% if tag_dict.total_page %}
+{{tag_dict.current_page_show}} / {{tag_dict.total_page}}
+<a href="/bookqa/tag_list/{{tag_dict.prev_page}}/">Prev</a>
+<a href="/bookqa/tag_list/{{tag_dict.next_page}}/">Next</a>
+{% endif %}
+
+{% endblock %}

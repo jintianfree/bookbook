@@ -56,9 +56,11 @@ def weibo_auth_end(request):
     return response
 
 def weibo_logout(request):
-    client = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)
-    client.set_access_token( request.COOKIES['token'], request.COOKIES['expires_in'])
-    client.account.end_session.get(access_token= request.COOKIES['token'])
+    if 'token' in request.COOKIES and 'expires_in' in request.COOKIES:
+        client = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)
+    
+        client.set_access_token(request.COOKIES['token'], request.COOKIES['expires_in'])
+        client.account.end_session.get(access_token= request.COOKIES['token'])
 
     auth.logout(request)
 

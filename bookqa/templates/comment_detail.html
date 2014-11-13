@@ -1,46 +1,80 @@
 {% extends "qa_base.html" %}
 
 {% block content %}
+<style type="text/css">
 
-<table border="1">
+.qa-voting {
+    color: #555;
+    font-weight:bold;
+    background: none repeat scroll 0% 0% #F1FBFE;
+    border: 1px solid #CDE2ED;
+    border-radius: 2px;
+    float: left;
+    height: 48px;
+    overflow: hidden;
+    margin: 6px 16px 0px 0px;
+    padding: 8px 0px;
+    width: 60px;
+    text-align:center;
+}
+.qa-a-count-none {
+    text-align:center;
+    color: #555;
+    font-weight:bold;
+    background: none repeat scroll 0% 0% #F9FFEC;
+    border: 1px solid #DBE6CB;
+    border-radius: 2px;
+    text-align: center;
+    width: 60px;
+    height: 48px;
+    overflow: hidden;
+    float: left;
+    margin: 6px 16px 0px 0px;
+    padding: 8px 0px;
+}
+</style>
+
+<table border="1" width="100%">
     <tr>
+        <td style="width:50px"> <div class="qa-voting"> answer </div></td>
+        <td style="width:50px"> <div class="qa-a-count-none"> up </div></td>
         <td> {{comment.content}} </td>
-        <td> {{comment.user_name}}</td>
-        <td> {{comment.create_time}}</td>
     </tr>
-</table>
+    <tr>
+        <td></td> <td></td>
+        <td> {{comment.user_name}}{{comment.create_time}}</td>
+    </tr>
 
-{{child_comment_dict}}
-<table border="1">
-            {% for child_comment in child_comment_dict.child_comments.all %}
-     <tr>
+    <tr>
+        <td></td> <td></td>
         <td>
-            {{child_comment.content}}
-            {{child_comment.user_name}}
-            {{child_comment.create_time}}
+            <form action="" method="post">
+                {% csrf_token %}
+                {{form.content.errors}}
+                {{form.content}}
+                <br/>
+                <input type="submit" value="&#x56DE;&#x590D;"></input>
+            </form>
+            
+            <form action="" method="get">
+                <input type="submit" value="cancel"></input>
+            </form>
         </td>
     </tr>
-            {% endfor %}
-<tr>
-<td>
+    {% for child_comment in child_comment_dict.child_comments.all %}
+        <tr> <td></td> <td></td> <td> {{child_comment.content}} </td> </tr>
+        <tr> <td></td> <td></td> <td> {{child_comment.user_name}} {{child_comment.create_time}} </td> </tr>
+    {% endfor %}
+
+    <tr>
+        <td></td> <td></td>
+        <td>
             {{child_comment_dict.current_page_show}} / {{child_comment_dict.total_page}}
             <a href="/bookqa/comment_detail/{{comment.id}}/{{child_comment_dict.prev_page}}/">Prev</a>
             <a href="/bookqa/comment_detail/{{comment.id}}/{{child_comment_dict.next_page}}/">Next</a>
- 
-</td>
-</tr>
+        </td>
+    </tr>
 </table>
  
-<form action="" method="post">
-    {% csrf_token %}
-    {{form.content.errors}}
-    {{form.content}}
-    <br/>
-    <input type="submit" value="&#x56DE;&#x590D;"></input>
-</form>
-<form action="" method="get">
-    <input type="submit" value="cancel"></input>
-</form>
-
 
 {% endblock %}
