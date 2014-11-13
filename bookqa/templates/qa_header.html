@@ -4,6 +4,11 @@
 
 <style type="text/css">
 
+a:link { text-decoration: none;} 
+a:active { text-decoration:blink} 
+a:hover { text-decoration:underline;} 
+a:visited { text-decoration: none;} 
+
 #logo {
     width: 100%;
     margin: 20px auto;
@@ -47,11 +52,11 @@
                     <span>
                         {% if user.is_authenticated %}
                         <img src="http://www.sinaimg.cn/blog/developer/wiki/16x16.png"/>
-                        <a style="font-size: 12px; font-family: Verdana,Arial,Helvetica,sans-serif;" href="">{{user.last_name}} </a>
-                        <a style="font-size: 12px; font-family: Verdana,Arial,Helvetica,sans-serif;" href="/weibo/weibo_logout">&#x9000;&#x51FA;</a>
+                        <a style="font-weight: lighter;font-size: 12px;" href="">{{user.last_name}} </a>
+                        <a style="font-weight: lighter;font-size: 12px;" href="/auth/weibo_logout">&#x9000;&#x51FA;</a>
                         {% else %}
                         <img src="http://www.sinaimg.cn/blog/developer/wiki/LOGO_16x16.png"/>
-                        <a style="font-size: 12px; font-family: Verdana,Arial,Helvetica,sans-serif;" href="/weibo/weibo_login">&#x5FAE;&#x535A;&#x767B;&#x5F55;</a>
+                        <a style="font-weight: lighter;font-size: 12px;" href="/auth/weibo_login">&#x5FAE;&#x535A;&#x767B;&#x5F55;</a>
                         {% endif %}
                     </span>
                 </span>

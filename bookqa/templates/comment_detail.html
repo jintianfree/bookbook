@@ -1,6 +1,31 @@
 {% extends "qa_base.html" %}
 
-{% block content %}
+{% block head %}
+
+<meta charset="utf-8" />
+
+<link rel="stylesheet" href="{{STATIC_URL}}/kindeditor-4.1.10/themes/default/default.css" />
+<script charset="utf-8" src="{{STATIC_URL}}/kindeditor-4.1.10/kindeditor-min.js"></script>
+<script charset="utf-8" src="{{STATIC_URL}}/kindeditor-4.1.10/lang/zh_CN.js"></script>
+
+<script>
+    var editor;
+
+    KindEditor.ready(function(K) {
+        editor = K.create('textarea[name="content"]', {
+            resizeType : 1,
+            allowPreviewEmoticons : false,
+            allowImageUpload : false,
+            items : [
+                'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+        });
+    });
+
+</script>
+
+
 <style type="text/css">
 
 .qa-voting {
@@ -34,19 +59,27 @@
 }
 </style>
 
-<table border="1" width="100%">
+{% endblock %}
+
+{% block content %}
+
+<table border="0" width="100%">
     <tr>
-        <td style="width:50px"> <div class="qa-voting"> answer </div></td>
         <td style="width:50px"> <div class="qa-a-count-none"> up </div></td>
-        <td> {{comment.content}} </td>
-    </tr>
-    <tr>
-        <td></td> <td></td>
-        <td> {{comment.user_name}}{{comment.create_time}}</td>
+        <td> 
+        {% autoescape off %}
+        {{comment.content}} 
+        {% endautoescape %}
+        </td>
     </tr>
 
     <tr>
-        <td></td> <td></td>
+        <td></td> 
+        <td> <span style="float:right;padding-right:150px">{{comment.user_name}}{{comment.create_time}}</span></td>
+    </tr>
+
+    <tr>
+        <td></td>
         <td>
             <form action="" method="post">
                 {% csrf_token %}
@@ -55,23 +88,34 @@
                 <br/>
                 <input type="submit" value="&#x56DE;&#x590D;"></input>
             </form>
-            
-            <form action="" method="get">
-                <input type="submit" value="cancel"></input>
-            </form>
         </td>
     </tr>
+
+    <tr><td colspan="2"><hr/></td></tr>
+
     {% for child_comment in child_comment_dict.child_comments.all %}
-        <tr> <td></td> <td></td> <td> {{child_comment.content}} </td> </tr>
-        <tr> <td></td> <td></td> <td> {{child_comment.user_name}} {{child_comment.create_time}} </td> </tr>
+    <tr> 
+        <td></td> 
+        <td>
+        {% autoescape off %}
+        {{child_comment.content}} 
+        {% endautoescape %}
+        </td>
+    </tr>
+
+    <tr> <td></td> <td> <span style="float:right;padding-right:150px">{{child_comment.user_name}} {{child_comment.create_time}}</span> </td> </tr>
+    
+    <tr><td colspan="2"><br/></td></tr>
     {% endfor %}
 
     <tr>
-        <td></td> <td></td>
+        <td></td>
         <td>
+            <span style="float:right;padding-right:150px">
             {{child_comment_dict.current_page_show}} / {{child_comment_dict.total_page}}
             <a href="/bookqa/comment_detail/{{comment.id}}/{{child_comment_dict.prev_page}}/">Prev</a>
             <a href="/bookqa/comment_detail/{{comment.id}}/{{child_comment_dict.next_page}}/">Next</a>
+            </span>
         </td>
     </tr>
 </table>

@@ -126,7 +126,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'bookbar',
     'bookqa',
-    'weibo',
+    'auth',
 )
 
 # A sample logging configuration. The only tangible logging

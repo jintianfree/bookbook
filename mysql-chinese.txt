@@ -1,0 +1,19 @@
+一、修改mysql安装路径下的/etc/my.ini这个配置文件
+
+ 找到客户端配置[client] 在下面添加
+
+ default-character-set=utf8 默认字符集为utf8
+
+ 在找到[mysqld] 添加
+
+ default-character-set=utf8 默认字符集为utf8
+
+ init_connect='SET NAMES utf8' （设定连接mysql数据库时使用utf8编码，以让mysql数据库为utf8运行）
+
+ 修改好后，重新启动mysql 即可，
+
+二、删除已有的数据表，然后重新创建你的数据表就可以了
+（
+重新建立数据库
+drop database bookbook
+create database bookbook）

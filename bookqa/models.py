@@ -41,6 +41,9 @@ class Comment(models.Model):
 
     create_time    = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ['-create_time']
+
 class Topic(models.Model):
     title       = models.CharField(max_length=512)
     category    = models.ForeignKey('Category')
@@ -57,4 +60,5 @@ class Topic(models.Model):
    
     is_solve    = models.BooleanField()
 
-
+    class Meta:
+        ordering = ['-create_time']

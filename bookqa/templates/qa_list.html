@@ -33,6 +33,7 @@
     margin: 6px 16px 0px 0px;
     padding: 8px 0px;
 }
+
 </style>
 
 <script>
@@ -45,25 +46,26 @@ function change(v) {
 <select name="category_select" onchange="change(this.value)" >
     <option value="0"> --- </option> 
     {% for category in categorys %}
-        <option value="{{category.id}}">{{category}}</option> 
+        <option value="{{category.id}}" {% ifequal category.id category_id %} selected="selected" {% endifequal %} >
+        {{category}}
+        </option> 
     {% endfor %}
 </select> 
 
-<table border="0" style="width:100%">
-
+<table border="0" style="width:90%">
     {% for topic in topic_dict.topics %}
     <tr>
         <td rowspan="3" style="width:50px"> <div class="qa-voting">view </div></td>
         <td rowspan="3" style="width:50px"> <div class="qa-a-count-none"> answer </div></td>
         <!-- <td rowspan="3" style="width:50px"> up / down </td> -->
         
-        <td><a href="/bookqa/qa_list/{{topic.category.id}}/0/"> [{{topic.category}}] </a></td>
-        <td><a href="/bookqa/topic_detail/{{topic.id}}/0/" target="_blank">{{topic.title}}</a> </td>
+        <td class="td_category"><a href="/bookqa/qa_list/{{topic.category.id}}/0/"> [{{topic.category}}] </a></td>
+        <td> <a href="/bookqa/topic_detail/{{topic.id}}/0/" target="_blank">{{topic.title}}</a> </td>
     </tr>
 
-    <tr> <td colspan="2"> {{topic.tag}} </td> </tr>
+    <tr> <td colspan="2"><span> {{topic.tag}} <span></td> </tr>
 
-    <tr> </td></td> <td>{{topic.user_name}} {{topic.create_time}}</td> </tr>
+    <tr> <td colspan="2"><span style="float:right;padding-right:150px"> {{topic.user_name}} {{topic.create_time}} </span></td> </tr>
 
     <tr> <td colspan="4"> <br/><br/><hr/> </td> <tr>
     {% endfor %}
@@ -72,7 +74,7 @@ function change(v) {
 
     <tr>
         <td></td> <td></td> <td></td>
-        <td> 
+        <td style="float:right;padding-right:50px;"> 
             {{topic_dict.current_page_show}} / {{topic_dict.total_page}}
             <a href="/bookqa/qa_list/{{category_id}}/{{topic_dict.prev_page}}/">Prev</a>
             <a href="/bookqa/qa_list/{{category_id}}/{{topic_dict.next_page}}/">Next</a>

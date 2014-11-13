@@ -11,7 +11,7 @@ urlpatterns = patterns('',
 
     url(r'^bookbar/', include('bookbar.urls')),
     url(r'^bookqa/', include('bookqa.urls')),
-    url(r'^weibo/', include('weibo.urls')),
+    url(r'^auth/', include('auth.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

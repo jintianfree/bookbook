@@ -30,7 +30,7 @@ def qa_list(request, category_id, page_num):
         "categorys": Category.objects.all(),
         "topic_dict":
         get_query_set_page_i(topics, "topics", int(page_num), one_page_count),
-        "category_id": category_id
+        "category_id": int(category_id)
     }
 
     return render_to_response('qa_list.html', context, 
@@ -140,7 +140,7 @@ def topic_detail(request, topic_id, comment_page_num):
         return HttpResponse("error: topic does not exist ")
 
     if request.method == 'GET':
-        comments = topic.comment_set.order_by('-up_num')
+        comments = topic.comment_set.all()
         try:
             best_comment = comments.get(is_best=True)
         except Comment.DoesNotExist:
@@ -250,9 +250,4 @@ def tag_list(request, page_num):
 
     return render_to_response('tag_list.html', context, 
         context_instance = RequestContext(request))
-
-def qa_search(request, page_num):
-    topics = Topic.objects.all()
-
-#def user_qa_list(request):
 

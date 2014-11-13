@@ -3,7 +3,7 @@
 APP_KEY='3544153356'
 APP_SECRET='92d5f8347e992155ee6d70592d22f7fc'
 #CALLBACK_URL='bookbook.tk'
-CALLBACK_URL='192.168.222.129/weibo/weibo_auth_end'
+CALLBACK_URL='192.168.222.129/auth/weibo_auth_end'
 
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
@@ -17,6 +17,7 @@ def weibo_login(request):
     client = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)
     url    = client.get_authorize_url()
 
+    
     return HttpResponseRedirect(url)
 
 def weibo_auth_end(request):
