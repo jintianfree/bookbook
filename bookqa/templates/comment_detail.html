@@ -1,0 +1,46 @@
+{% extends "qa_base.html" %}
+
+{% block content %}
+
+<table border="1">
+    <tr>
+        <td> {{comment.content}} </td>
+        <td> {{comment.user_name}}</td>
+        <td> {{comment.create_time}}</td>
+    </tr>
+</table>
+
+{{child_comment_dict}}
+<table border="1">
+            {% for child_comment in child_comment_dict.child_comments.all %}
+     <tr>
+        <td>
+            {{child_comment.content}}
+            {{child_comment.user_name}}
+            {{child_comment.create_time}}
+        </td>
+    </tr>
+            {% endfor %}
+<tr>
+<td>
+            {{child_comment_dict.current_page_show}} / {{child_comment_dict.total_page}}
+            <a href="/bookqa/comment_detail/{{comment.id}}/{{child_comment_dict.prev_page}}/">Prev</a>
+            <a href="/bookqa/comment_detail/{{comment.id}}/{{child_comment_dict.next_page}}/">Next</a>
+ 
+</td>
+</tr>
+</table>
+ 
+<form action="" method="post">
+    {% csrf_token %}
+    {{form.content.errors}}
+    {{form.content}}
+    <br/>
+    <input type="submit" value="&#x56DE;&#x590D;"></input>
+</form>
+<form action="" method="get">
+    <input type="submit" value="cancel"></input>
+</form>
+
+
+{% endblock %}

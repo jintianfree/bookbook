@@ -1,0 +1,90 @@
+
+{% extends "qa_base.html" %}
+{% block content %}
+<style type="text/css">
+
+.qa-voting {
+    color: #555;
+    font-weight:bold;
+    background: none repeat scroll 0% 0% #F1FBFE;
+    border: 1px solid #CDE2ED;
+    border-radius: 2px;
+    float: left;
+    height: 48px;
+    overflow: hidden;
+    margin: 6px 16px 0px 0px;
+    padding: 8px 0px;
+    width: 60px;
+    text-align:center;
+}
+</style>
+
+<table border="0" style="width:100%">
+    <tr>
+        <td colspan="2"> 
+            <a href="">[{{topic.category}}]</a>
+            <h3> <a href="/bookqa/qa_detail/{{topic.id}}/0/">{{topic.title}}</a> </h3>
+        </td>
+    </tr>
+
+    <tr>
+        <td rowspan="3" style="width:70px;position:relative;"> 
+            <div class="qa-voting"> up </div> 
+        </td>
+    </tr>
+
+    <tr> <td> {{topic.content}} </td> </tr>
+
+    <tr> <td>{{topic.user_name}} {{topic.create_time}}</td> </tr>
+</table>
+
+{% if best_comment %}
+<table>
+</table>
+{% endif %}
+
+{{comment_dict}}
+{% if comment_dict.total_page %}
+<table border="1">
+    {% for comment in comment_dict.comments %}
+    <tr>
+        <td> {{comment.content}} </td>
+        <td> {{comment.user_name}}</td>
+        <td> {{comment.create_time}}</td>
+    </tr>
+    <tr>
+        <td>
+            {% for child_comment in comment.comment_set.all %}
+            {{child_comment.content}}
+            {{child_comment.user_name}}
+            {{child_comment.create_time}}
+            {% endfor %}
+            <a href="/bookqa/comment_detail/{{child_comment.id}}/0/"> comment </a>
+            <a href="/bookqa/comment_detail/{{child_comment.id}}/0/"> view more </a>
+        </td>
+    </tr>
+    {% endfor %}
+
+    <tr>
+        <td>
+            {{comment_dict.current_page_show}} / {{comment_dict.total_page}}
+            <a href="/bookqa/topic_detail/{{topic.id}}/{{comment_dict.prev_page}}/">Prev</a>
+            <a href="/bookqa/topic_detail/{{topic.id}}/{{comment_dict.next_page}}/">Next</a>
+        </td>
+    </tr>
+
+</table>
+{% endif %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{form.content.errors}}
+    {{form.content}}
+    <br/>
+    <input type="submit" value="&#x56DE;&#x590D;"></input>
+</form>
+<form action="" method="get">
+    <input type="submit" value="cancel"></input>
+</form>
+
+{% endblock %}

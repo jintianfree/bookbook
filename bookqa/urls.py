@@ -6,8 +6,9 @@ from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('bookqa',
     url(r'^$', 'views.qa_list', name='qa_list'),
-    url(r'^qa_list/$', 'views.qa_list', name='qa_list'),
-    url(r'^qa_detail/(\d+)/$', 'views.qa_detail', name='qa_detail'),
+    url(r'^qa_list/(\d+)/(\d+)/$', 'views.qa_list', name='qa_list'),
+    url(r'^topic_detail/(\d+)/(\d+)/$', 'views.topic_detail', name='topic_detail'),
+    url(r'^comment_detail/(\d+)/(\d+)/$', 'views.comment_detail', name='comment_detail'),
     url(r'^qa_add_question/$', 'views.qa_add_question', name='qa_add_question'),
     #url(r'^sharebook/$', 'views.sharebook', name='sharebook'),
 

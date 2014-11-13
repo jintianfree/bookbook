@@ -1,14 +1,15 @@
 from django import forms
 
-from bookbar.models import Book
-from bookbar.models import BookDownloadURL
-from bookbar.models import Comment
-from bookbar.models import Article
-
 from bookqa.models import Topic
+from bookqa.models import Comment
 
 class TopicForm(forms.ModelForm):
-    book_name = forms.CharField(max_length=40)
+    tag_name = forms.CharField(max_length=40)
     class Meta:
         model  = Topic
-        fields = ('title', 'content')
+        fields = ('title', 'content', 'category')
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model  = Comment
+        fields = ('content', )

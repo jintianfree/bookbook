@@ -2,28 +2,6 @@
 
 {% block content %}
 
-<script>
-function prev_page() {
-    document.getElementById("id_page_num_to_show").value = document.getElementById("id_prev_page_num").value
-}
-
-function next_page() {
-    document.getElementById("id_page_num_to_show").value = document.getElementById("id_next_page_num").value
-}
-
-</script>
-
-<form action="" method="get">
-
-<input type="hidden" name="page_num_to_show" id="id_page_num_to_show"></input>
-<!--
-<input type="text"   name="key_word" value="{{key_word}}"></input> 
-<input type="submit" name="search_question" value="search question"></input> 
-<input type="submit" name="search_answer" value="search answer"></input>
--->
-<input type="hidden" name="prev_page_num" id = "id_prev_page_num"value="{{prev_page}}"></input>
-<input type="hidden" name="next_page_num" id = "id_next_page_num"value="{{next_page}}"></input>
-
 <style type="text/css">
 .qa-voting {
     color: #555;
@@ -58,44 +36,35 @@ function next_page() {
 </style>
 
 <table border="0" style="width:100%">
-    {% for topic in topics %}
 
+    {% for topic in topic_dict.topics %}
     <tr>
-        <td rowspan="2" style="width:50px"> <div class="qa-voting">view </div></td>
-        <td rowspan="2" style="width:50px"> <div class="qa-a-count-none"> answer </div></td>
+        <td rowspan="3" style="width:50px"> <div class="qa-voting">view </div></td>
+        <td rowspan="3" style="width:50px"> <div class="qa-a-count-none"> answer </div></td>
         <!-- <td rowspan="3" style="width:50px"> up / down </td> -->
-        <td colspan="2"> [{{topic.book_name}}] <a href="/bookqa/qa_detail/{{topic.id}}/">{{topic.title}}</a> </td>
+        
+        <td><a href="/bookqa/qa_list/{{topic.category.id}}/0/"> [{{topic.category}}] </a></td>
+        <td><a href="/bookqa/qa_detail/{{topic.id}}/">{{topic.title}}</a> </td>
     </tr>
 
-    <tr>
-        <td>USER: {{topic.user_name}}</td>
-        <td>TIME: {{topic.create_time}}</td>
-    </tr>
+    <tr> <td colspan="2"> {{topic.tag}} </td> </tr>
 
-    <tr>
-        <td colspan="4">
-            <br/><br/><hr/>
-        </td>
-    <tr>
+    <tr> </td></td> <td>{{topic.user_name}} {{topic.create_time}}</td> </tr>
+
+    <tr> <td colspan="4"> <br/><br/><hr/> </td> <tr>
     {% endfor %}
 
+    <tr> <td colspan="4"> <br/><br/> </td> <tr>
+
     <tr>
-        <td colspan="4">
-            <br/><br/>
-        </td>
-    <tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td></td> <td></td> <td></td>
         <td> 
-            {{current_page_show}} / {{total_page}}
-            <input type="submit" name="prev_page_button" value="Prev" onClick="prev_page()"></input>
-            <input type="submit" name="next_page_button" value="Next" onClick="next_page()"></input>
+            {{topic_dict.current_page_show}} / {{topic_dict.total_page}}
+            <a href="/bookqa/qa_list/{{category_id}}/{{topic_dict.prev_page}}/">Prev</a>
+            <a href="/bookqa/qa_list/{{category_id}}/{{topic_dict.next_page}}/">Next</a>
         </td>
     </tr>
 </table>
-</form>
 
 <a href="/bookqa/qa_add_question/"> new question </a>
 
