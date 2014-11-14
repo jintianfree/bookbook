@@ -51,12 +51,22 @@ a:visited { text-decoration: none;}
                     <span><a href="/bookbar/0/">BOOKBAR /</a></span>
                     <span>
                         {% if user.is_authenticated %}
-                        <img src="http://www.sinaimg.cn/blog/developer/wiki/16x16.png"/>
-                        <a style="font-weight: lighter;font-size: 12px;" href="">{{user.last_name}} </a>
-                        <a style="font-weight: lighter;font-size: 12px;" href="/auth/weibo_logout">&#x9000;&#x51FA;</a>
+                            {% ifequal user.first_name "weibo"%}
+                            <img src="http://www.sinaimg.cn/blog/developer/wiki/16x16.png"/>
+                            <a style="font-weight: lighter;font-size: 12px;" href="">{{user.last_name}} </a>
+                            <a style="font-weight: lighter;font-size: 12px;" href="/auth/weibo_logout">&#x9000;&#x51FA;</a>
+                            {% endifequal %}
+
+                            {% ifequal user.first_name "tweibo"%}
+                            <img src="http://mat1.gtimg.com/app/opent/images/wiki/share/16.png"/>
+                            <a style="font-weight: lighter;font-size: 12px;" href="">{{user.last_name}} </a>
+                            <a style="font-weight: lighter;font-size: 12px;" href="/auth/tweibo_logout">&#x9000;&#x51FA;</a>
+                            {% endifequal %}
+              
                         {% else %}
-                        <img src="http://www.sinaimg.cn/blog/developer/wiki/LOGO_16x16.png"/>
-                        <a style="font-weight: lighter;font-size: 12px;" href="/auth/weibo_login">&#x5FAE;&#x535A;&#x767B;&#x5F55;</a>
+                            <a href="/auth/weibo_login"><img src="http://www.sinaimg.cn/blog/developer/wiki/LOGO_16x16.png"  alt="&#x5FAE;&#x535A;&#x767B;&#x5F55;" title= "&#x5FAE;&#x535A;&#x767B;&#x5F55;"/> </a>
+                            <!--<a style="font-weight: lighter;font-size: 12px;" href="/auth/weibo_login">&#x5FAE;&#x535A;&#x767B;&#x5F55;</a>-->
+                            <a href="/auth/tweibo_login"><img src="http://mat1.gtimg.com/app/opent/images/wiki/share/16.png" alt="&#x817E;&#x8BAF;&#x5FAE;&#x535A;&#x767B;&#x5F55;" title= "&#x817E;&#x8BAF;&#x5FAE;&#x535A;&#x767B;&#x5F55;"/> </a>
                         {% endif %}
                     </span>
                 </span>
