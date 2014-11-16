@@ -34,6 +34,40 @@
     padding: 8px 0px;
 }
 
+.qa-tag-link {
+    font-size: 12px;
+    color: #B4B4B4 !important;
+    padding: 5px 13px;
+    margin-bottom: 3px;
+    border: 1px solid #EDEDED;
+    border-radius: 2px;
+    background-color: #FBFBFB;
+    display: inline-block;
+    vertical-align: middle;
+    text-decoration: none !important;
+}
+
+.qa-q-item-meta {
+    color: #999;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 6px;
+}
+
+.qa-q-item-title {
+    letter-spacing:2px;
+    padding-bottom: 3px;
+    color: #235272;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.qa-q-list-item {
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px dotted #CCC;
+}
+
 </style>
 
 <script>
@@ -59,21 +93,33 @@ function change(v) {
         <td rowspan="3" style="width:50px"> <div class="qa-a-count-none"> answer </div></td>
         <!-- <td rowspan="3" style="width:50px"> up / down </td> -->
         
-        <td class="td_category"><a href="/bookqa/qa_list/{{topic.category.id}}/0/"> [{{topic.category}}] </a></td>
-        <td> <a href="/bookqa/topic_detail/{{topic.id}}/0/" target="_blank">{{topic.title}}</a> </td>
+        <td> 
+        <span class="qa-q-item-title"  title="{{topic.content}}">
+        <a href="/bookqa/topic_detail/{{topic.id}}/0/" target="_blank"> {{topic.title}}</a>
+        </span> 
+        </td>
     </tr>
 
-    <tr> <td colspan="2"><span> {{topic.tag}} <span></td> </tr>
+    <tr> 
+        <td colspan="1">
+        <span class="qa-q-item-meta">  
+           &#x65F6;&#x95F4;: &nbsp;{{topic.create_time|date:"Y-m-d H:i"}} 
+           &nbsp;&nbsp;&nbsp;&#x5206;&#x7C7B;: &nbsp;<a href="/bookqa/qa_list/{{topic.category.id}}/0/"> [{{topic.category}}] </a>
+           &nbsp;&nbsp;&nbsp;&#x4F5C;&#x8005;: &nbsp;{{topic.user_name}}
+        </span> 
+        </td> 
+    </tr>
 
-    <tr> <td colspan="2"><span style="float:right;padding-right:150px"> {{topic.user_name}} {{topic.create_time}} </span></td> </tr>
+    <tr> <td colspan="0"><span class="qa-tag-link"> {{topic.tag}} <span></td> </tr>
 
-    <tr> <td colspan="4"> <br/><br/><hr/> </td> <tr>
+    <tr><td colspan="3"><div class="qa-q-list-item"> </div> </td></tr>
+   <!-- <tr> <td colspan="3"> <br/><br/><hr/> </td> <tr> -->
     {% endfor %}
 
-    <tr> <td colspan="4"> <br/><br/> </td> <tr>
+    <tr> <td colspan="3"> <br/><br/> </td> <tr>
 
     <tr>
-        <td></td> <td></td> <td></td>
+        <td></td> <td></td> 
         <td style="float:right;padding-right:50px;"> 
             {{topic_dict.current_page_show}} / {{topic_dict.total_page}}
             <a href="/bookqa/qa_list/{{category_id}}/{{topic_dict.prev_page}}/">Prev</a>

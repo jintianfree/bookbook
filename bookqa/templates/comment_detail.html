@@ -57,6 +57,14 @@
     margin: 6px 16px 0px 0px;
     padding: 8px 0px;
 }
+.qa-q-item-meta {
+    color: #999;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 6px;
+}
+
+
 </style>
 
 {% endblock %}
@@ -65,7 +73,12 @@
 
 <table border="0" width="100%">
     <tr>
-        <td style="width:50px"> <div class="qa-a-count-none"> up </div></td>
+        <td style="width:50px;height:100%"> 
+        <table border="0" style="height:100%">
+            <tr><td> <div class="qa-a-count-none"> up </div> </td></tr>
+            <tr><td style="height:100%;"></td></tr>
+        </table>
+        </td>
         <td> 
         {% autoescape off %}
         {{comment.content}} 
@@ -75,7 +88,13 @@
 
     <tr>
         <td></td> 
-        <td> <span style="float:right;padding-right:150px">{{comment.user_name}}{{comment.create_time}}</span></td>
+        <td> 
+           <span class="qa-q-item-meta" style="float:right">
+              &#x65F6;&#x95F4;: &nbsp;{{comment.create_time|date:"Y-m-d H:i"}} 
+              &nbsp;&nbsp;&nbsp;&#x4F5C;&#x8005;: &nbsp;{{comment.user_name}}
+           </span>
+<!-- <span style="float:right;padding-right:150px">{{comment.user_name}}{{comment.create_time}}</span> -->
+        </td> 
     </tr>
 
     <tr>
@@ -103,7 +122,15 @@
         </td>
     </tr>
 
-    <tr> <td></td> <td> <span style="float:right;padding-right:150px">{{child_comment.user_name}} {{child_comment.create_time}}</span> </td> </tr>
+    <tr> 
+        <td></td> 
+        <td>
+           <span class="qa-q-item-meta" style="float:right">
+              &#x65F6;&#x95F4;: &nbsp;{{child_comment.create_time|date:"Y-m-d H:i"}} 
+              &nbsp;&nbsp;&nbsp;&#x4F5C;&#x8005;: &nbsp;{{child_comment.user_name}}
+           </span>
+        </td>
+    </tr>
     
     <tr><td colspan="2"><br/></td></tr>
     {% endfor %}

@@ -27,7 +27,6 @@
 
 
 <style type="text/css">
-
 .qa-voting {
     color: #555;
     font-weight:bold;
@@ -42,6 +41,7 @@
     width: 60px;
     text-align:center;
 }
+
 .qa-a-count-none {
     text-align:center;
     color: #555;
@@ -57,28 +57,85 @@
     margin: 6px 16px 0px 0px;
     padding: 8px 0px;
 }
+
+.qa-tag-link {
+    font-size: 12px;
+    color: #B4B4B4 !important;
+    padding: 5px 13px;
+    margin-bottom: 3px;
+    border: 1px solid #EDEDED;
+    border-radius: 2px;
+    background-color: #FBFBFB;
+    display: inline-block;
+    vertical-align: middle;
+    text-decoration: none !important;
+}
+
+.qa-q-item-meta {
+    color: #999;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 6px;
+}
+
+.qa-q-item-title {
+    letter-spacing:2px;
+    padding-bottom: 3px;
+    color: #235272;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.qa-q-list-item {
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px dotted #CCC;
+}
+
+.qa-top-tags-h1 {
+    padding: 10px 0px 10px 9px;
+    border: 1px solid #EDEDED;
+    background: none repeat scroll 0% 0% #F9F9F9;
+    color: #333;
+    font-size: 14px;
+}
 </style>
+
+
 {% endblock %}
 
 {% block content %}
 <table border="0" style="width:90%">
-    <tr>
-        <td rowspan="4" style="width:50px"> <div class="qa-voting"> answer </div></td>
-        <td class="td_category"><a href="/bookqa/qa_list/{{topic.category.id}}/0/"> [{{topic.category}}] </a></td>
-        <td><a href="/bookqa/topic_detail/{{topic.id}}/0/">{{topic.title}}</a> </td>
+    <tr> 
+        <td colspan="2">
+        <div class="qa-top-tags-h1"> <a href="/bookqa/topic_detail/{{topic.id}}/0/">{{topic.title}}</a> </div>
+        </td>
     </tr>
 
-    <tr> <td colspan="2"> {{topic.tag}} </td> </tr>
-
-    <tr> 
-        <td colspan="2"> 
+    <tr>
+        <td style="width:50px;height:100%;"  rowspan="4"> 
+        <table border="0" style="height:100%">
+            <tr><td> <div class="qa-voting"> answer </div></td> </tr></td>
+            <tr><td style="height:100%;"></td></tr>
+        </table>
+        <td>
         {% autoescape off %}
         {{topic.content}} 
         {% endautoescape %}
+       </td>
+    </tr>
+
+    <tr> 
+        <td colspan="1">
+        <span class="qa-q-item-meta">  
+           &#x65F6;&#x95F4;: &nbsp;{{topic.create_time|date:"Y-m-d H:i"}} 
+           &nbsp;&nbsp;&nbsp;&#x5206;&#x7C7B;: &nbsp;<a href="/bookqa/qa_list/{{topic.category.id}}/0/"> [{{topic.category}}] </a>
+           &nbsp;&nbsp;&nbsp;&#x4F5C;&#x8005;: &nbsp;{{topic.user_name}}
+        </span> 
         </td> 
     </tr>
 
-    <tr> <td colspan="2"> <span style="float:right; padding-right:150px">{{topic.user_name}} {{topic.create_time}} </span></td> </tr>
+    <tr> <td colspan="0"><span class="qa-tag-link"> {{topic.tag}} <span></td> </tr>
 </table>
 
 {% if best_comment %}
@@ -92,7 +149,12 @@
 <table border="0" width="90%">
     {% for comment in comment_dict.comments %}
     <tr>
-        <td style="width:50px"> <div class="qa-a-count-none"> up </div></td>
+        <td style="width:50px;height:100%"> 
+        <table border="0" style="height:100%">
+            <tr><td> <div class="qa-a-count-none"> up </div> </td></tr>
+            <tr><td style="height:100%;"></td></tr>
+        </table>
+        </td>
         <td>
         {% autoescape off %}
         {{comment.content}} 
@@ -102,7 +164,12 @@
 
     <tr>
         <td></td>
-        <td><span style="float:right;padding-right:150px"> {{comment.user_name}}{{comment.create_time}} </span></td>
+        <td> 
+           <span class="qa-q-item-meta">
+              &#x65F6;&#x95F4;: &nbsp;{{comment.create_time|date:"Y-m-d H:i"}} 
+              &nbsp;&nbsp;&nbsp;&#x4F5C;&#x8005;: &nbsp;{{comment.user_name}}
+           </span>
+        </td> 
     </tr>
 
     <tr>
@@ -119,12 +186,19 @@
                    </span>
                </td> 
             </tr>
-            <tr> <td> <span style="font-size:11px">{{child_comment.user_name}} {{child_comment.create_time}} </span></td> </tr>
+            <tr> 
+                <td> 
+                    <span class="qa-q-item-meta">
+                       &#x65F6;&#x95F4;: &nbsp;{{child_comment.create_time|date:"Y-m-d H:i"}} 
+                       &nbsp;&nbsp;&nbsp;&#x4F5C;&#x8005;: &nbsp;{{child_comment.user_name}}
+                   </span>
+               </td> 
+           </tr>
             {% endfor %}
 
             <tr>
                 <td>
-                    <span style="float:right;padding-right:150px;font-size:11px">
+                    <span style="font-size:11px">
                     <a target="_blank" href="/bookqa/comment_detail/{{comment.id}}/0/"> &#x56DE;&#x590D; </a>
                     {% if comment.comment_set.all.count %}
                     <a target="_blank" href="/bookqa/comment_detail/{{comment.id}}/0/"> &#x66F4;&#x591A; </a>
@@ -135,6 +209,8 @@
         </table>
         </td>
     </tr>
+
+    <tr><td colspan="2"><div class="qa-q-list-item"> </div> </td></tr>
     {% endfor %}
 
     <tr>
