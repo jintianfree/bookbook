@@ -46,7 +46,7 @@ def weibo_auth_end(request):
 
     show=client.users.show.get(access_token=access_token, uid=uid)
 
-    username   = str(uid)
+    username   = 'w' + str(uid)
     password   = 'weibo'
     first_name = 'weibo'
     last_name  = show['screen_name']
@@ -112,7 +112,7 @@ def tweibo_auth_end(request):
     api = API(oauth)
     info = api.get.user__info(format="json")
 
-    username = info.data.name
+    username = 't' + info.data.name
     password = 'tweibo'
     first_name = 'tweibo'
     last_name = info.data.nick
@@ -130,10 +130,51 @@ def tweibo_auth_end(request):
     return response
 
 def tweibo_logout(request):
-    #if 'access_token' in request.COOKIES and 'openid' in request.COOKIES:
     # TODO: logout tweibo
 
     auth.logout(request)
 
     response = HttpResponseRedirect("/")
     return response
+
+def qq_call_back(request):
+    return HttpResponse(
+'''
+<script type="text/javascript"
+src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" charset="utf-8" data-callback="true"></script>
+'''
+)
+
+def qq_auth_end(request):
+    username = 'q' + request.GET['name'] 
+    password = 'qq'
+    first_name = 'qq'
+    last_name  = request.GET['nick']
+
+    user = auth.authenticate(username=username, password=password)
+    if user is None:
+        user = User.objects.create_user(username=username, password=password)
+        user.first_name = first_name
+        user.last_name  = last_name
+        user.save()
+
+    user = auth.authenticate(username=username, password=password)
+    auth.login(request, user)
+
+    response = HttpResponseRedirect("/")
+
+    return response
+
+def qq_logout(request):
+    auth.logout(request)
+
+    return HttpResponse(
+'''
+<script>
+QC.Login.signOut()
+window.location.href=\"/\"
+</script>
+'''
+)
+
+

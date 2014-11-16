@@ -46,7 +46,7 @@
                     <span><a href="/bookbar/articlelist/0/0/">&#x6587;&#x7AE0; /</a></span><!-- wen zhang -->
                     <span><a href="/bookqa">BOOKQA /</a></span><!-- wen zhang -->
                     <span>
-                        {% if user.is_authenticated %}
+                        <!-- {% if user.is_authenticated %}
                             {% ifequal user.first_name "weibo"%}
                             <img src="http://www.sinaimg.cn/blog/developer/wiki/16x16.png"/>
                             <a style="font-weight: lighter;font-size: 12px;" href="">{{user.last_name}} </a>
@@ -61,9 +61,10 @@
               
                         {% else %}
                             <a href="/auth/weibo_login"><img src="http://www.sinaimg.cn/blog/developer/wiki/LOGO_16x16.png"  alt="&#x5FAE;&#x535A;&#x767B;&#x5F55;" title= "&#x5FAE;&#x535A;&#x767B;&#x5F55;"/> </a>
-                            <!--<a style="font-weight: lighter;font-size: 12px;" href="/auth/weibo_login">&#x5FAE;&#x535A;&#x767B;&#x5F55;</a>-->
                             <a href="/auth/tweibo_login"><img src="http://mat1.gtimg.com/app/opent/images/wiki/share/16.png" alt="&#x817E;&#x8BAF;&#x5FAE;&#x535A;&#x767B;&#x5F55;" title= "&#x817E;&#x8BAF;&#x5FAE;&#x535A;&#x767B;&#x5F55;"/> </a>
                         {% endif %}
+                       -->
+                        {% include 'login.html' %}
                     </span>
                 </span>
             </td>

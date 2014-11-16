@@ -11,4 +11,7 @@ urlpatterns = patterns('auth',
     url(r'^tweibo_login$', 'views.tweibo_login', name='tweibo_login'),
     url(r'^tweibo_auth_end$', 'views.tweibo_auth_end', name='tweibo_auth_end'),
     url(r'^tweibo_logout$', 'views.tweibo_logout', name='tweibo_logout'),
+    url(r'^qq_auth_end$', 'views.qq_auth_end', name='qq_auth_end'),
+    url(r'^qq_logout$', 'views.qq_logout', name='qq_logout'),
+    url(r'^qq_call_back$', 'views.qq_call_back', name='qq_call_back'),
 )

@@ -1,0 +1,31 @@
+
+
+<script type="text/javascript"
+src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" charset="utf-8" data-callback="true"></script>
+
+
+<script type="text/javascript">
+
+var paras = {};
+
+
+QC.api("get_info", paras)
+
+	.success(function(s){
+		s.data.name
+		s.data.nickname);
+ 
+        var url = "/auth/qq_auth_end?name=" + s.data.name + ";nick=" + s.data.nickname + ";"
+
+        window.location.href=url
+	})
+
+	.error(function(f){
+	
+		
+	})
+	
+	.complete(function(c){
+		
+	});
+</script>
