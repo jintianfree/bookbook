@@ -228,7 +228,6 @@ def addarticleend(request, article_id, related_page_index, find_page_index):
     else:
         return addarticleend_post(request, article_id, related_page_index, find_page_index)
 
-
 def articledetail(request, article_id, book_page_index, comment_page_index):
     if not Article.objects.filter(id=article_id).count > 0:
         return HttpResponse("error")
@@ -276,7 +275,6 @@ def articledetail(request, article_id, book_page_index, comment_page_index):
             return render_to_response('articledetail.html', 
                 context,
                 context_instance = RequestContext(request))
- 
 
 def articlelist(request, category, pageindex):
     article_num_one_page = 10
@@ -290,60 +288,6 @@ def articlelist(request, category, pageindex):
     return render_to_response('articlelist.html',
         context,
         context_instance = RequestContext(request))
-
-
-
-            
-'''
-def addarticleend_(request, article_id):
-    if not Article.objects.filter(id=article_id).count > 0:
-        return HttpResponse("error")
-
-    # GET
-    if request.method == 'GET':
-        article = Article.objects.filter(id=article_id)[0]
-    
-        related_books = []
-        booknames = article.bookname.split(';')
-    
-        for bookname in booknames:
-           all_books = Book.objects.filter(title__icontains=bookname).all()
-
-           books = []
-           for book in all_books:
-               if book not in article.book.all():
-                   books.append(book)
-    
-           if(len(books) > 5):
-               books = books[:5]
-           if (len(related_books) < 50):
-               related_books.extend(books)
-    
-        context = {
-            'maped_book_num':article.book.count(),
-            'maped_books':article.book.all(),
-            'related_books':related_books,
-            'related_book_num': len(related_books),
-            'bookform':BookForm(),
-        }
-        
-        return render_to_response('addarticleend.html',
-            context,
-            context_instance=RequestContext(request))
-    
-    # POST
-    if request.POST['submit_type'] == 'map_related_book':
-        book_id = int(request.POST['submit_value'].split('_')[0])
-        book = Book.objects.filter(id=book_id)[0]
-        article = Article.objects.filter(id=article_id)[0]
-        article.book.add(book)
-        article.save()
- 
-        return HttpResponseRedirect('/bookbar/addarticleend/' + article_id)
-
-    if request.POST['submit_type'] == 'add_new_and_map':
-        bookform = BookForm(request.POST)
-'''
 
 def addbook(request):
     # GET
@@ -825,46 +769,8 @@ def downloadurldetail(request, url_id, page_index):
             context_instance = RequestContext(request))
  
 def addadvice(request, pageindex):
-    if WebSite.objects.count() == 0:
-        return HttpResponse("error")
-
-    website = WebSite.objects.all()[0]
-
-    if request.method == 'GET':
-        context = {'commentform':CommentForm()}
-    else:
-        commentform = CommentForm(request.POST) 
-
-        if commentform.is_valid():
-
-            # TODO: only support anonymous now
-            anonymous = User.objects.filter(name = "anonymous")
-            if anonymous.count() == 0:
-                user = User(name="anonymous", password="password")
-                user.save()
-            else:
-                user = anonymous[0]
-
-            comment = Comment()
-            comment.content = commentform.cleaned_data['content']
-            comment.user_name = request.META['REMOTE_ADDR'] # TODO:
-            comment.user = user
-            comment.save()
-
-            website.comment.add(comment)
-            website.save()
-
-            context = {'commentform':CommentForm(), 'msg_ok': 'add successfully ' }
-        else:
-            context = {'commentform':commentform}
-
-    one_page_count = 10
-    comment_dict = get_query_set_page_i(website.comment.all(), "comments", int(pageindex), one_page_count)
-
-    context.update(comment_dict)
-
     return render_to_response('advice.html', 
-        context,
+        {},
         context_instance = RequestContext(request))           
  
 def sharebook(request):

@@ -1,36 +1,22 @@
 
-
+<link href='http://www.youziku.com/webfont/CSS/0fbcc2a6128b693fa3e1806818a8d678' rel='stylesheet' type='text/css'/>
 <style type="text/css">
 
-#logo {
-    width: 100%;
-    margin: 20px auto;
-}
-
-#logo h1 a {
+#title {
+    font-family:jdzhonyuanjian86524;
     font-weight: bold;
-    font-size: 35px;
+    font-size: 40px;
     color: #000;
     letter-spacing: 3px;
 }
 
-#tags {
-    padding-left:60%;
-    color: #999;
-    font-size: 13px;
-    font-weight: bold;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-}
-
 </style>
- 
-<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=3544153356" type="text/javascript" charset="utf-8"></script>
 
-<div id="logo">
+<div>
     <table border="0">
         <tr>
             <td>
-                <h1 style="display:inline;"><a href="/bookbar/0">BOOKBAR</a> </h1>
+                <a href="/"><h1 id="title">&#x540C;&#x4E00;&#x672C;&#x4E66;</h1></a> 
             </td>
             <td style="width:200px">
                 <script type="text/javascript">document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E%3Cscript charset="utf-8" src="http://rp.baidu.com/rp3w/3w.js?sid=16632368784966857390') + '&t=' + (Math.ceil(new Date()/3600000)) + unescape('"%3E%3C/script%3E'));</script>
@@ -38,35 +24,13 @@
         </tr>
 
         <tr>
-            <td colspan="2" style="width:800px;padding-top:20px;">
-                <span id="tags">
-                    <span><a href="/bookbar/0">&#x9996;&#x9875; /</a></span> <!-- shou ye  -->
-                    <span><a href="/bookbar/booksmalllist/0">&#x56FE;&#x4E66; /</a></span><!-- tu shu -->
-                    <span><a href="/bookbar/downloadurlalllist/0/0/">&#x4E0B;&#x8F7D; /</a> </span><!-- xia zai -->
-                    <span><a href="/bookbar/articlelist/0/0/">&#x6587;&#x7AE0; /</a></span><!-- wen zhang -->
-                    <span><a href="/bookqa">BOOKQA /</a></span><!-- wen zhang -->
-                    <span>
-                        <!-- {% if user.is_authenticated %}
-                            {% ifequal user.first_name "weibo"%}
-                            <img src="http://www.sinaimg.cn/blog/developer/wiki/16x16.png"/>
-                            <a style="font-weight: lighter;font-size: 12px;" href="">{{user.last_name}} </a>
-                            <a style="font-weight: lighter;font-size: 12px;" href="/auth/weibo_logout">&#x9000;&#x51FA;</a>
-                            {% endifequal %}
-
-                            {% ifequal user.first_name "tweibo"%}
-                            <img src="http://mat1.gtimg.com/app/opent/images/wiki/share/16.png" />
-                            <a style="font-weight: lighter;font-size: 12px;" href="">{{user.last_name}} </a>
-                            <a style="font-weight: lighter;font-size: 12px;" href="/auth/tweibo_logout">&#x9000;&#x51FA;</a>
-                            {% endifequal %}
-              
-                        {% else %}
-                            <a href="/auth/weibo_login"><img src="http://www.sinaimg.cn/blog/developer/wiki/LOGO_16x16.png"  alt="&#x5FAE;&#x535A;&#x767B;&#x5F55;" title= "&#x5FAE;&#x535A;&#x767B;&#x5F55;"/> </a>
-                            <a href="/auth/tweibo_login"><img src="http://mat1.gtimg.com/app/opent/images/wiki/share/16.png" alt="&#x817E;&#x8BAF;&#x5FAE;&#x535A;&#x767B;&#x5F55;" title= "&#x817E;&#x8BAF;&#x5FAE;&#x535A;&#x767B;&#x5F55;"/> </a>
-                        {% endif %}
-                       -->
-                        {% include 'login.html' %}
-                    </span>
-                </span>
+            <td colspan="2" style="width:800px;padding-top:20px;font-size:14px;">
+                    <span><a href="/bookbar/0">&#x9996;&#x9875; </a></span> <!-- shou ye  -->
+                    <span><a href="/bookbar/booksmalllist/0">&#x56FE;&#x4E66; </a></span><!-- tu shu -->
+                    <span><a href="/bookbar/downloadurlalllist/0/0/">&#x4E0B;&#x8F7D; </a> </span><!-- xia zai -->
+                    <span><a href="/bookbar/articlelist/0/0/">&#x6587;&#x7AE0; </a></span><!-- wen zhang -->
+                    <span><a href="/bookqa">QA </a></span>
+                    <span style="float:right;padding-right:40px;"> {% include 'login.html' %} </span>
             </td>
         </tr>
     </table>

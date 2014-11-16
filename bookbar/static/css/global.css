@@ -1,8 +1,20 @@
 
-body {
+html{
+background: #333;
+}
+
+body{
+    width: 90%;
+    min-width:950px;
+    max-width:950px;
+    margin: 10px auto;
+    color: #444;
+    background: #fff;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
     font-size: 12px;
     font-family: Verdana,Arial,Helvetica,sans-serif;
-    margin: 0px;
     padding: 0px;
 }
 

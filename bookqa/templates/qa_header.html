@@ -2,6 +2,8 @@
 <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=3544153356" type="text/javascript" charset="utf-8"></script>
 
 
+<link href='http://www.youziku.com/webfont/NameCSS/46721' rel='stylesheet' type='text/css'/>
+
 <style type="text/css">
 
 a:link { text-decoration: none;} 
@@ -9,33 +11,22 @@ a:active { text-decoration:blink}
 a:hover { text-decoration:underline;} 
 a:visited { text-decoration: none;} 
 
-#logo {
-    width: 100%;
-    margin: 20px auto;
-}
-
-#logo h1 a {
+#title {
+    font-family:Regencie46188;
     font-weight: bold;
-    font-size: 35px;
+    font-size: 40px;
     color: #000;
-    letter-spacing: 3px;
-}
-
-#tags {
-    padding-left:60%;
-    color: #999;
-    font-size: 13px;
-    font-weight: bold;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    letter-spacing: 10px;
 }
 
 </style>
 
-<div id="logo">
+
+<div>
     <table border="0">
         <tr>
             <td>
-                <h1 style="display:inline;"><a href="/bookqa">BOOKQA</a> </h1>
+                <a href="/bookqa"> <h1 id="title"> QA </h1> </a>
             </td>
             <td style="width:200px">
                 <script type="text/javascript">document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E%3Cscript charset="utf-8" src="http://rp.baidu.com/rp3w/3w.js?sid=16632368784966857390') + '&t=' + (Math.ceil(new Date()/3600000)) + unescape('"%3E%3C/script%3E'));</script>
@@ -43,37 +34,34 @@ a:visited { text-decoration: none;}
         </tr>
 
         <tr>
-            <td colspan="2" style="width:800px;padding-top:20px;">
-                <span id="tags">
-                    <span><a href="/bookqa/qa_list/0/0/">&#x9996;&#x9875; /</a></span>
-                    <span><a href="/bookqa/qa_add_question/">&#x63D0;&#x95EE; /</a> </span>
-                    <span><a href="">&#x56FE;&#x4E66; /</a></span>
-                    <span><a href="/bookbar/0/">BOOKBAR /</a></span>
-                    <span>
-                        {% if user.is_authenticated %}
-                            {% ifequal user.first_name "weibo"%}
-                            <img src="http://www.sinaimg.cn/blog/developer/wiki/16x16.png"/>
-                            <a style="font-weight: lighter;font-size: 12px;" href="">{{user.last_name}} </a>
-                            <a style="font-weight: lighter;font-size: 12px;" href="/auth/weibo_logout">&#x9000;&#x51FA;</a>
-                            {% endifequal %}
-
-                            {% ifequal user.first_name "tweibo"%}
-                            <img src="http://mat1.gtimg.com/app/opent/images/wiki/share/16.png"/>
-                            <a style="font-weight: lighter;font-size: 12px;" href="">{{user.last_name}} </a>
-                            <a style="font-weight: lighter;font-size: 12px;" href="/auth/tweibo_logout">&#x9000;&#x51FA;</a>
-                            {% endifequal %}
-              
-                        {% else %}
-                            <a href="/auth/weibo_login"><img src="http://www.sinaimg.cn/blog/developer/wiki/LOGO_16x16.png"  alt="&#x5FAE;&#x535A;&#x767B;&#x5F55;" title= "&#x5FAE;&#x535A;&#x767B;&#x5F55;"/> </a>
-                            <!--<a style="font-weight: lighter;font-size: 12px;" href="/auth/weibo_login">&#x5FAE;&#x535A;&#x767B;&#x5F55;</a>-->
-                            <a href="/auth/tweibo_login"><img src="http://mat1.gtimg.com/app/opent/images/wiki/share/16.png" alt="&#x817E;&#x8BAF;&#x5FAE;&#x535A;&#x767B;&#x5F55;" title= "&#x817E;&#x8BAF;&#x5FAE;&#x535A;&#x767B;&#x5F55;"/> </a>
-                        {% endif %}
-                    </span>
+            <td colspan="2" style="width:800px;padding-top:20px;font-size:14px;">
+                <span>
+                    <span><a href="/bookqa/qa_list/0/0/">&#x9996;&#x9875; </a></span>
+                    <span><a href="/bookqa/qa_add_question/">&#x63D0;&#x95EE; </a> </span>
+                    <span><a href="">&#x6807;&#x7B7E; </a></span>
+                    <span><a href="/bookbar/0/">&#x597D;&#x4E66;&#x63A8;&#x8350; </a></span>
+                    <span style="float:right;padding-right:40px;"> {% include 'login.html' %} </span>
                 </span>
             </td>
         </tr>
     </table>
     <br/>
     <hr/>
+    
+
+<link href='{{STATIC_URL}}/css/nav.css' rel='stylesheet' type='text/css'/>
+
+<ul id="breadcrumbs-one">
+<li><a href="">N1</a></li>
+<li><a href="">N2</a></li>
+<li><a href="">N3</a></li>
+<li><a href="">N4</a></li>
+<li><a href="">N5</a></li>
+<li><a href="">N6</a></li>
+<li><a href="" class="current">Current</a></li>
+</ul>
+
+
 </div>
+
 

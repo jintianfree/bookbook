@@ -1,9 +1,13 @@
 # Create your views here.
 
-APP_KEY='3544153356'
-APP_SECRET='92d5f8347e992155ee6d70592d22f7fc'
-#CALLBACK_URL='bookbook.tk'
-CALLBACK_URL='192.168.222.129/auth/weibo_auth_end'
+weibo_app_key='3544153356'
+weibo_app_secret='92d5f8347e992155ee6d70592d22f7fc'
+weibo_call_back='bookbook.tk/auth/weibo_auth_end'
+
+tweibo_app_key = '801550933'
+tweibo_app_secret = '86ead0c79aaabe5f31e3015e2d2280f8'
+tweibo_call_back = 'bookbook.tk/auth/tweibo_auth_end'
+
 
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
@@ -22,14 +26,14 @@ reload(sys)
 sys.setdefaultencoding('utf8')
 
 def weibo_login(request):
-    client = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)
+    client = APIClient(app_key=weibo_app_key, app_secret=weibo_app_secret, redirect_uri=weibo_call_back)
     url    = client.get_authorize_url()
 
     return HttpResponseRedirect(url)
 
 def weibo_auth_end(request):
     code   = request.GET['code']
-    client = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)
+    client = APIClient(app_key=weibo_app_key, app_secret=weibo_app_secret, redirect_uri=weibo_call_back)
     r      = client.request_access_token(code)
 
     uid          = r.uid
@@ -65,7 +69,7 @@ def weibo_auth_end(request):
 
 def weibo_logout(request):
     if 'token' in request.COOKIES and 'expires_in' in request.COOKIES:
-        client = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)
+        client = APIClient(app_key=weibo_app_key, app_secret=weibo_app_secret, redirect_uri=weibo_call_back)
     
         client.set_access_token(request.COOKIES['token'], request.COOKIES['expires_in'])
         client.account.end_session.get(access_token= request.COOKIES['token'])
@@ -78,11 +82,7 @@ def weibo_logout(request):
 def tweibo_login(request):
     oauth = OAuth2Handler()
 
-    app_key = '801550933'
-    app_secret = '86ead0c79aaabe5f31e3015e2d2280f8'
-    callback_url = 'http://192.168.222.129/auth/tweibo_auth_end'
-
-    oauth.set_app_key_secret(app_key, app_secret, callback_url)
+    oauth.set_app_key_secret(tweibo_app_key, tweibo_app_secret, tweibo_call_back)
     url = oauth.get_access_token_url()
 
     return HttpResponseRedirect(url)
@@ -96,12 +96,8 @@ def tweibo_auth_end(request):
     access_token = request.GET['access_token']
     openid = request.GET['openid']
 
-    app_key = '801550933'
-    app_secret = '86ead0c79aaabe5f31e3015e2d2280f8'
-    callback_url = 'http://192.168.222.129/auth_tweibo_auth_end'
-
     oauth = OAuth2Handler()
-    oauth.set_app_key_secret(app_key, app_secret, callback_url)
+    oauth.set_app_key_secret(tweibo_app_key, tweibo_app_secret, tweibo_call_back)
     oauth.set_access_token(access_token)
     oauth.set_openid(openid)
 
