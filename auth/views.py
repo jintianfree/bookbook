@@ -171,7 +171,8 @@ def qq_logout(request):
     return HttpResponse(
 '''
 <script>
-QC.Login.signOut()
+QC.Login.signOut();
+alert('logout');
 window.location.href=\"/\"
 </script>
 '''
