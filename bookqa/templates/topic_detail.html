@@ -115,7 +115,7 @@
     <tr>
         <td style="width:50px;height:100%;"  rowspan="4"> 
         <table border="0" style="height:100%">
-            <tr><td> <div class="qa-voting"> answer </div></td> </tr></td>
+            <tr><td> <div class="qa-voting"> {{topic.comment_set.count}} </div></td> </tr></td>
             <tr><td style="height:100%;"></td></tr>
         </table>
         <td>
@@ -151,7 +151,7 @@
     <tr>
         <td style="width:50px;height:100%"> 
         <table border="0" style="height:100%">
-            <tr><td> <div class="qa-a-count-none"> up </div> </td></tr>
+            <tr><td> <div class="qa-a-count-none"> {{comment.up_num}} </div> </td></tr>
             <tr><td style="height:100%;"></td></tr>
         </table>
         </td>

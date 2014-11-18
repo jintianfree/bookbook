@@ -60,7 +60,9 @@
          <td><li></li></td>
          <td class="td_category"> [{{article.category}}]</td>
          <td class="td_title"> 
+             <span title="{{article.content|striptags}}"> 
              <a href="/bookbar/articledetail/{{article.id}}/0/0/">{{article.title|slice:"30"}}</a>
+             </span>
          </td>
          <td class="td_user">{{article.user_name|slice:"15"}}</td>
          <td class="td_time">{{article.create_time|date:"m-d i:s"}}</td>
@@ -118,7 +120,9 @@
          <td><li></li></td>
          <td class="td_category"> [{{article.category}}]</td>
          <td class="td_title">
+             <span title="{{article.content|striptags}}"> 
              <a href="/bookbar/articledetail/{{article.id}}/0/0/">{{article.title|slice:"30"}}</a>
+             </span>
          </td>
          <td class="td_user">{{article.user_name|slice:"15"}}</td>
          <td class="td_time">{{article.create_time|date:"m-d H:i"}}</td>
