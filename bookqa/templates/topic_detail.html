@@ -99,7 +99,43 @@
     color: #333;
     font-size: 14px;
 }
+
 </style>
+
+<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+function toggle_comment(obj) {
+    obj_id = parseInt(obj.id)
+    var content="comment_"  + obj_id.toString()
+    var content_thumb="comment_thumb_" + obj_id.toString()
+
+    if($('#' + content).is(":hidden")) {
+        obj.innerHTML = "\u6536\u8D77"
+    } else {
+        obj.innerHTML = "\u5C55\u5F00"
+    }
+
+    //obj.value = ($('#' + content).is(":hidden") ? "\u6536\u8D77" : "\u5C55\u5F00");
+    $('#' + content_thumb).slideToggle(0);
+    $('#' +  content).slideToggle();
+}
+
+function toggle_child_comment(obj) {
+    obj_id = parseInt(obj.id)
+    var content="child_comment_"  + obj_id.toString()
+    var content_thumb="child_comment_thumb_" + obj_id.toString()
+
+    if($('#' + content).is(":hidden")) {
+        obj.innerHTML = "\u6536\u8D77"
+    } else {
+        obj.innerHTML = "\u5C55\u5F00"
+    }
+
+    //obj.value = ($('#' + content).is(":hidden") ? "\u6536\u8D77" : "\u5C55\u5F00");
+    $('#' + content_thumb).slideToggle(0);
+    $('#' +  content).slideToggle();
+}
+</script>
 
 
 {% endblock %}
@@ -156,9 +192,11 @@
         </table>
         </td>
         <td>
-        {% autoescape off %}
-        {{comment.content}} 
-        {% endautoescape %}
+            <article> <div id="comment_{{comment.id}}" style="display:none;"> {{comment.content|safe}} </div> </article>
+            <article> <span id="comment_thumb_{{comment.id}}"> {{comment.content|slice:"256"|safe}} </span> </article>
+            {% if comment.content|length > 256 %}
+               ... ...  <a style="font-size:11px;" href="javascript:void()" onclick="toggle_comment(this)" id="{{comment.id}}_button">&#x5C55;&#x5F00;</a>
+           {% endif %}
         </td>
     </tr>
 
@@ -179,11 +217,11 @@
             {% for child_comment in comment.comment_set.all|slice:":5" %}
             <tr> 
                 <td> 
-                    <span style="font-size:11px" >
-                    {% autoescape off %}
-                    {{child_comment.content}} 
-                    {% endautoescape %}
-                   </span>
+                    <article><div style="font-size:11px;display:none;" id="child_comment_{{child_comment.id}}"> {{child_comment.content|safe}} </div></article>
+                    <article><span style="font-size:11px;" id="child_comment_thumb_{{child_comment.id}}"> {{child_comment.content|slice:":256"|safe}} </span> </article>
+                    {% if child_comment.content|length > 256 %}
+                    ... ...  <a style="font-size:11px;" href="javascript:void()" onclick="toggle_child_comment(this)" id="{{child_comment.id}}_button">&#x5C55;&#x5F00;</a>
+                    {% endif %}
                </td> 
             </tr>
             <tr> 
@@ -220,8 +258,8 @@
             <br/>
             <br/>
             {{comment_dict.current_page_show}} / {{comment_dict.total_page}}
-            <a href="/bookqa/topic_detail/{{topic.id}}/{{comment_dict.prev_page}}/">Prev</a>
-            <a href="/bookqa/topic_detail/{{topic.id}}/{{comment_dict.next_page}}/">Next</a>
+            <a href="/bookqa/topic_detail/{{topic.id}}/{{comment_dict.prev_page}}/">&#x4E0A;&#x4E00;&#x9875;</a>
+            <a href="/bookqa/topic_detail/{{topic.id}}/{{comment_dict.next_page}}/">&#x4E0B;&#x4E00;&#x9875;</a>
         </td>
     </tr>
 

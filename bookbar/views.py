@@ -277,7 +277,7 @@ def articledetail(request, article_id, book_page_index, comment_page_index):
                 context_instance = RequestContext(request))
 
 def articlelist(request, category, pageindex):
-    article_num_one_page = 10
+    article_num_one_page = 50
 
     articles = Article.objects.order_by('show_num')
 
@@ -498,7 +498,7 @@ def downloadurllist(request, bookid, page_index):
         context_instance = RequestContext(request))
 
 def downloadurlalllist(request, category, page_index):
-    url_num_one_page = 10
+    url_num_one_page = 50
 
     urls = BookDownloadURL.objects.order_by('download_num')
 
@@ -510,7 +510,7 @@ def downloadurlalllist(request, category, page_index):
         context_instance = RequestContext(request))
 
 def booksmalllist(request, page_index):
-    book_num_one_page = 10
+    book_num_one_page = 50
     context = get_query_set_page_i(Book.objects.all(), "books", int(page_index), book_num_one_page)
 
     return render_to_response('booksmalllist.html',
@@ -639,45 +639,7 @@ def get_query_set_page_i(set, set_name, i, one_page_count):
      
 
 def get_one_page_comment(comments, page_index):
-   return get_query_set_page_i(comments, "comments", int(page_index), 2)
-
-   comment_one_page = 3
-   total_page = comments.count() / comment_one_page
-
-   if comments.count() % comment_one_page != 0 :
-       total_page += 1
-
-   if total_page == 0:
-       return {'current_page': 0, 'prev_page': 0,
-            'next_page': 0, 'total_page':0, 'comments':comments}
-
-   current_page = int(page_index)
-   if current_page < 0:
-       current_page = 0
-   if current_page >= total_page:
-       current_page = total_page - 1
-
-   prev_page    = current_page - 1
-   if prev_page < 0:
-       prev_page = 0
- 
-   next_page    = current_page + 1
-   if next_page >= total_page:
-       next_page = total_page - 1
-   
-   c = comments[current_page * comment_one_page: ]
-
-   if(c.count() > comment_one_page):
-       d = c[:comment_one_page]
-   else:
-       d = c
-
-   current_page_show = current_page + 1
-
-   return {'current_page': current_page_show, 'prev_page': prev_page,
-            'next_page': next_page, 'total_page':total_page, 'comments':d}
-
-   
+   return get_query_set_page_i(comments, "comments", int(page_index), 10)
 
 def downloadurldetail(request, url_id, page_index):
     urls = BookDownloadURL.objects.filter(id=url_id)

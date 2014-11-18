@@ -24,7 +24,7 @@ def qa_list(request, category_id, page_num):
         category = Category.objects.get(id=category_id)
         topics   = category.topic_set.all()
 
-    one_page_count = 2
+    one_page_count = 50
 
     context = {
         "categorys": Category.objects.all(),
@@ -89,7 +89,7 @@ def comment_detail(request, comment_id, child_comment_page_num):
     if request.method == 'GET':
         child_comments = comment.comment_set.all()
          
-        one_page_count = 2  
+        one_page_count = 50
         context = {
             'comment':comment,
             'child_comment_dict':
@@ -146,7 +146,7 @@ def topic_detail(request, topic_id, comment_page_num):
         except Comment.DoesNotExist:
             best_comment = 0
 
-        one_page_count = 2
+        one_page_count = 50
         context = {
            'topic':topic,
            'best_comment':best_comment,

@@ -67,6 +67,42 @@
 
 </style>
 
+<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+function toggle_comment(obj) {
+    obj_id = parseInt(obj.id)
+    var content="comment_"  + obj_id.toString()
+    var content_thumb="comment_thumb_" + obj_id.toString()
+
+    if($('#' + content).is(":hidden")) {
+        obj.innerHTML = "\u6536\u8D77"
+    } else {
+        obj.innerHTML = "\u5C55\u5F00"
+    }
+
+    //obj.value = ($('#' + content).is(":hidden") ? "\u6536\u8D77" : "\u5C55\u5F00");
+    $('#' + content_thumb).slideToggle(0);
+    $('#' +  content).slideToggle();
+}
+
+function toggle_child_comment(obj) {
+    obj_id = parseInt(obj.id)
+    var content="child_comment_"  + obj_id.toString()
+    var content_thumb="child_comment_thumb_" + obj_id.toString()
+
+    if($('#' + content).is(":hidden")) {
+        obj.innerHTML = "\u6536\u8D77"
+    } else {
+        obj.innerHTML = "\u5C55\u5F00"
+    }
+
+    //obj.value = ($('#' + content).is(":hidden") ? "\u6536\u8D77" : "\u5C55\u5F00");
+    $('#' + content_thumb).slideToggle(0);
+    $('#' +  content).slideToggle();
+}
+</script>
+
+
 {% endblock %}
 
 {% block content %}
@@ -116,9 +152,12 @@
     <tr> 
         <td></td> 
         <td>
-        {% autoescape off %}
-        {{child_comment.content}} 
-        {% endautoescape %}
+        <article><div style="display:none;" id="child_comment_{{child_comment.id}}"> {{child_comment.content|safe}} </div></article>
+        <article><span id="child_comment_thumb_{{child_comment.id}}"> {{child_comment.content|slice:":256"|safe}} </span> </article>
+        {% if child_comment.content|length > 256 %}
+        ... ...  <a style="font-size:11px;" href="javascript:void()" onclick="toggle_child_comment(this)" id="{{child_comment.id}}_button">&#x5C55;&#x5F00;</a>
+        {% endif %}
+ 
         </td>
     </tr>
 
@@ -140,8 +179,8 @@
         <td>
             <span style="float:right;padding-right:150px">
             {{child_comment_dict.current_page_show}} / {{child_comment_dict.total_page}}
-            <a href="/bookqa/comment_detail/{{comment.id}}/{{child_comment_dict.prev_page}}/">Prev</a>
-            <a href="/bookqa/comment_detail/{{comment.id}}/{{child_comment_dict.next_page}}/">Next</a>
+            <a href="/bookqa/comment_detail/{{comment.id}}/{{child_comment_dict.prev_page}}/">&#x4E0A;&#x4E00;&#x9875;</a>
+            <a href="/bookqa/comment_detail/{{comment.id}}/{{child_comment_dict.next_page}}/">&#x4E0B;&#x4E00;&#x9875;</a>
             </span>
         </td>
     </tr>
