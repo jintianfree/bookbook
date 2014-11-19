@@ -152,9 +152,14 @@ function toggle_child_comment(obj) {
     <tr> 
         <td></td> 
         <td>
-        <article><div style="display:none;" id="child_comment_{{child_comment.id}}"> {{child_comment.content|safe}} </div></article>
-        <article><span id="child_comment_thumb_{{child_comment.id}}"> {{child_comment.content|slice:":256"|safe}} </span> </article>
-        {% if child_comment.content|length > 256 %}
+        <div style="display:none;" id="child_comment_{{child_comment.id}}"> {{child_comment.content|safe}} </div>
+        <span id="child_comment_thumb_{{child_comment.id}}"> 
+            <script>
+                var str = '{{child_comment.content|slice:":1024"|safe|linebreaksbr|addslashes }}'
+                document.write(closeHTML(str));
+            </script>
+        </span>
+        {% if child_comment.content|length > 1024 %}
         ... ...  <a style="font-size:11px;" href="javascript:void()" onclick="toggle_child_comment(this)" id="{{child_comment.id}}_button">&#x5C55;&#x5F00;</a>
         {% endif %}
  

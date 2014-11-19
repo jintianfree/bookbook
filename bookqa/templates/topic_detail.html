@@ -25,6 +25,27 @@
 
 </script>
 
+<script type="text/javascript"> 
+function closeHTML(str) { 
+var arrTags=["span","font","b","u","i","h1","h2","h3","h4","h5","h6","p","li","ul","table","div"]; 
+    for(var i=0;i<arrTags.length;i++){ 
+        var intOpen=0; 
+        var intClose=0; 
+        var re=new RegExp("\\<"+arrTags[i]+"( [^\\<\\>]+|)\\>","ig"); 
+        var arrMatch=str.match(re); 
+        if(arrMatch!=null) 
+            intOpen=arrMatch.length; 
+        re=new RegExp("\\<\\/"+arrTags[i]+"\\>","ig"); 
+        arrMatch=str.match(re); 
+        if(arrMatch!=null) 
+            intClose=arrMatch.length; 
+        for(var j=0;j<intOpen-intClose;j++){ 
+                str+="</"+arrTags[i]+">"; 
+        } 
+    } 
+    return str; 
+} 
+</script> 
 
 <style type="text/css">
 .qa-voting {
@@ -191,12 +212,17 @@ function toggle_child_comment(obj) {
             <tr><td style="height:100%;"></td></tr>
         </table>
         </td>
-        <td>
-            <article> <div id="comment_{{comment.id}}" style="display:none;"> {{comment.content|safe}} </div> </article>
-            <article> <span id="comment_thumb_{{comment.id}}"> {{comment.content|slice:"256"|safe}} </span> </article>
-            {% if comment.content|length > 256 %}
+        <td style="word-break:break-all">
+            <div id="comment_{{comment.id}}" style="display:none;"> {{comment.content|safe}} </div>
+            <span id="comment_thumb_{{comment.id}}"> 
+                <script> 
+                    var str = '{{comment.content|slice:":1024"|safe|linebreaksbr|addslashes }}'
+                    document.write(closeHTML(str));
+                </script>
+            </span>
+            {% if comment.content|length > 1024 %}
                ... ...  <a style="font-size:11px;" href="javascript:void()" onclick="toggle_comment(this)" id="{{comment.id}}_button">&#x5C55;&#x5F00;</a>
-           {% endif %}
+            {% endif %}
         </td>
     </tr>
 
@@ -217,9 +243,14 @@ function toggle_child_comment(obj) {
             {% for child_comment in comment.comment_set.all|slice:":5" %}
             <tr> 
                 <td> 
-                    <article><div style="font-size:11px;display:none;" id="child_comment_{{child_comment.id}}"> {{child_comment.content|safe}} </div></article>
-                    <article><span style="font-size:11px;" id="child_comment_thumb_{{child_comment.id}}"> {{child_comment.content|slice:":256"|safe}} </span> </article>
-                    {% if child_comment.content|length > 256 %}
+                    <div style="font-size:11px;display:none;" id="child_comment_{{child_comment.id}}"> {{child_comment.content|safe}} </div>
+                    <span style="font-size:11px;" id="child_comment_thumb_{{child_comment.id}}">
+                        <script>
+                            var str = '{{child_comment.content|slice:":1024"|safe|linebreaksbr|addslashes }}'
+                            document.write(closeHTML(str));
+                        </script>
+                    </span>
+                    {% if child_comment.content|length > 1024 %}
                     ... ...  <a style="font-size:11px;" href="javascript:void()" onclick="toggle_child_comment(this)" id="{{child_comment.id}}_button">&#x5C55;&#x5F00;</a>
                     {% endif %}
                </td> 
